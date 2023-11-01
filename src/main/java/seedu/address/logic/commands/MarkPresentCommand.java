@@ -23,10 +23,10 @@ public class MarkPresentCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks a student as present.\n"
             + "Parameters: "
             + "Parameters: "
-            + PREFIX_STUDENT_NUMBER + "STUDENT NUMBER"
+            + PREFIX_STUDENT_NUMBER + "STUDENT NUMBER "
             + PREFIX_TUTORIAL_INDEX + "TUTORIAL INDEX\n"
             + "Example: "
-            + PREFIX_STUDENT_NUMBER + "A0245234A"
+            + PREFIX_STUDENT_NUMBER + "A0245234A "
             + PREFIX_TUTORIAL_INDEX + "1";
     private final Index index;
     private final StudentNumber targetStudentNumber;

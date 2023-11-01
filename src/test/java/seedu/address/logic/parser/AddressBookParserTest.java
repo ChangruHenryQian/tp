@@ -14,6 +14,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_COUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
@@ -106,8 +107,9 @@ public class AddressBookParserTest {
     public void parseCommand_markPresent() throws Exception {
         int tut = ClassDetails.DEFAULT_COUNT;
         Student student = new StudentBuilder().build();
-        MarkPresentCommand command = (MarkPresentCommand) parser.parseCommand(MarkPresentCommand.COMMAND_WORD + " "
-                + tut + " " + PREFIX_STUDENT_NUMBER + student.getStudentNumber(),
+        MarkPresentCommand command = (MarkPresentCommand) parser.parseCommand(MarkPresentCommand.COMMAND_WORD
+                        + " " + PREFIX_STUDENT_NUMBER + student.getStudentNumber()
+                        + " " + PREFIX_TUTORIAL_INDEX + tut,
                 true);
         assertEquals(new MarkPresentCommand(Index.fromOneBased(tut), student.getStudentNumber()), command);
     }
@@ -116,7 +118,9 @@ public class AddressBookParserTest {
     public void parseCommand_markPresentAll() throws Exception {
         int tut = ClassDetails.DEFAULT_COUNT;
         MarkPresentAllCommand command = (MarkPresentAllCommand) parser
-                .parseCommand(MarkPresentAllCommand.COMMAND_WORD + " " + tut, true);
+                .parseCommand(MarkPresentAllCommand.COMMAND_WORD
+                        + " " + PREFIX_TUTORIAL_INDEX + tut,
+                        true);
         assertEquals(new MarkPresentAllCommand(Index.fromOneBased(tut)), command);
     }
 
@@ -124,8 +128,9 @@ public class AddressBookParserTest {
     public void parseCommand_markAbsent() throws Exception {
         int tut = ClassDetails.DEFAULT_COUNT;
         Student student = new StudentBuilder().build();
-        MarkAbsentCommand command = (MarkAbsentCommand) parser.parseCommand(MarkAbsentCommand.COMMAND_WORD + " "
-                        + tut + " " + PREFIX_STUDENT_NUMBER + student.getStudentNumber(),
+        MarkAbsentCommand command = (MarkAbsentCommand) parser.parseCommand(MarkAbsentCommand.COMMAND_WORD
+                        + " " + PREFIX_STUDENT_NUMBER + student.getStudentNumber()
+                        + " " + PREFIX_TUTORIAL_INDEX + tut,
                 true);
         assertEquals(new MarkAbsentCommand(Index.fromOneBased(tut), student.getStudentNumber()), command);
     }
