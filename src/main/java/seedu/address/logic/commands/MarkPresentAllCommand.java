@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_INDEX;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.List;
@@ -18,8 +19,10 @@ public class MarkPresentAllCommand extends Command {
     public static final String COMMAND_WORD = "mark-pre-all";
     public static final String MESSAGE_MARK_SUCCESS = "Successfully mark attendance as present.";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks all the students displayed as present.\n"
-            + "Parameters: INDEX\n"
-            + "Example: " + COMMAND_WORD + " 1 ";
+            + "Parameters: "
+            + PREFIX_TUTORIAL_INDEX + "TUTORIAL INDEX\n"
+            + "Example: "
+            + PREFIX_TUTORIAL_INDEX + "1";
     private final Index index;
 
     /**

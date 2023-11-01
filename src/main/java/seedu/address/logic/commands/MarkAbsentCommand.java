@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_INDEX;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import seedu.address.commons.core.index.Index;
@@ -20,10 +21,12 @@ public class MarkAbsentCommand extends Command {
     public static final String COMMAND_WORD = "mark-abs";
     public static final String MESSAGE_MARK_SUCCESS = "Successfully mark the student as absent.";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks a student as absent.\n"
-            + "Parameters: INDEX "
-            + PREFIX_STUDENT_NUMBER + "STUDENT NUMBER\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_STUDENT_NUMBER + "A0245234A";
+            + "Parameters: "
+            + PREFIX_STUDENT_NUMBER + "STUDENT NUMBER"
+            + PREFIX_TUTORIAL_INDEX + "TUTORIAL INDEX\n"
+            + "Example: "
+            + PREFIX_STUDENT_NUMBER + "A0245234A"
+            + PREFIX_TUTORIAL_INDEX + "1";
     private final Index index;
     private final StudentNumber targetStudentNumber;
 

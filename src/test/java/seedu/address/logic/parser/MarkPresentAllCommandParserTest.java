@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_INDEX;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -26,7 +27,7 @@ public class MarkPresentAllCommandParserTest {
     @Test
     public void parse_validArgs_returnsMarkCommand() {
         int tut = 1;
-        assertParseSuccess(parser, " " + tut,
+        assertParseSuccess(parser, " " + PREFIX_TUTORIAL_INDEX + tut,
                 new MarkPresentAllCommand(Index.fromOneBased(tut)));
     }
 }

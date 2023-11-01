@@ -4,6 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_STUDENT_NUMBER_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.STUDENT_NUMBER_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_NUMBER_BOB;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_INDEX;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -30,7 +31,7 @@ public class MarkAbsentCommandParserTest {
     @Test
     public void parse_validArgs_returnsMarkCommand() {
         int tut = 1;
-        assertParseSuccess(parser, " " + tut + STUDENT_NUMBER_DESC_BOB,
+        assertParseSuccess(parser, " " + PREFIX_TUTORIAL_INDEX + tut + STUDENT_NUMBER_DESC_BOB,
                 new MarkAbsentCommand(Index.fromOneBased(tut), new StudentNumber(VALID_STUDENT_NUMBER_BOB)));
     }
 
@@ -39,13 +40,15 @@ public class MarkAbsentCommandParserTest {
         int tut = 1;
         assertParseFailure(parser, STUDENT_NUMBER_DESC_BOB,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAbsentCommand.MESSAGE_USAGE));
-        assertParseFailure(parser, " " + tut,
+        assertParseFailure(parser, " " + PREFIX_TUTORIAL_INDEX + tut,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAbsentCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_invalidStudentNumber_throwsParseException() {
         int tut = 1;
-        assertParseFailure(parser, " " + tut + INVALID_STUDENT_NUMBER_DESC, StudentNumber.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser,
+                " " + PREFIX_TUTORIAL_INDEX + tut + INVALID_STUDENT_NUMBER_DESC,
+                StudentNumber.MESSAGE_CONSTRAINTS);
     }
 }

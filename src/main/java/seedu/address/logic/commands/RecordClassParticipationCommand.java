@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARTICIPATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_SESSION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_INDEX;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -25,11 +25,11 @@ public class RecordClassParticipationCommand extends Command {
             + ": Records the class participation of a student in a specific tutorial session.\n"
             + "Parameters: "
             + PREFIX_STUDENT_NUMBER + "STUDENT_NUMBER "
-            + PREFIX_TUTORIAL_SESSION + "TUTORIAL_SESSION "
+            + PREFIX_TUTORIAL_INDEX + "TUTORIAL_SESSION "
             + PREFIX_PARTICIPATION + "PARTICIPATION\n"
             + "Example: "
             + COMMAND_WORD + " " + PREFIX_STUDENT_NUMBER + "A0123456X "
-            + PREFIX_TUTORIAL_SESSION + "1 " + PREFIX_PARTICIPATION + "true";
+            + PREFIX_TUTORIAL_INDEX + "1 " + PREFIX_PARTICIPATION + "true";
 
     public static final String MESSAGE_SUCCESS = "Recorded participation for Student: %1$s\n"
             + "Here are the details:\n";

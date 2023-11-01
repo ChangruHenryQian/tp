@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARTICIPATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_SESSION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_INDEX;
 
 import seedu.address.logic.commands.RecordClassParticipationCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -23,21 +23,21 @@ public class RecordClassParticipationCommandParser implements Parser<RecordClass
     public RecordClassParticipationCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_STUDENT_NUMBER,
-               PREFIX_TUTORIAL_SESSION, PREFIX_PARTICIPATION);
+                PREFIX_TUTORIAL_INDEX, PREFIX_PARTICIPATION);
 
-        if (!argMultimap.arePrefixesPresent(PREFIX_STUDENT_NUMBER, PREFIX_TUTORIAL_SESSION, PREFIX_PARTICIPATION)
+        if (!argMultimap.arePrefixesPresent(PREFIX_STUDENT_NUMBER, PREFIX_TUTORIAL_INDEX, PREFIX_PARTICIPATION)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, RecordClassParticipationCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_STUDENT_NUMBER,
-                PREFIX_TUTORIAL_SESSION, PREFIX_PARTICIPATION);
+                PREFIX_TUTORIAL_INDEX, PREFIX_PARTICIPATION);
         StudentNumber studentNumber = ParserUtil.parseStudentNumber(
                 argMultimap.getValue(PREFIX_STUDENT_NUMBER).get());
         int sessionNumber;
         try {
-            sessionNumber = Integer.parseInt(argMultimap.getValue(PREFIX_TUTORIAL_SESSION).get());
+            sessionNumber = Integer.parseInt(argMultimap.getValue(PREFIX_TUTORIAL_INDEX).get());
         } catch (NumberFormatException e) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, RecordClassParticipationCommand.MESSAGE_USAGE));
