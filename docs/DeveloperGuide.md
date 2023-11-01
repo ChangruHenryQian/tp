@@ -35,7 +35,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/AY2324S1-CS2103T-T11-1/tp/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2324S1-CS2103T-T11-1/tp/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2324S1-CS2103T-T11-1/tp/tree/master/src/main/java/seedu/classmanager/Main.java) and [`MainApp`](https://github.com/AY2324S1-CS2103T-T11-1/tp/tree/master/src/main/java/seedu/classmanager/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -67,13 +67,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/AY2324S1-CS2103T-T11-1/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2324S1-CS2103T-T11-1/tp/tree/master/src/main/java/seedu/classmanager/ui/Ui.java)
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `StudentListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2324S1-CS2103T-T11-1/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2324S1-CS2103T-T11-1/tp/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2324S1-CS2103T-T11-1/tp/tree/master/src/main/java/seedu/classmanager/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2324S1-CS2103T-T11-1/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -84,7 +84,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/AY2324S1-CS2103T-T11-1/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2324S1-CS2103T-T11-1/tp/tree/master/src/main/java/seedu/classmanager/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -101,7 +101,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
+1. When `Logic` is called upon to execute a command, it is passed to an `ClassManagerParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a student).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
@@ -111,11 +111,11 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <puml src="diagrams/ParserClasses.puml" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `ClassManagerParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `ClassManagerParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-T11-1/tp/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-T11-1/tp/tree/master/src/main/java/seedu/classmanager/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" />
 
@@ -129,7 +129,7 @@ The `Model` component,
 
 <box type="info" seamless>
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in `ClassManager`, which `Person` references. This allows `ClassManager` to only require one `Tag` object per unique tag, instead of each `Student` needing their own `Tag` objects.<br>
 
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
@@ -138,18 +138,18 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-T11-1/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-T11-1/tp/tree/master/src/main/java/seedu/classmanager/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="650" />
 
 The `Storage` component,
 * can save both Class Manager data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* inherits from both `ClassManagerStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.classmanager.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -175,7 +175,7 @@ Step 1. User inputs
 
         tag A0245234N t/teamleader
 
-Step 2. `Logic` will receive the input and pass it to a `AddressBookParser` object which in turn creates a `TagCommandParser` object to parse the command.
+Step 2. `Logic` will receive the input and pass it to a `ClassManagerParser` object which in turn creates a `TagCommandParser` object to parse the command.
 
 Step 3. Next `TagCommandParser` will check for any action identifiers,
 `/add` or `/delete`, which will create a `AddTagCommand` object or `DeleteTagCommand` object respectively,
@@ -208,42 +208,42 @@ The following activity diagram summarizes what happens when a user executes a ta
 
 #### Proposed Implementation
 
-The undo/redo feature works similarly to the one implemented in AddressBook-Level 4, but with support for more commands. The undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The undo/redo feature works similarly to the one implemented in AddressBook-Level 4, but with support for more commands. The undo/redo mechanism is facilitated by `VersionedClassManager`. It extends `ClassManager` with an undo/redo history, stored internally as an `classManagerStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+* `VersionedClassManager#commit()` — Saves the current Class Manager state in its history.
+* `VersionedClassManager#undo()` — Restores the previous Class Manager state from its history.
+* `VersionedClassManager#redo()` — Restores a previously undone Class Manager state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+These operations are exposed in the `Model` interface as `Model#commitClassManager()`, `Model#undoClassManager()` and `Model#redoClassManager()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `VersionedClassManager` will be initialized with the initial Class Manager state, and the `currentStatePointer` pointing to that single Class Manager state.
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `delete s/A0123456L` command to delete the student with the Student Number A0123456L in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete s/A0123456L` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete s/A0123456L` command to delete the student with the Student Number A0123456L in Class Manager. The `delete` command calls `Model#commitClassManager()`, causing the modified state of Class Manager after the `delete s/A0123456L` command executes to be saved in the `classManagerStateList`, and the `currentStatePointer` is shifted to the newly inserted Class Manager state.
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add n/David …​` to add a new student. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new student. The `add` command also calls `Model#commitClassManager()`, causing another modified Class Manager state to be saved into the `classManagerStateList`.
 
 <puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
 <box type="info" seamless>
 
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+**Note:** If a command fails its execution, it will not call `Model#commitClassManager()`, so Class Manager state will not be saved into the `classManagerStateList`.
 
 </box>
 
-Step 4. The user now decides that adding the student was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the student was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoClassManager()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous Class Manager state, and restores Class Manager to that state.
 
 <puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
 
 
 <box type="info" seamless>
 
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+**Note:** If the `currentStatePointer` is at index 0, pointing to the initial ClassManager state, then there are no previous ClassManager states to restore. The `undo` command uses `Model#canundoClassManager()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
 </box>
@@ -258,19 +258,19 @@ The following sequence diagram shows how the undo operation works:
 
 </box>
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite — it calls `Model#redoClassManager()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores Class Manager to that state.
 
 <box type="info" seamless>
 
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+**Note:** If the `currentStatePointer` is at index `classManagerStateList.size() - 1`, pointing to the latest Class Manager state, then there are no undone Class Manager states to restore. The `redo` command uses `Model#canRedoClassManager()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </box>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify Class Manager, such as `list`, will usually not call `Model#commitClassManager()`, `Model#undoClassManager()` or `Model#redoClassManager()`. Thus, the `classManagerStateList` remains unchanged.
 
 <puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitClassManager()`. Since the `currentStatePointer` is not pointing at the end of the `classManagerStateList`, all Class Manager states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 <puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
 
@@ -282,7 +282,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Aspect: How undo & redo executes:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Alternative 1 (current choice):** Saves the entire Class Manager.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
@@ -293,9 +293,9 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Aspect: Data structure to support the undo/redo commands**
 
-* **Alternative 1 (current choice):** Use a list to store the history of address book states.
+* **Alternative 1 (current choice):** Use a list to store the history of Class Manager states.
   * Pros: Easy to understand.
-  * Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both `HistoryManager` and `VersionedAddressBook`.
+  * Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both `HistoryManager` and `VersionedClassManager`.
 
 * **Alternative 2:** Use `HistoryManager` for undo/redo.
   * Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.
@@ -322,12 +322,12 @@ This feature is an improvement to the previous method of directly editing the `c
 
 <puml src="diagrams/LoadSequenceDiagram.puml" alt="LoadSequenceDiagram" />
 
-The `load` command is facilitated by `LoadCommand` and `LoadCommandParser`. `LoadCommand` attempts to read the JSON file and calls `setAddressBook` and `setAddressBookFilePath` of `Model` to update the new save file path and address book data to be displayed.
+The `load` command is facilitated by `LoadCommand` and `LoadCommandParser`. `LoadCommand` attempts to read the JSON file and calls `setClassManager` and `setClassManagerFilePath` of `Model` to update the new save file path and Class Manager data to be displayed.
 
 #### Parsing user input
 
 1. The user inputs the `load` command.
-2. The `AddressBookParser` processes the input and creates a new `LoadCommandParser`.
+2. The `ClassManagerParser` processes the input and creates a new `LoadCommandParser`.
 3. The `LoadCommandParser` then calls ArgumentTokenizer#tokenize(String argString, Prefix... prefixes) to extract the file name. If there are duplicate prefixes, a ParseException would be thrown.
 4. The file name is then check to ensure that it is valid. If the file name is missing, null or contains a forward slash, a ParseException would be thrown.
 5. The `LoadCommandParser` then creates the `LoadCommand` based on the processed input.

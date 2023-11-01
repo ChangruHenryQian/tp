@@ -14,19 +14,19 @@ activate ui UI_COLOR
 ui -[UI_COLOR]> logic : execute("load f/t2")
 activate logic LOGIC_COLOR
 
-logic -[LOGIC_COLOR]> model : setAddressBook(newData)
+logic -[LOGIC_COLOR]> model : setClassManager(newData)
 activate model MODEL_COLOR
 
 model -[MODEL_COLOR]-> logic
 deactivate model
 
-logic -[LOGIC_COLOR]> model : setAddressBookFilePath(filePath)
+logic -[LOGIC_COLOR]> model : setClassManagerFilePath(filePath)
 activate model MODEL_COLOR
 
 model -[MODEL_COLOR]-> logic
 deactivate model
 
-logic -[LOGIC_COLOR]> storage : saveAddressBook(addressBook)
+logic -[LOGIC_COLOR]> storage : saveClassManager(classManager)
 activate storage STORAGE_COLOR
 
 storage -[STORAGE_COLOR]> storage : Save to file
