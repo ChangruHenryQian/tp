@@ -18,13 +18,14 @@
                 <Insets bottom="5" left="15" right="5" top="5" />
             </padding>
             <HBox alignment="CENTER_LEFT" spacing="5">
-                <Label fx:id="name" prefHeight="17.0" prefWidth="100.0" styleClass="cell_big_label" text="\$first" />
+                <Label fx:id="name" prefHeight="17.0" prefWidth="250.0" styleClass="cell_big_label" text="\$first" />
             </HBox>
             <Label fx:id="classDetails" styleClass="cell_small_label" text="\$classDetails" />
+            <Label fx:id="divider1" styleClass="cell_small_label" text="\$divider" />
             <Label fx:id="attendance" styleClass="cell_small_label" text="\$attendance" />
-            <Label fx:id="divider1" styleClass="cell_small_label" text="\$divider1" />
+            <Label fx:id="divider2" styleClass="cell_small_label" text="\$divider" />
             <Label fx:id="classParticipation" styleClass="cell_small_label" text="\$classParticipation" />
-            <Label fx:id="divider2" styleClass="cell_small_label" text="\$divider2" />
+            <Label fx:id="divider3" styleClass="cell_small_label" text="\$divider" />
             <Label fx:id="assignments" styleClass="cell_small_label" text="\$assignments" />
         </VBox>
       <rowConstraints>

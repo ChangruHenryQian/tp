@@ -375,7 +375,7 @@
 .axis {
     -fx-font-size: 1pt;
     -fx-tick-label-fill: #FFFFFF;
-    -fx-tick-label-font-size: 10pt;
+    -fx-tick-label-font-size: 8pt;
     -fx-font-family: "Segoe UI Semibold";
     -fx-tick-length: 10;
     -fx-minor-tick-length: 10;

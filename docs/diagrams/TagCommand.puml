@@ -4,7 +4,7 @@
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":ClassManagerParser" as ClassManagerParser LOGIC_COLOR
 participant "p:TagCommandParser" as TagCommandParser LOGIC_COLOR
 participant "c:TagCommand" as TagCommand LOGIC_COLOR
 participant "s:Student" as Student LOGIC_COLOR
@@ -16,11 +16,11 @@ end box
 
 [-> LogicManager : execute("tag A0245234N t/teamleader")
 
-LogicManager -> AddressBookParser : parseCommand()
-activate AddressBookParser
+LogicManager -> ClassManagerParser : parseCommand()
+activate ClassManagerParser
 
 create TagCommandParser
-AddressBookParser -> TagCommandParser
+ClassManagerParser -> TagCommandParser
 activate TagCommandParser
 
 create TagCommand
@@ -30,11 +30,11 @@ activate TagCommand
 TagCommand --> TagCommandParser
 deactivate TagCommand
 
-TagCommandParser --> AddressBookParser
+TagCommandParser --> ClassManagerParser
 deactivate TagCommandParser
 
-AddressBookParser --> LogicManager : c
-deactivate AddressBookParser
+ClassManagerParser --> LogicManager : c
+deactivate ClassManagerParser
 destroy TagCommandParser
 
 LogicManager -> TagCommand : execute()

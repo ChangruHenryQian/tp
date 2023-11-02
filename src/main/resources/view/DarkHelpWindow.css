@@ -1,6 +1,6 @@
 #copyButton, #helpMessage {
     -fx-text-fill: white;
-    -fx-font-family: "Segoe UI";
+    -fx-font-family: "Segoe UI Semibold";
     -fx-font-size: 11pt;
 }
 

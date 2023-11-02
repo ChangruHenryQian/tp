@@ -1,0 +1,26 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+participant ":ClassDetails" as ClassDetails MODEL_COLOR
+participant ":AttendanceTracker" as AttendanceTracker MODEL_COLOR
+participant ":Attendance" as Attendance MODEL_COLOR
+
+[-> ClassDetails : markPresent(tutNum)
+activate ClassDetails
+
+ClassDetails -> AttendanceTracker : markPresent(tutNum)
+activate AttendanceTracker
+
+AttendanceTracker -> Attendance : mark()
+activate Attendance
+
+Attendance --> AttendanceTracker
+deactivate Attendance
+
+AttendanceTracker --> ClassDetails
+deactivate AttendanceTracker
+
+[<--ClassDetails
+deactivate ClassDetails
+@enduml

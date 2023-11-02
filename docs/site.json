@@ -1,7 +1,7 @@
 {
   "baseUrl": "",
   "titlePrefix": "Class Manager 2023",
-  "faviconPath": "images/Logo.png",
+  "faviconPath": "images/Logo-no-bg.png",
   "style": {
     "codeTheme": "light"
   },

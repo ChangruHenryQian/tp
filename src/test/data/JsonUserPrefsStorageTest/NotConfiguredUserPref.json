@@ -7,6 +7,8 @@
       "y" : 100
     }
   },
-  "addressBookFilePath" : "addressbook.json",
-  "isConfigured" : false
+  "classManagerFilePath": "data/classmanager.json",
+  "isConfigured" : false,
+  "tutorialCount" : 10,
+  "assignmentCount" : 10
 }

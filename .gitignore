@@ -9,7 +9,8 @@ src/main/resources/docs/
 /*.iml
 
 # Storage/log files
-/data/
+data/*
+!data/logicmanagertest.json
 /config.json
 /preferences.json
 /*.log.*
