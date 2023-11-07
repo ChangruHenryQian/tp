@@ -1,3 +1,6 @@
+//@@author Cikguseven-reused
+//Reused from AddressBook-Level 4 (https://github.com/se-edu/addressbook-level4)
+// with minor modifications
 package seedu.classmanager.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -222,7 +225,7 @@ public class VersionedClassManagerTest {
         assertFalse(versionedClassManager.equals(null));
 
         // different types -> returns false
-        assertFalse(versionedClassManager.equals(1));
+        assertFalse(versionedClassManager.equals(0));
 
         // different state list -> returns false
         VersionedClassManager differentClassManagerList =
@@ -277,12 +280,12 @@ public class VersionedClassManagerTest {
      * Creates and returns a {@code versionedClassManager} with the {@code ClassManagerStates} added into it, and the
      * {@code versionedClassManager#currentStatePointer} at the end of list.
      */
-    private VersionedClassManager prepareClassManagerList(ReadOnlyClassManager... ClassManagerStates) {
-        assertFalse(ClassManagerStates.length == 0);
+    private VersionedClassManager prepareClassManagerList(ReadOnlyClassManager... classManagerStates) {
+        assertFalse(classManagerStates.length == 0);
 
-        VersionedClassManager versionedClassManager = new VersionedClassManager(ClassManagerStates[0]);
-        for (int i = 1; i < ClassManagerStates.length; i++) {
-            versionedClassManager.resetData(ClassManagerStates[i]);
+        VersionedClassManager versionedClassManager = new VersionedClassManager(classManagerStates[0]);
+        for (int i = 1; i < classManagerStates.length; i++) {
+            versionedClassManager.resetData(classManagerStates[i]);
             versionedClassManager.commit();
         }
 
@@ -319,3 +322,4 @@ public class VersionedClassManagerTest {
         assertFalse(versionedClassManager.equals(newVersionedClassManager));
     }
 }
+//@@author

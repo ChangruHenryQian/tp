@@ -38,7 +38,6 @@ public class AddTagCommand extends TagCommand {
                 studentToTag.getStudentNumber(), studentToTag.getClassDetails(), newTags, studentToTag.getComment());
 
         model.setStudent(studentToTag, editedStudent);
-        model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
         model.commitClassManager();
 
         return new CommandResult(generateSuccessMessage(editedStudent));

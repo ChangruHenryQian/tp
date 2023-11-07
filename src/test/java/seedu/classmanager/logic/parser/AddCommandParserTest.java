@@ -28,11 +28,14 @@ import static seedu.classmanager.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.classmanager.logic.commands.CommandTestUtil.VALID_STUDENT_NUMBER_BOB;
 import static seedu.classmanager.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.classmanager.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_COUNT;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_CLASS_NUMBER;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
+import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_TUTORIAL_INDEX;
+import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_WILDCARD;
 import static seedu.classmanager.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.classmanager.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.classmanager.testutil.TypicalStudents.AMY;
@@ -228,6 +231,24 @@ public class AddCommandParserTest {
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                         + STUDENT_NUMBER_DESC_BOB + CLASS_NUMBER_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+
+        // additional unexpected prefixes - tut/
+        assertParseFailure(parser, NAME_DESC_BOB + " " + PREFIX_TUTORIAL_INDEX + "1" + PHONE_DESC_BOB
+                        + EMAIL_DESC_BOB + STUDENT_NUMBER_DESC_BOB + CLASS_NUMBER_DESC_BOB + TAG_DESC_HUSBAND
+                        + TAG_DESC_FRIEND,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+
+        // additional unexpected prefixes - /
+        assertParseFailure(parser, NAME_DESC_BOB + " " + PREFIX_WILDCARD + "add" + PHONE_DESC_BOB
+                        + EMAIL_DESC_BOB + STUDENT_NUMBER_DESC_BOB + CLASS_NUMBER_DESC_BOB + TAG_DESC_HUSBAND
+                        + TAG_DESC_FRIEND,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+
+        // additional unexpected prefixes - #a/
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB
+                        + EMAIL_DESC_BOB + STUDENT_NUMBER_DESC_BOB + CLASS_NUMBER_DESC_BOB + TAG_DESC_HUSBAND
+                        + TAG_DESC_FRIEND + " " + PREFIX_ASSIGNMENT_COUNT + "1",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 }

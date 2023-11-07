@@ -4,8 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_ASSIGNMENT;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
-import static seedu.classmanager.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
+import seedu.classmanager.commons.core.index.Index;
 import seedu.classmanager.commons.util.ToStringBuilder;
 import seedu.classmanager.logic.CommandHistory;
 import seedu.classmanager.logic.Messages;
@@ -35,15 +35,15 @@ public class SetGradeCommand extends Command {
 
 
     private final StudentNumber studentNumber;
-    private final int assignmentNumber;
+    private final Index assignmentIndex;
     private final int grade;
 
     /**
      * Creates an SetGradeCommand to set the specified {@code Student}'s grade
      */
-    public SetGradeCommand(StudentNumber studentNumber, int assignmentNumber, int grade) {
+    public SetGradeCommand(StudentNumber studentNumber, Index assignmentIndex, int grade) {
         this.studentNumber = studentNumber;
-        this.assignmentNumber = assignmentNumber;
+        this.assignmentIndex = assignmentIndex;
         this.grade = grade;
     }
 
@@ -58,9 +58,8 @@ public class SetGradeCommand extends Command {
 
         Student studentToGrade = model.getStudent(studentNumber);
         Student gradedStudent = studentToGrade.copy();
-        gradedStudent.setGrade(assignmentNumber, grade);
+        gradedStudent.setGrade(assignmentIndex, grade);
         model.setStudent(studentToGrade, gradedStudent);
-        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         model.setSelectedStudent(gradedStudent);
         model.commitClassManager();
 
@@ -81,7 +80,7 @@ public class SetGradeCommand extends Command {
 
         SetGradeCommand otherSetGradeCommand = (SetGradeCommand) other;
         return studentNumber.equals(otherSetGradeCommand.studentNumber)
-                && assignmentNumber == otherSetGradeCommand.assignmentNumber
+                && assignmentIndex.equals(otherSetGradeCommand.assignmentIndex)
                 && grade == otherSetGradeCommand.grade;
     }
 
@@ -89,7 +88,7 @@ public class SetGradeCommand extends Command {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("studentNumber", studentNumber)
-                .add("assignmentNumber", assignmentNumber)
+                .add("assignmentIndex", assignmentIndex)
                 .add("grade", grade)
                 .toString();
     }

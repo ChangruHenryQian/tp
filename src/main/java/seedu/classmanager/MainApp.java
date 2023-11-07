@@ -21,6 +21,7 @@ import seedu.classmanager.model.ModelManager;
 import seedu.classmanager.model.ReadOnlyClassManager;
 import seedu.classmanager.model.ReadOnlyUserPrefs;
 import seedu.classmanager.model.UserPrefs;
+import seedu.classmanager.model.student.ClassDetails;
 import seedu.classmanager.model.util.SampleDataUtil;
 import seedu.classmanager.storage.ClassManagerStorage;
 import seedu.classmanager.storage.JsonClassManagerStorage;
@@ -36,7 +37,7 @@ import seedu.classmanager.ui.UiManager;
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(1, 2, 1, true);
+    public static final Version VERSION = new Version(1, 3, 1, true);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
@@ -158,13 +159,32 @@ public class MainApp extends Application {
             initializedPrefs = new UserPrefs();
         }
 
-        //Update prefs file in case it was missing to begin with or there are new/unused fields
+        // Check if the assignment count and tutorial count are valid
+        if (initializedPrefs.getAssignmentCount() < 0 || initializedPrefs.getTutorialCount() < 0) {
+            logger.warning("Preference file at " + prefsFilePath + " could not be loaded."
+                    + " Because of Illegal values. Using default preferences.");
+            initializedPrefs = new UserPrefs();
+        }
+        // Check if the theme is valid
+        if (!initializedPrefs.getTheme().equalsIgnoreCase("dark")
+                && !initializedPrefs.getTheme().equalsIgnoreCase("light")) {
+            logger.warning("Preference file at " + prefsFilePath + " could not be loaded."
+                    + " Because of Illegal values. Using default preferences.");
+            initializedPrefs = new UserPrefs();
+        }
+
+        // Update prefs file in case it was missing to begin with or there are new/unused fields
         try {
             storage.saveUserPrefs(initializedPrefs);
         } catch (IOException e) {
             logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
         }
 
+        // Set the tutorial count and assignment count
+        logger.info("Set the tutorial count to " + initializedPrefs.getTutorialCount());
+        logger.info("Set the assignment count to " + initializedPrefs.getAssignmentCount());
+        ClassDetails.setTutorialCount(initializedPrefs.getTutorialCount());
+        ClassDetails.setAssignmentCount(initializedPrefs.getAssignmentCount());
         return initializedPrefs;
     }
 
@@ -181,6 +201,13 @@ public class MainApp extends Application {
             storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
+        }
+
+        // Save the class manager data upon exiting the application
+        try {
+            storage.saveClassManager(model.getClassManager(), model.getClassManagerFilePath());
+        } catch (IOException e) {
+            logger.severe("Failed to save Class Manager data " + StringUtil.getDetails(e));
         }
     }
 }

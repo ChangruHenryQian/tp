@@ -1,9 +1,12 @@
 package seedu.classmanager.logic.parser;
 
 import static seedu.classmanager.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.classmanager.logic.commands.CommandTestUtil.CLASS_NUMBER_DESC_AMY;
 import static seedu.classmanager.logic.commands.CommandTestUtil.INVALID_STUDENT_NUMBER_DESC;
+import static seedu.classmanager.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.classmanager.logic.commands.CommandTestUtil.STUDENT_NUMBER_DESC_AMY;
 import static seedu.classmanager.logic.commands.CommandTestUtil.STUDENT_NUMBER_DESC_BOB;
+import static seedu.classmanager.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.classmanager.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.classmanager.logic.commands.CommandTestUtil.VALID_STUDENT_NUMBER_AMY;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_PARTICIPATION;
@@ -14,8 +17,10 @@ import static seedu.classmanager.logic.parser.CommandParserTestUtil.assertParseS
 
 import org.junit.jupiter.api.Test;
 
+import seedu.classmanager.commons.core.index.Index;
 import seedu.classmanager.logic.Messages;
 import seedu.classmanager.logic.commands.RecordClassParticipationCommand;
+import seedu.classmanager.model.student.ClassDetails;
 import seedu.classmanager.model.student.StudentNumber;
 
 public class RecordClassParticipationCommandParserTest {
@@ -52,16 +57,15 @@ public class RecordClassParticipationCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
+        ClassDetails.setTutorialCount(13);
         assertParseFailure(parser, INVALID_STUDENT_NUMBER_DESC + VALID_TUT_DESC + VALID_PARTICIPATION_DESC,
                 StudentNumber.MESSAGE_CONSTRAINTS); // invalid student number
 
         assertParseFailure(parser, STUDENT_NUMBER_DESC_AMY + INVALID_TUT_DESC + VALID_PARTICIPATION_DESC,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        RecordClassParticipationCommand.MESSAGE_USAGE)); // invalid tut
+                ClassDetails.getMessageInvalidTutorialIndex()); // invalid tut
 
         assertParseFailure(parser, STUDENT_NUMBER_DESC_AMY + VALID_TUT_DESC + INVALID_PARTICIPATION_DESC,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        RecordClassParticipationCommand.MESSAGE_USAGE)); // invalid participation
+                ClassDetails.MESSAGE_INVALID_PARTICIPATION); // invalid participation
     }
 
     @Test
@@ -70,7 +74,7 @@ public class RecordClassParticipationCommandParserTest {
 
         RecordClassParticipationCommand expectedCommand = new RecordClassParticipationCommand(
                 new StudentNumber(VALID_STUDENT_NUMBER_AMY),
-                Integer.parseInt(VALID_TUT),
+                Index.fromOneBased(Integer.parseInt(VALID_TUT)),
                 Boolean.parseBoolean(VALID_PARTICIPATION));
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -81,7 +85,7 @@ public class RecordClassParticipationCommandParserTest {
 
         RecordClassParticipationCommand expectedCommand = new RecordClassParticipationCommand(
                 new StudentNumber(VALID_STUDENT_NUMBER_AMY),
-                Integer.parseInt(VALID_TUT),
+                Index.fromOneBased(Integer.parseInt(VALID_TUT)),
                 Boolean.parseBoolean(VALID_PARTICIPATION));
         assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -113,5 +117,27 @@ public class RecordClassParticipationCommandParserTest {
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_TUTORIAL_INDEX,
                         PREFIX_PARTICIPATION,
                         PREFIX_STUDENT_NUMBER));
+    }
+
+    @Test
+    public void parse_additionalPrefix_failure() {
+        // additional prefix at different location
+        assertParseFailure(parser, STUDENT_NUMBER_DESC_AMY + VALID_TUT_DESC
+                + NAME_DESC_AMY + VALID_PARTICIPATION_DESC, MESSAGE_INVALID_FORMAT);
+
+        assertParseFailure(parser, STUDENT_NUMBER_DESC_AMY + VALID_TUT_DESC
+                + VALID_PARTICIPATION_DESC + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+
+        assertParseFailure(parser, STUDENT_NUMBER_DESC_AMY + NAME_DESC_AMY + VALID_TUT_DESC
+                + VALID_PARTICIPATION_DESC, MESSAGE_INVALID_FORMAT);
+
+        assertParseFailure(parser, NAME_DESC_AMY + STUDENT_NUMBER_DESC_AMY + VALID_TUT_DESC
+                + VALID_PARTICIPATION_DESC, MESSAGE_INVALID_FORMAT);
+
+        // different additional prefix
+        assertParseFailure(parser, STUDENT_NUMBER_DESC_AMY + VALID_TUT_DESC + TAG_DESC_FRIEND
+                + VALID_PARTICIPATION_DESC, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, STUDENT_NUMBER_DESC_AMY + VALID_TUT_DESC + CLASS_NUMBER_DESC_AMY
+                + VALID_PARTICIPATION_DESC, MESSAGE_INVALID_FORMAT);
     }
 }

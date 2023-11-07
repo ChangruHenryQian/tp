@@ -1,7 +1,9 @@
+//@@author Cikguseven-reused
+//Reused from AddressBook-Level 4 (https://github.com/se-edu/addressbook-level4)
+// with minor modifications
 package seedu.classmanager.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.classmanager.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import seedu.classmanager.logic.CommandHistory;
 import seedu.classmanager.logic.commands.exceptions.CommandException;
@@ -19,8 +21,8 @@ public class RedoCommand extends Command {
     /**
      * Executes a redo command and reverts to the previously undone Class Manager.
      * @param model {@code Model} which the command should operate on.
-     * @param history
-     * @return CommandResult
+     * @param history {@code CommandHistory} which the command should operate on.
+     * @return CommandResult that indicates a successful redo.
      * @throws CommandException if there is no more commands to redo.
      */
     @Override
@@ -32,7 +34,7 @@ public class RedoCommand extends Command {
         }
 
         model.redoClassManager();
-        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
+//@@author

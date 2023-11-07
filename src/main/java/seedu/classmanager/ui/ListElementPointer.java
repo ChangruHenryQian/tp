@@ -1,3 +1,6 @@
+//@@author Cikguseven-reused
+//Reused from AddressBook-Level 4 (https://github.com/se-edu/addressbook-level4)
+// with minor modifications
 package seedu.classmanager.ui;
 
 import java.util.ArrayList;
@@ -109,3 +112,4 @@ public class ListElementPointer {
         return list.equals(iterator.list) && index == iterator.index;
     }
 }
+//@@author

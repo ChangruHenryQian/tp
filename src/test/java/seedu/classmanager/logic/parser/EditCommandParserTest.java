@@ -8,8 +8,10 @@ import static seedu.classmanager.logic.commands.CommandTestUtil.INVALID_CLASS_NU
 import static seedu.classmanager.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.classmanager.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.classmanager.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
+import static seedu.classmanager.logic.commands.CommandTestUtil.INVALID_STUDENT_NUMBER;
 import static seedu.classmanager.logic.commands.CommandTestUtil.INVALID_STUDENT_NUMBER_DESC;
 import static seedu.classmanager.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.classmanager.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.classmanager.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.classmanager.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.classmanager.logic.commands.CommandTestUtil.STUDENT_NUMBER_DESC_AMY;
@@ -19,10 +21,13 @@ import static seedu.classmanager.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.classmanager.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.classmanager.logic.commands.CommandTestUtil.VALID_STUDENT_NUMBER_AMY;
 import static seedu.classmanager.logic.commands.CommandTestUtil.VALID_STUDENT_NUMBER_BOB;
+import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_COUNT;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_WILDCARD;
 import static seedu.classmanager.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.classmanager.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -58,6 +63,9 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
+        assertParseFailure(parser, INVALID_STUDENT_NUMBER + STUDENT_NUMBER_DESC_AMY,
+                MESSAGE_INVALID_FORMAT); // invalid 'old' student number
+
         assertParseFailure(parser, VALID_STUDENT_NUMBER_BOB + INVALID_NAME_DESC,
                 Name.MESSAGE_CONSTRAINTS); // invalid name
         assertParseFailure(parser, VALID_STUDENT_NUMBER_BOB + INVALID_PHONE_DESC,
@@ -65,7 +73,7 @@ public class EditCommandParserTest {
         assertParseFailure(parser, VALID_STUDENT_NUMBER_BOB + INVALID_EMAIL_DESC,
                 Email.MESSAGE_CONSTRAINTS); // invalid email
         assertParseFailure(parser, VALID_STUDENT_NUMBER_BOB + INVALID_STUDENT_NUMBER_DESC,
-                StudentNumber.MESSAGE_CONSTRAINTS); // invalid student number
+                StudentNumber.MESSAGE_CONSTRAINTS); // invalid 'new' student number
         assertParseFailure(parser, VALID_STUDENT_NUMBER_BOB + INVALID_CLASS_NUMBER_DESC,
                 ClassDetails.MESSAGE_CONSTRAINTS); // invalid class number
 
@@ -175,4 +183,21 @@ public class EditCommandParserTest {
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_STUDENT_NUMBER));
     }
 
+    @Test
+    public void parse_emptyPreamble_failure() {
+        assertParseFailure(parser, NAME_DESC_BOB, MESSAGE_INVALID_FORMAT);
+    }
+
+    @Test
+    public void parse_additionalPrefix_failure() {
+        assertParseFailure(parser, VALID_STUDENT_NUMBER_BOB + NAME_DESC_AMY
+                        + " " + PREFIX_ASSIGNMENT_COUNT + "1", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, VALID_STUDENT_NUMBER_BOB + NAME_DESC_AMY
+                + " " + PREFIX_GRADE + "100", MESSAGE_INVALID_FORMAT);
+
+        assertParseFailure(parser, VALID_STUDENT_NUMBER_BOB + NAME_DESC_AMY
+                + " " + PREFIX_WILDCARD + "add", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, VALID_STUDENT_NUMBER_BOB
+                + " " + PREFIX_WILDCARD + "add" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+    }
 }

@@ -19,9 +19,9 @@ import seedu.classmanager.model.student.Student;
 import seedu.classmanager.testutil.TypicalStudents;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for MarkPresentAllCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for MarkAbsentAllCommand.
  */
-public class MarkPresentAllCommandTest {
+public class MarkAbsentAllCommandTest {
 
     private final Model model = new ModelManager(TypicalStudents.getTypicalClassManager(), new UserPrefs());
     private final CommandHistory commandHistory = new CommandHistory();
@@ -31,19 +31,19 @@ public class MarkPresentAllCommandTest {
         Index i = Index.fromOneBased(ClassDetails.getTutorialCount());
         Student selectedStudent = TypicalStudents.getTypicalStudents().get(0);
         model.setSelectedStudent(selectedStudent);
-        MarkPresentAllCommand markPresentAllCommand = new MarkPresentAllCommand(i);
+        MarkAbsentAllCommand markAbsentAllCommand = new MarkAbsentAllCommand(i);
 
-        String expectedMessage = MarkPresentAllCommand.MESSAGE_MARK_SUCCESS;
+        String expectedMessage = MarkAbsentAllCommand.MESSAGE_MARK_SUCCESS;
 
         ModelManager expectedModel = new ModelManager(model.getClassManager(), new UserPrefs());
         for (Student s : TypicalStudents.getTypicalStudents()) {
             Student markedStudent = s.copy();
-            markedStudent.markPresent(i);
+            markedStudent.markAbsent(i);
             expectedModel.setStudent(s, markedStudent);
         }
         expectedModel.commitClassManager();
 
-        assertCommandSuccess(markPresentAllCommand, model, expectedMessage, expectedModel, commandHistory);
+        assertCommandSuccess(markAbsentAllCommand, model, expectedMessage, expectedModel, commandHistory);
         assertEquals(selectedStudent, model.getSelectedStudent().get(0));
     }
 
@@ -51,18 +51,18 @@ public class MarkPresentAllCommandTest {
     public void execute_invalidTutorialIndex_throwsCommandException() {
         Index i = Index.fromZeroBased(ClassDetails.getTutorialCount() + 1);
 
-        MarkPresentAllCommand markPresentAllCommand = new MarkPresentAllCommand(i);
+        MarkAbsentAllCommand markAbsentAllCommand = new MarkAbsentAllCommand(i);
 
         assertCommandFailure(
-                markPresentAllCommand, model,
+                markAbsentAllCommand, model,
                 String.format(ClassDetails.MESSAGE_INVALID_TUTORIAL_INDEX, ClassDetails.getTutorialCount()),
                 commandHistory);
     }
 
     @Test
     public void equals() {
-        MarkPresentAllCommand markForFirstTutorial = new MarkPresentAllCommand(Index.fromOneBased(1));
-        MarkPresentAllCommand markForSecondTutorial = new MarkPresentAllCommand(Index.fromOneBased(2));
+        MarkAbsentAllCommand markForFirstTutorial = new MarkAbsentAllCommand(Index.fromOneBased(1));
+        MarkAbsentAllCommand markForSecondTutorial = new MarkAbsentAllCommand(Index.fromOneBased(2));
 
         // same object -> returns true
         assertTrue(markForFirstTutorial.equals(markForFirstTutorial));

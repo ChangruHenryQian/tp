@@ -1,7 +1,7 @@
 package seedu.classmanager.logic.parser;
 
 import static seedu.classmanager.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.classmanager.logic.commands.CommandTestUtil.STUDENT_NUMBER_DESC_BOB;
+import static seedu.classmanager.logic.commands.RandomCommand.MESSAGE_INVALID_NUM_OF_STUDENTS;
 import static seedu.classmanager.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.classmanager.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -29,7 +29,12 @@ public class RandomCommandParserTest {
     }
 
     @Test
-    public void parse_invalidIndex_throwsParseException() {
-        assertParseFailure(parser, STUDENT_NUMBER_DESC_BOB, MESSAGE_INVALID_FORMAT);
+    public void parse_invalidNumberOfStudent_throwsParseException() {
+        // Not a number
+        assertParseFailure(parser, " text", MESSAGE_INVALID_NUM_OF_STUDENTS);
+        assertParseFailure(parser, " 1 n/ alice", MESSAGE_INVALID_NUM_OF_STUDENTS);
+
+        // Not an integer
+        assertParseFailure(parser, " 1.1", MESSAGE_INVALID_NUM_OF_STUDENTS);
     }
 }

@@ -146,16 +146,6 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean getConfigured() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setConfigured(boolean isConfigured) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void addStudent(Student student) {
             throw new AssertionError("This method should not be called.");
         }
@@ -210,6 +200,9 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        //@@author Cikguseven-reused
+        //Reused from AddressBook-Level 4 (https://github.com/se-edu/addressbook-level4)
+        // with minor modifications
         @Override
         public boolean canUndoClassManager() {
             throw new AssertionError("This method should not be called.");
@@ -237,6 +230,12 @@ public class AddCommandTest {
 
         @Override
         public void reset(ReadOnlyClassManager classManager) {
+            throw new AssertionError("This method should not be called.");
+        }
+        //@@author
+
+        @Override
+        public void resetSelectedStudent() {
             throw new AssertionError("This method should not be called.");
         }
 

@@ -22,6 +22,7 @@ public class TagCommand extends Command {
     public static final String COMMAND_WORD = "tag";
     public static final String ADD_TAGS = "add";
     public static final String DELETE_TAGS = "delete";
+    public static final String DEFAULT = "";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Edits the tags of the student identified by the student number.\n"
             + "Existing tags will be overwritten by the input.\n"
@@ -34,6 +35,7 @@ public class TagCommand extends Command {
     public static final String MESSAGE_DELETE_ALL_TAG_SUCCESS = "Removed all tags from Student %1$s:\n";
     public static final String MESSAGE_TAG_FAILED = "There was an issue tagging the student.\n"
         + "Please check that the student with the student number exists or each tag has the “t/” prefix.\n";
+    public static final String MESSAGE_INVALID_ACTION_IDENTIFIER = "Only /add and /delete is allowed.";
     protected final StudentNumber studentNumber;
     protected final Set<Tag> tags;
 
@@ -63,7 +65,6 @@ public class TagCommand extends Command {
                 studentToTag.getStudentNumber(), studentToTag.getClassDetails(), this.tags, studentToTag.getComment());
 
         model.setStudent(studentToTag, editedStudent);
-        model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
         model.commitClassManager();
 
         return new CommandResult(generateSuccessMessage(editedStudent));

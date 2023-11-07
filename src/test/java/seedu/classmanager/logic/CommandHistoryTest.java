@@ -1,3 +1,7 @@
+//@@author Cikguseven-reused
+//Reused from AddressBook-Level 4 (https://github.com/se-edu/addressbook-level4)
+// with minor modifications
+
 package seedu.classmanager.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -29,7 +33,7 @@ public class CommandHistoryTest {
     @Test
     public void add() {
         final String validCommand = "clear";
-        final String invalidCommand = "adds Bob";
+        final String invalidCommand = "adds Alice";
 
         history.add(validCommand);
         history.add(invalidCommand);
@@ -77,3 +81,4 @@ public class CommandHistoryTest {
         assertNotEquals(commandHistoryWithA.hashCode(), commandHistoryWithB.hashCode());
     }
 }
+//@@author

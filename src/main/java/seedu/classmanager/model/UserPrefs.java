@@ -16,9 +16,8 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
     private Path classManagerFilePath = Paths.get("data" , "classmanager.json");
-    private boolean isConfigured = false;
-    private int tutorialCount = ClassDetails.DEFAULT_COUNT;
-    private int assignmentCount = ClassDetails.DEFAULT_COUNT;
+    private int tutorialCount = ClassDetails.getTutorialCount();
+    private int assignmentCount = ClassDetails.getAssignmentCount();
     private String theme = "dark";
 
     /**
@@ -41,7 +40,6 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
         setClassManagerFilePath(newUserPrefs.getClassManagerFilePath());
-        setConfigured(newUserPrefs.getConfigured());
         setAssignmentCount(newUserPrefs.getAssignmentCount());
         setTutorialCount(newUserPrefs.getTutorialCount());
         setTheme(newUserPrefs.getTheme());
@@ -64,14 +62,6 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         return classManagerFilePath;
     }
 
-    public boolean getConfigured() {
-        return isConfigured;
-    }
-
-    public void setConfigured(boolean isConfigured) {
-        this.isConfigured = isConfigured;
-    }
-
     public void setClassManagerFilePath(Path classManagerFilePath) {
         requireNonNull(classManagerFilePath);
         this.classManagerFilePath = classManagerFilePath;
@@ -90,13 +80,12 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
         UserPrefs otherUserPrefs = (UserPrefs) other;
         return guiSettings.equals(otherUserPrefs.guiSettings)
-                && classManagerFilePath.equals(otherUserPrefs.classManagerFilePath)
-                && isConfigured == otherUserPrefs.isConfigured;
+                && classManagerFilePath.equals(otherUserPrefs.classManagerFilePath);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(guiSettings, classManagerFilePath, isConfigured);
+        return Objects.hash(guiSettings, classManagerFilePath);
     }
 
     @Override
@@ -104,7 +93,6 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         StringBuilder sb = new StringBuilder();
         sb.append("Gui Settings : ").append(guiSettings);
         sb.append("\nLocal data file location : ").append(classManagerFilePath);
-        sb.append("\nModule information configured : ").append(isConfigured);
         return sb.toString();
     }
 

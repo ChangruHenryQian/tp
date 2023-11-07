@@ -1,3 +1,6 @@
+//@@author Cikguseven-reused
+//Reused from AddressBook-Level 4 (https://github.com/se-edu/addressbook-level4)
+// with minor modifications
 package seedu.classmanager.logic.commands;
 
 import static seedu.classmanager.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -24,12 +27,15 @@ public class HistoryCommandTest {
                 String.format(HistoryCommand.MESSAGE_SUCCESS, command1), expectedModel, commandHistory);
 
         String command2 = "randomCommand";
-        String command3 = "select 1";
+        String command3 = "anotherRandomCommand";
+        String command4 = "select 0";
         commandHistory.add(command2);
         commandHistory.add(command3);
+        commandHistory.add(command4);
 
         String expectedMessage = String.format(HistoryCommand.MESSAGE_SUCCESS,
-                String.join("\n", command3, command2, command1));
+                String.join("\n", command4, command3, command2, command1));
         assertCommandSuccess(new HistoryCommand(), model, expectedMessage, expectedModel, commandHistory);
     }
 }
+//@@author

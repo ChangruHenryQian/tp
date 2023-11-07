@@ -1,3 +1,6 @@
+//@@author Cikguseven-reused
+//Reused from AddressBook-Level 4 (https://github.com/se-edu/addressbook-level4)
+// with some modifications
 package seedu.classmanager.model;
 
 import java.util.ArrayList;
@@ -123,3 +126,4 @@ public class VersionedClassManager extends ClassManager {
         }
     }
 }
+//@@author

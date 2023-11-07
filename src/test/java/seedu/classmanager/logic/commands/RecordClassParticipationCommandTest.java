@@ -13,6 +13,7 @@ import static seedu.classmanager.testutil.TypicalStudents.getTypicalClassManager
 
 import org.junit.jupiter.api.Test;
 
+import seedu.classmanager.commons.core.index.Index;
 import seedu.classmanager.logic.CommandHistory;
 import seedu.classmanager.logic.Messages;
 import seedu.classmanager.model.ClassManager;
@@ -35,12 +36,12 @@ public class RecordClassParticipationCommandTest {
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Student editedStudent = new StudentBuilder(TypicalStudents.ALICE)
-                .withClassParticipationDetails(1, true)
+                .withClassParticipationDetails(Index.fromOneBased(1), true)
                 .build();
         model.setSelectedStudent(editedStudent);
         StudentNumber studentNumber = editedStudent.getStudentNumber();
         RecordClassParticipationCommand recordClassParticipationCommand =
-                new RecordClassParticipationCommand(studentNumber, 1, true);
+                new RecordClassParticipationCommand(studentNumber, Index.fromOneBased(1), true);
 
         String expectedMessage = String.format(RecordClassParticipationCommand.MESSAGE_SUCCESS,
                 editedStudent.getStudentNumber())
@@ -61,10 +62,10 @@ public class RecordClassParticipationCommandTest {
 
         Student studentInFilteredList = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
         Student editedStudent = new StudentBuilder(studentInFilteredList)
-                .withClassParticipationDetails(1, true)
+                .withClassParticipationDetails(Index.fromOneBased(1), true)
                 .build();
         RecordClassParticipationCommand recordClassParticipationCommand = new RecordClassParticipationCommand(
-                editedStudent.getStudentNumber(), 1, true);
+                editedStudent.getStudentNumber(), Index.fromOneBased(1), true);
 
         String expectedMessage = String.format(RecordClassParticipationCommand.MESSAGE_SUCCESS,
                 editedStudent.getStudentNumber())
@@ -74,7 +75,6 @@ public class RecordClassParticipationCommandTest {
         showStudentAtIndex(expectedModel, INDEX_FIRST_STUDENT);
         expectedModel.setStudent(model.getStudent(editedStudent.getStudentNumber()), editedStudent);
         expectedModel.setSelectedStudent(editedStudent);
-        expectedModel.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
         expectedModel.commitClassManager();
 
         assertCommandSuccess(recordClassParticipationCommand, model, expectedMessage, expectedModel, commandHistory);
@@ -85,7 +85,7 @@ public class RecordClassParticipationCommandTest {
         Student ida = TypicalStudents.IDA;
         assertFalse(model.hasStudent(ida));
         RecordClassParticipationCommand recordClassParticipationCommand = new RecordClassParticipationCommand(
-                ida.getStudentNumber(), 1, true);
+                ida.getStudentNumber(), Index.fromOneBased(1), true);
 
         assertCommandFailure(
                 recordClassParticipationCommand, model, Messages.MESSAGE_NONEXISTENT_STUDENT_NUMBER, commandHistory);
@@ -94,11 +94,11 @@ public class RecordClassParticipationCommandTest {
     @Test
     public void equals() {
         final RecordClassParticipationCommand standardCommand = new RecordClassParticipationCommand(
-                new StudentNumber(VALID_STUDENT_NUMBER_AMY), 1, true);
+                new StudentNumber(VALID_STUDENT_NUMBER_AMY), Index.fromOneBased(1), true);
 
         // same values -> returns true
         RecordClassParticipationCommand commandWithSameValues = new RecordClassParticipationCommand(
-                new StudentNumber(VALID_STUDENT_NUMBER_AMY), 1, true);
+                new StudentNumber(VALID_STUDENT_NUMBER_AMY), Index.fromOneBased(1), true);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -112,24 +112,26 @@ public class RecordClassParticipationCommandTest {
 
         // different tutorial session -> returns false
         assertFalse(standardCommand.equals(new RecordClassParticipationCommand(
-                new StudentNumber(VALID_STUDENT_NUMBER_AMY), 2, true)));
+                new StudentNumber(VALID_STUDENT_NUMBER_AMY), Index.fromOneBased(2), true)));
 
         // different participation -> returns false
         assertFalse(standardCommand.equals(new RecordClassParticipationCommand(
-                new StudentNumber(VALID_STUDENT_NUMBER_AMY), 1, false)));
+                new StudentNumber(VALID_STUDENT_NUMBER_AMY), Index.fromOneBased(1), false)));
 
         // different student number -> returns false
         assertFalse(standardCommand.equals(new RecordClassParticipationCommand(
-                new StudentNumber(VALID_STUDENT_NUMBER_BOB), 1, true)));
+                new StudentNumber(VALID_STUDENT_NUMBER_BOB), Index.fromOneBased(1), true)));
     }
 
     @Test
     public void toStringMethod() {
         RecordClassParticipationCommand recordClassParticipationCommand = new RecordClassParticipationCommand(
-                new StudentNumber(VALID_STUDENT_NUMBER_AMY), 1, true);
+                new StudentNumber(VALID_STUDENT_NUMBER_AMY), Index.fromOneBased(1), true);
 
         String expected = RecordClassParticipationCommand.class.getCanonicalName()
-                + "{studentNumber=" + VALID_STUDENT_NUMBER_AMY + ", sessionNumber=1, hasParticipated=true}";
+                + "{studentNumber=" + VALID_STUDENT_NUMBER_AMY + ", "
+                + "tutorialIndex=seedu.classmanager.commons.core.index.Index{zeroBasedIndex=0}, "
+                + "hasParticipated=true}";
         assertEquals(expected, recordClassParticipationCommand.toString());
     }
 

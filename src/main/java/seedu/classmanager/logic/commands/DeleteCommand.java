@@ -19,7 +19,7 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a student.\n"
             + "Parameters: "
-            + PREFIX_STUDENT_NUMBER + "STUDENT NUMBER\n"
+            + PREFIX_STUDENT_NUMBER + "STUDENT_NUMBER\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_STUDENT_NUMBER + "A0245234A";
     public static final String MESSAGE_DELETE_STUDENT_SUCCESS = "Deleted student: %1$s";

@@ -73,9 +73,8 @@ public class JsonUserPrefsStorageTest {
         UserPrefs userPrefs = new UserPrefs();
         userPrefs.setGuiSettings(new GuiSettings(1000, 500, 300, 100));
         userPrefs.setClassManagerFilePath(Paths.get("data/classmanager.json"));
-        userPrefs.setConfigured(true);
-        userPrefs.setTutorialCount(10);
-        userPrefs.setAssignmentCount(10);
+        userPrefs.setTutorialCount(13);
+        userPrefs.setAssignmentCount(6);
         return userPrefs;
     }
 

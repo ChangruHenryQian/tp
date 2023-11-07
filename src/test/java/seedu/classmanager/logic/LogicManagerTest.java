@@ -58,17 +58,16 @@ public class LogicManagerTest {
     private final Model model = new ModelManager();
     private Logic logic;
     private final int tutorialCount = 13;
-    private final int assignmentCount = 4;
-    private final String fileName = "classmanager";
+    private final int assignmentCount = 6;
+    private final String fileName = "logicmanagertest";
     private final String loadCommand = "load f/" + fileName;
 
     @BeforeEach
     public void setUp() {
         JsonClassManagerStorage classManagerStorage =
-                new JsonClassManagerStorage(temporaryFolder.resolve("classmanager.json"));
+                new JsonClassManagerStorage(temporaryFolder.resolve("logicmanagertest.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         StorageManager storage = new StorageManager(classManagerStorage, userPrefsStorage);
-        model.setConfigured(true);
         logic = new LogicManager(model, storage);
     }
 
@@ -102,7 +101,6 @@ public class LogicManagerTest {
 
     @Test
     public void execute_configCommand_success() throws CommandException, ParseException {
-        model.setConfigured(false);
         String configCommand = "config #t/" + tutorialCount + " #a/" + assignmentCount;
         assertCommandSuccess(configCommand,
                 String.format(ConfigCommand.MESSAGE_CONFIG_SUCCESS, tutorialCount, assignmentCount), model);
@@ -135,8 +133,6 @@ public class LogicManagerTest {
         // Triggers the saveClassManager method by executing an add command
         String configCommand = "config #t/" + tutorialCount + " #a/" + assignmentCount;
         ModelManager expectedModel = new ModelManager();
-        model.setConfigured(false);
-        expectedModel.setConfigured(true);
         assertCommandFailure(configCommand, CommandException.class,
                 String.format(FILE_OPS_ERROR_FORMAT, DUMMY_IO_EXCEPTION.getMessage()), expectedModel);
         assertHistoryCorrect(configCommand);
@@ -253,7 +249,6 @@ public class LogicManagerTest {
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
         Model expectedModel = new ModelManager(model.getClassManager(), new UserPrefs());
-        expectedModel.setConfigured(true);
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
@@ -299,7 +294,6 @@ public class LogicManagerTest {
                 + EMAIL_DESC_AMY + STUDENT_NUMBER_DESC_AMY + CLASS_NUMBER_DESC_AMY;
         Student expectedStudent = new StudentBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
-        expectedModel.setConfigured(true);
         expectedModel.addStudent(expectedStudent);
         expectedModel.commitClassManager();
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
@@ -327,7 +321,6 @@ public class LogicManagerTest {
                 + EMAIL_DESC_AMY + STUDENT_NUMBER_DESC_AMY + CLASS_NUMBER_DESC_AMY;
         Student expectedStudent = new StudentBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
-        expectedModel.setConfigured(true);
         expectedModel.addStudent(expectedStudent);
         expectedModel.commitClassManager();
         storage.saveClassManager(expectedModel.getClassManager(), expectedModel.getClassManagerFilePath());
@@ -366,7 +359,6 @@ public class LogicManagerTest {
             throw new AssertionError("Data should not be invalid", dle);
         }
         ModelManager expectedModel = new ModelManager();
-        expectedModel.setConfigured(true);
         expectedModel.setClassManagerFilePath(filePath);
         expectedModel.reset(newData);
         assertCommandFailure(loadCommand, CommandException.class, expectedMessage, expectedModel);

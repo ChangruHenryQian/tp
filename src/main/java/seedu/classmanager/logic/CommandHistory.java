@@ -1,3 +1,6 @@
+//@@author Cikguseven-reused
+//Reused from AddressBook-Level 4 (https://github.com/se-edu/addressbook-level4)
+// with minor modifications
 package seedu.classmanager.logic;
 
 import static java.util.Objects.requireNonNull;
@@ -56,3 +59,4 @@ public class CommandHistory {
         return userInputHistory.hashCode();
     }
 }
+//@@author

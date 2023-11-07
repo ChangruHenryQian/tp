@@ -66,16 +66,6 @@ public interface Model {
     void setClassManagerFilePath(Path classManagerFilePath);
 
     /**
-     * Returns true if the user has configured the module information.
-     */
-    boolean getConfigured();
-
-    /**
-     * User has configured the module information.
-     */
-    void setConfigured(boolean isConfigured);
-
-    /**
      * Replaces Class Manager data with the data in {@code classManager}.
      */
     void setClassManager(ReadOnlyClassManager classManager);
@@ -133,6 +123,9 @@ public interface Model {
      */
     void updateFilteredStudentList(Predicate<Student> predicate);
 
+    //@@author Cikguseven-reused
+    //Reused from AddressBook-Level 4 (https://github.com/se-edu/addressbook-level4)
+    // with minor modifications
     /**
      * Returns true if the model has previous Class Manager states to restore.
      */
@@ -162,4 +155,10 @@ public interface Model {
      * Resets the history of the model after a load command.
      */
     void reset(ReadOnlyClassManager classManager);
+    //@@author
+
+    /**
+     * Resets the selected student after a clear command.
+     */
+    void resetSelectedStudent();
 }

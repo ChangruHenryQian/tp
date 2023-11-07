@@ -38,9 +38,9 @@ public class Student {
     public Student(StudentNumber studentNumber) {
         requireAllNonNull(studentNumber);
         this.name = null;
-        this.studentNumber = studentNumber;
         this.phone = null;
         this.email = null;
+        this.studentNumber = studentNumber;
         this.classDetails = null;
         this.comment = null;
     }
@@ -137,19 +137,18 @@ public class Student {
     }
 
     /**
-     * Marks student as having participated in the specific tutorial.
+     * Marks the student as having participated in the specific tutorial.
      */
-    public void markClassParticipation(int sessionNumber, boolean hasParticipated) throws CommandException {
-        this.classDetails.recordClassParticipation(sessionNumber, hasParticipated);
+    public void markClassParticipation(Index tutorialIndex, boolean hasParticipated) throws CommandException {
+        this.classDetails.recordClassParticipation(tutorialIndex, hasParticipated);
     }
 
     /**
-     * Marks student as having participated in the specific tutorial.
+     * Marks the student as having participated in the specific tutorial.
      */
-    public void setGrade(int assignmentNumber, int grade) throws CommandException {
-        this.classDetails.setGrade(assignmentNumber, grade);
+    public void setGrade(Index assignmentIndex, int grade) throws CommandException {
+        this.classDetails.setGrade(assignmentIndex, grade);
     }
-
 
     /**
      * Returns true if both students have the same identity and data fields.
@@ -189,5 +188,4 @@ public class Student {
                 .add("comment", comment)
                 .toString();
     }
-
 }

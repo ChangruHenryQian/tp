@@ -1,3 +1,6 @@
+//@@author Cikguseven-reused
+//Reused from AddressBook-Level 4 (https://github.com/se-edu/addressbook-level4)
+// with minor modifications
 package seedu.classmanager.logic.commands;
 
 import static seedu.classmanager.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -43,3 +46,4 @@ public class UndoCommandTest {
         assertCommandFailure(new UndoCommand(), model, UndoCommand.MESSAGE_FAILURE, commandHistory);
     }
 }
+//@@author

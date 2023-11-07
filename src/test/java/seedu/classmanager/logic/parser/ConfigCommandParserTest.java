@@ -2,10 +2,13 @@ package seedu.classmanager.logic.parser;
 
 import static seedu.classmanager.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_COUNT;
+import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_FILE;
+import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_TUTORIAL_COUNT;
+import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_WILDCARD;
 import static seedu.classmanager.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.classmanager.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.classmanager.logic.parser.ConfigCommandParser.MESSAGE_INVALID_COUNT_VALUE;
+import static seedu.classmanager.logic.parser.ConfigCommandParser.MESSAGE_INVALID_COUNT_VALUE_TOO_SMALL;
 
 import org.junit.jupiter.api.Test;
 
@@ -47,12 +50,38 @@ public class ConfigCommandParserTest {
     public void parse_negativeIntArg_failure() {
         String argument = " " + PREFIX_ASSIGNMENT_COUNT + "-1 "
                 + PREFIX_TUTORIAL_COUNT + "2";
-        assertParseFailure(parser, argument, String.format(MESSAGE_INVALID_COUNT_VALUE, "assignments"));
+        assertParseFailure(parser, argument, String.format(MESSAGE_INVALID_COUNT_VALUE_TOO_SMALL, "assignments"));
     }
 
     @Test
     public void parse_emptyArg_failure() {
         String argument = " " + PREFIX_ASSIGNMENT_COUNT + " "
+                + PREFIX_TUTORIAL_COUNT + "2";
+        assertParseFailure(parser, argument, String.format(
+                MESSAGE_INVALID_COMMAND_FORMAT, ConfigCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_additionalArg_failure() {
+        String argument = " " + PREFIX_ASSIGNMENT_COUNT + "1 " + PREFIX_FILE + "sample "
+                + PREFIX_TUTORIAL_COUNT + "2";
+        assertParseFailure(parser, argument, String.format(
+                MESSAGE_INVALID_COMMAND_FORMAT, ConfigCommand.MESSAGE_USAGE));
+
+        argument = " " + PREFIX_WILDCARD + "add " + PREFIX_ASSIGNMENT_COUNT + "1 "
+                + PREFIX_TUTORIAL_COUNT + "2";
+        assertParseFailure(parser, argument, String.format(
+                MESSAGE_INVALID_COMMAND_FORMAT, ConfigCommand.MESSAGE_USAGE));
+
+        argument = " " + PREFIX_ASSIGNMENT_COUNT + "1 " + PREFIX_TUTORIAL_COUNT + "2 "
+                + PREFIX_NAME + "alice";
+        assertParseFailure(parser, argument, String.format(
+                MESSAGE_INVALID_COMMAND_FORMAT, ConfigCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_nonEmptyPreamble_failure() {
+        String argument = " test " + PREFIX_ASSIGNMENT_COUNT + "1 "
                 + PREFIX_TUTORIAL_COUNT + "2";
         assertParseFailure(parser, argument, String.format(
                 MESSAGE_INVALID_COMMAND_FORMAT, ConfigCommand.MESSAGE_USAGE));

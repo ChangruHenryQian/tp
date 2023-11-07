@@ -12,7 +12,6 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.classmanager.commons.core.GuiSettings;
 import seedu.classmanager.commons.core.LogsCenter;
-import seedu.classmanager.model.student.ClassDetails;
 import seedu.classmanager.model.student.Student;
 import seedu.classmanager.model.student.StudentNumber;
 
@@ -37,11 +36,6 @@ public class ModelManager implements Model {
         this.versionedClassManager = new VersionedClassManager(classManager);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredStudents = new FilteredList<>(this.versionedClassManager.getStudentList());
-
-        logger.info("Set the tutorial count to " + this.userPrefs.getTutorialCount());
-        logger.info("Set the assignment count to " + this.userPrefs.getAssignmentCount());
-        ClassDetails.setTutorialCount(this.userPrefs.getTutorialCount());
-        ClassDetails.setAssignmentCount(this.userPrefs.getAssignmentCount());
     }
 
     public ModelManager() {
@@ -89,22 +83,6 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Returns true if the user has configured the module information.
-     */
-    @Override
-    public boolean getConfigured() {
-        return userPrefs.getConfigured();
-    }
-
-    /**
-     * User has configured the module information.
-     */
-    @Override
-    public void setConfigured(boolean isConfigured) {
-        userPrefs.setConfigured(isConfigured);
-    }
-
-    /**
      * Assignment count that the user configured.
      */
     @Override
@@ -124,6 +102,7 @@ public class ModelManager implements Model {
     public void toggleColorTheme() {
         userPrefs.toggleColorTheme();
     }
+
     //=========== ClassManager ================================================================================
 
     @Override
@@ -194,11 +173,11 @@ public class ModelManager implements Model {
     public void updateFilteredStudentList(Predicate<Student> predicate) {
         requireNonNull(predicate);
         filteredStudents.setPredicate(predicate);
-        if (!filteredStudents.isEmpty()) {
-            versionedClassManager.setSelectedStudent(filteredStudents.get(0));
-        }
     }
 
+    //@@author Cikguseven-reused
+    //Reused from AddressBook-Level 4 (https://github.com/se-edu/addressbook-level4)
+    // with minor modifications
     /**
      * Returns true if the model has previous Class Manager states to restore.
      */
@@ -245,6 +224,15 @@ public class ModelManager implements Model {
     @Override
     public void reset(ReadOnlyClassManager classManager) {
         this.versionedClassManager.reset(classManager);
+        versionedClassManager.resetSelectedStudent();
+    }
+    //@@author
+
+    /**
+     * Resets the selected student after a clear command.
+     */
+    @Override
+    public void resetSelectedStudent() {
         versionedClassManager.resetSelectedStudent();
     }
 

@@ -38,6 +38,9 @@ public class CommandBox extends UiPart<Region> {
         historySnapshot = new ListElementPointer(history);
     }
 
+    //@@author Cikguseven-reused
+    //Reused from AddressBook-Level 4 (https://github.com/se-edu/addressbook-level4)
+    // with minor modifications
     /**
      * Handles the key press event, {@code keyEvent}.
      */
@@ -96,6 +99,17 @@ public class CommandBox extends UiPart<Region> {
     }
 
     /**
+     * Initializes the history snapshot.
+     */
+    private void initHistory() {
+        historySnapshot = new ListElementPointer(history);
+        // add an empty string to represent the most-recent end of historySnapshot, to be shown to
+        // the user if they try to navigate past the most-recent end of the historySnapshot.
+        historySnapshot.add("");
+    }
+    //@@author
+
+    /**
      * Handles the Enter button pressed event.
      */
     @FXML
@@ -114,16 +128,6 @@ public class CommandBox extends UiPart<Region> {
             initHistory();
             setStyleToIndicateCommandFailure();
         }
-    }
-
-    /**
-     * Initializes the history snapshot.
-     */
-    private void initHistory() {
-        historySnapshot = new ListElementPointer(history);
-        // add an empty string to represent the most-recent end of historySnapshot, to be shown to
-        // the user if they try to navigate past the most-recent end of the historySnapshot.
-        historySnapshot.add("");
     }
 
     /**

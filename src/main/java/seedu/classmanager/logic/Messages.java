@@ -20,10 +20,6 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_STUDENT_DOES_NOT_EXIST = "There is no student with the given student number.";
-    public static final String MESSAGE_CLASS_MANAGER_NOT_CONFIGURED = "Class Manager is not configured yet. "
-            + "Please enter config to configure Class Manager.";
-    public static final String MESSAGE_CLASS_MANAGER_ALREADY_CONFIGURED = "Class Manager has been configured "
-            + "previously. You are not allowed to configure it again.";
     public static final String MESSAGE_USER_PREFS_CANNOT_LOAD = "Unable to load user preferences from preferences.json";
 
     /**

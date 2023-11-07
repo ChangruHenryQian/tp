@@ -4,8 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_PARTICIPATION;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_TUTORIAL_INDEX;
-import static seedu.classmanager.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
+import seedu.classmanager.commons.core.index.Index;
 import seedu.classmanager.commons.util.ToStringBuilder;
 import seedu.classmanager.logic.CommandHistory;
 import seedu.classmanager.logic.Messages;
@@ -35,15 +35,15 @@ public class RecordClassParticipationCommand extends Command {
             + "Here are the details:\n";
 
     private final StudentNumber studentNumber;
-    private final int sessionNumber;
+    private final Index tutorialIndex;
     private final boolean hasParticipated;
 
     /**
      * Creates an RecordPartCommand to record the specified {@code Student}'s participation
      */
-    public RecordClassParticipationCommand(StudentNumber studentNumber, int sessionNumber, boolean hasParticipated) {
+    public RecordClassParticipationCommand(StudentNumber studentNumber, Index tutorialIndex, boolean hasParticipated) {
         this.studentNumber = studentNumber;
-        this.sessionNumber = sessionNumber;
+        this.tutorialIndex = tutorialIndex;
         this.hasParticipated = hasParticipated;
     }
 
@@ -58,9 +58,8 @@ public class RecordClassParticipationCommand extends Command {
 
         Student studentToMark = model.getStudent(studentNumber);
         Student markedStudent = studentToMark.copy();
-        markedStudent.markClassParticipation(this.sessionNumber, this.hasParticipated);
+        markedStudent.markClassParticipation(this.tutorialIndex, this.hasParticipated);
         model.setStudent(studentToMark, markedStudent);
-        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         model.setSelectedStudent(markedStudent);
         model.commitClassManager();
 
@@ -81,7 +80,7 @@ public class RecordClassParticipationCommand extends Command {
 
         RecordClassParticipationCommand otherSetGradeCommand = (RecordClassParticipationCommand) other;
         return studentNumber.equals(otherSetGradeCommand.studentNumber)
-                && sessionNumber == otherSetGradeCommand.sessionNumber
+                && tutorialIndex.equals(otherSetGradeCommand.tutorialIndex)
                 && hasParticipated == otherSetGradeCommand.hasParticipated;
     }
 
@@ -89,7 +88,7 @@ public class RecordClassParticipationCommand extends Command {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("studentNumber", studentNumber)
-                .add("sessionNumber", sessionNumber)
+                .add("tutorialIndex", tutorialIndex)
                 .add("hasParticipated", hasParticipated)
                 .toString();
     }

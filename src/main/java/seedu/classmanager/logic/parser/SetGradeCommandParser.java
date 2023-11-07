@@ -2,12 +2,15 @@ package seedu.classmanager.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.classmanager.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.classmanager.logic.parser.ArgumentMultimap.areAdditionalPrefixesPresent;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_ASSIGNMENT;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 
+import seedu.classmanager.commons.core.index.Index;
 import seedu.classmanager.logic.commands.SetGradeCommand;
 import seedu.classmanager.logic.parser.exceptions.ParseException;
+import seedu.classmanager.model.student.ClassDetails;
 import seedu.classmanager.model.student.StudentNumber;
 
 /**
@@ -26,22 +29,28 @@ public class SetGradeCommandParser implements Parser<SetGradeCommand> {
                PREFIX_ASSIGNMENT, PREFIX_GRADE);
 
         if (!argMultimap.arePrefixesPresent(PREFIX_STUDENT_NUMBER, PREFIX_ASSIGNMENT, PREFIX_GRADE)
-                || !argMultimap.getPreamble().isEmpty()) {
+                || !argMultimap.getPreamble().isEmpty()
+                || areAdditionalPrefixesPresent(args, PREFIX_STUDENT_NUMBER, PREFIX_ASSIGNMENT, PREFIX_GRADE)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetGradeCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_STUDENT_NUMBER, PREFIX_ASSIGNMENT, PREFIX_GRADE);
         StudentNumber studentNumber = ParserUtil.parseStudentNumber(
                 argMultimap.getValue(PREFIX_STUDENT_NUMBER).get());
-        int assignmentNumber;
+        Index assignmentIndex;
+        try {
+            assignmentIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_ASSIGNMENT).get());
+        } catch (ParseException e) {
+            throw new ParseException(ClassDetails.getMessageInvalidAssignmentIndex());
+        }
+
         int grade;
         try {
-            assignmentNumber = Integer.parseInt(argMultimap.getValue(PREFIX_ASSIGNMENT).get());
             grade = Integer.parseInt(argMultimap.getValue(PREFIX_GRADE).get());
         } catch (NumberFormatException e) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetGradeCommand.MESSAGE_USAGE));
+            throw new ParseException(ClassDetails.MESSAGE_INVALID_GRADE);
         }
-        return new SetGradeCommand(studentNumber, assignmentNumber, grade);
+        return new SetGradeCommand(studentNumber, assignmentIndex, grade);
     }
 
 }

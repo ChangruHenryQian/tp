@@ -8,12 +8,12 @@ import static seedu.classmanager.logic.commands.CommandTestUtil.VALID_STUDENT_NU
 import static seedu.classmanager.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.classmanager.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.classmanager.logic.commands.CommandTestUtil.showStudentAtIndex;
-import static seedu.classmanager.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import static seedu.classmanager.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.classmanager.testutil.TypicalStudents.getTypicalClassManager;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.classmanager.commons.core.index.Index;
 import seedu.classmanager.logic.CommandHistory;
 import seedu.classmanager.logic.Messages;
 import seedu.classmanager.model.ClassManager;
@@ -36,11 +36,11 @@ public class SetGradeCommandTest {
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Student editedStudent = new StudentBuilder(TypicalStudents.ALICE)
-                .withAssignmentDetails(1, 100)
+                .withAssignmentDetails(Index.fromOneBased(1), 100)
                 .build();
         model.setSelectedStudent(editedStudent);
         StudentNumber studentNumber = editedStudent.getStudentNumber();
-        SetGradeCommand setGradeCommand = new SetGradeCommand(studentNumber, 1, 100);
+        SetGradeCommand setGradeCommand = new SetGradeCommand(studentNumber, Index.fromOneBased(1), 100);
 
         String expectedMessage = String.format(SetGradeCommand.MESSAGE_SUCCESS, editedStudent.getStudentNumber())
                 + editedStudent.getClassDetails().displayAssignments();
@@ -60,9 +60,10 @@ public class SetGradeCommandTest {
 
         Student studentInFilteredList = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
         Student editedStudent = new StudentBuilder(studentInFilteredList)
-                .withAssignmentDetails(1, 50)
+                .withAssignmentDetails(Index.fromOneBased(1), 50)
                 .build();
-        SetGradeCommand setGradeCommand = new SetGradeCommand(editedStudent.getStudentNumber(), 1, 50);
+        SetGradeCommand setGradeCommand = new SetGradeCommand(editedStudent.getStudentNumber(),
+                Index.fromOneBased(1), 50);
 
         String expectedMessage = String.format(SetGradeCommand.MESSAGE_SUCCESS, editedStudent.getStudentNumber())
                 + editedStudent.getClassDetails().displayAssignments();
@@ -71,7 +72,6 @@ public class SetGradeCommandTest {
         showStudentAtIndex(expectedModel, INDEX_FIRST_STUDENT);
         expectedModel.setStudent(model.getStudent(editedStudent.getStudentNumber()), editedStudent);
         expectedModel.setSelectedStudent(editedStudent);
-        expectedModel.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         expectedModel.commitClassManager();
 
         assertCommandSuccess(setGradeCommand, model, expectedMessage, expectedModel, commandHistory);
@@ -81,7 +81,8 @@ public class SetGradeCommandTest {
     public void execute_studentDoesNotExist_failure() {
         Student ida = TypicalStudents.IDA;
         assertFalse(model.hasStudent(ida));
-        SetGradeCommand setGradeCommand = new SetGradeCommand(ida.getStudentNumber(), 1, 100);
+        SetGradeCommand setGradeCommand = new SetGradeCommand(ida.getStudentNumber(),
+                Index.fromOneBased(1), 100);
 
         assertCommandFailure(setGradeCommand, model, Messages.MESSAGE_NONEXISTENT_STUDENT_NUMBER, commandHistory);
     }
@@ -89,11 +90,11 @@ public class SetGradeCommandTest {
     @Test
     public void equals() {
         final SetGradeCommand standardCommand = new SetGradeCommand(
-                new StudentNumber(VALID_STUDENT_NUMBER_AMY), 1, 100);
+                new StudentNumber(VALID_STUDENT_NUMBER_AMY), Index.fromOneBased(1), 100);
 
         // same values -> returns true
         SetGradeCommand commandWithSameValues = new SetGradeCommand(
-                new StudentNumber(VALID_STUDENT_NUMBER_AMY), 1, 100);
+                new StudentNumber(VALID_STUDENT_NUMBER_AMY), Index.fromOneBased(1), 100);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -107,24 +108,25 @@ public class SetGradeCommandTest {
 
         // different assignment -> returns false
         assertFalse(standardCommand.equals(new SetGradeCommand(
-                new StudentNumber(VALID_STUDENT_NUMBER_AMY), 2, 100)));
+                new StudentNumber(VALID_STUDENT_NUMBER_AMY), Index.fromOneBased(2), 100)));
 
         // different grade -> returns false
         assertFalse(standardCommand.equals(new SetGradeCommand(
-                new StudentNumber(VALID_STUDENT_NUMBER_AMY), 1, 50)));
+                new StudentNumber(VALID_STUDENT_NUMBER_AMY), Index.fromOneBased(1), 50)));
 
         // different student number -> returns false
         assertFalse(standardCommand.equals(new SetGradeCommand(
-                new StudentNumber(VALID_STUDENT_NUMBER_BOB), 1, 50)));
+                new StudentNumber(VALID_STUDENT_NUMBER_BOB), Index.fromOneBased(1), 50)));
     }
 
     @Test
     public void toStringMethod() {
         SetGradeCommand setGradeCommand = new SetGradeCommand(
-                new StudentNumber(VALID_STUDENT_NUMBER_AMY), 1, 50);
+                new StudentNumber(VALID_STUDENT_NUMBER_AMY), Index.fromOneBased(1), 50);
 
         String expected = SetGradeCommand.class.getCanonicalName()
-                + "{studentNumber=" + VALID_STUDENT_NUMBER_AMY + ", assignmentNumber=1, grade=50}";
+                + "{studentNumber=" + VALID_STUDENT_NUMBER_AMY + ", "
+                + "assignmentIndex=seedu.classmanager.commons.core.index.Index{zeroBasedIndex=0}, grade=50}";
         assertEquals(expected, setGradeCommand.toString());
     }
 }

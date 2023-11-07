@@ -2,6 +2,7 @@ package seedu.classmanager.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.classmanager.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.classmanager.logic.commands.RandomCommand.MESSAGE_INVALID_NUM_OF_STUDENTS;
 
 import seedu.classmanager.logic.commands.RandomCommand;
 import seedu.classmanager.logic.parser.exceptions.ParseException;
@@ -20,11 +21,16 @@ public class RandomCommandParser implements Parser<RandomCommand> {
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args);
 
-        Integer numOfStudent;
+        if (argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    RandomCommand.MESSAGE_USAGE));
+        }
+
+        int numOfStudent;
         try {
             numOfStudent = Integer.parseInt(argMultimap.getPreamble());
         } catch (NumberFormatException e) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RandomCommand.MESSAGE_USAGE));
+            throw new ParseException(MESSAGE_INVALID_NUM_OF_STUDENTS);
         }
 
         return new RandomCommand(numOfStudent);

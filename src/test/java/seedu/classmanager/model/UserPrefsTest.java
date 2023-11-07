@@ -61,11 +61,6 @@ public class UserPrefsTest {
         differentUserPrefs = new UserPrefs();
         differentUserPrefs.setGuiSettings(new GuiSettings(1, 1, 1, 1));
         assertNotEquals(userPrefs, differentUserPrefs);
-
-        // different isConfigured -> returns false
-        differentUserPrefs = new UserPrefs();
-        differentUserPrefs.setConfigured(!userPrefs.getConfigured());
-        assertNotEquals(userPrefs, differentUserPrefs);
     }
 
 }

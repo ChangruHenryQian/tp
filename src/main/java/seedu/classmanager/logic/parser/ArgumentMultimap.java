@@ -83,4 +83,15 @@ public class ArgumentMultimap {
     public boolean arePrefixesPresent(Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> this.getValue(prefix).isPresent());
     }
+
+    /**
+     * Returns true if additional prefixes other than the given prefixes are present in the
+     * {@code String} args.
+     */
+    public static boolean areAdditionalPrefixesPresent(String args, Prefix... prefixes) {
+        ArgumentMultimap argMultimapAllPrefix = ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_LIST);
+        return argMultimapAllPrefix.argMultimap.keySet().stream()
+                .filter(pfx -> !pfx.equals(new Prefix(""))) // Filter out preamble
+                .anyMatch(pfx -> Stream.of(prefixes).noneMatch(givenPrefix -> givenPrefix.equals(pfx)));
+    }
 }

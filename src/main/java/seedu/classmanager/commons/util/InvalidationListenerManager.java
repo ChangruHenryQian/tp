@@ -1,3 +1,6 @@
+//@@author Cikguseven-reused
+//Reused from AddressBook-Level 4 (https://github.com/se-edu/addressbook-level4)
+// with minor modifications
 package seedu.classmanager.commons.util;
 
 import static java.util.Objects.requireNonNull;
@@ -49,3 +52,4 @@ public class InvalidationListenerManager {
         listeners.remove(listener);
     }
 }
+//@@author

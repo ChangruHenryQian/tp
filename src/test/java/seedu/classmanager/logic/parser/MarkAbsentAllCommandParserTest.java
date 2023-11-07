@@ -14,38 +14,36 @@ import static seedu.classmanager.logic.parser.CommandParserTestUtil.assertParseS
 import org.junit.jupiter.api.Test;
 
 import seedu.classmanager.commons.core.index.Index;
-import seedu.classmanager.logic.commands.MarkPresentAllCommand;
+import seedu.classmanager.logic.commands.MarkAbsentAllCommand;
 import seedu.classmanager.model.student.ClassDetails;
 
 /**
- * Tests MarkPresentAllCommandParser.
+ * Tests MarkAbsentAllCommandParser.
  */
-public class MarkPresentAllCommandParserTest {
-    private MarkPresentAllCommandParser parser = new MarkPresentAllCommandParser();
+public class MarkAbsentAllCommandParserTest {
+    private MarkAbsentAllCommandParser parser = new MarkAbsentAllCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() {
         assertParseFailure(parser, "", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                MarkPresentAllCommand.MESSAGE_USAGE));
+                MarkAbsentAllCommand.MESSAGE_USAGE));
         assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                MarkPresentAllCommand.MESSAGE_USAGE));
+                MarkAbsentAllCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_validArgs_returnsMarkCommand() {
         // first tutorial
         assertParseSuccess(parser, TEST_FIRST_TUTORIAL_DESC,
-                new MarkPresentAllCommand(Index.fromOneBased(TEST_FIRST_TUTORIAL)));
+                new MarkAbsentAllCommand(Index.fromOneBased(TEST_FIRST_TUTORIAL)));
 
         // default tutorial
         assertParseSuccess(parser, TEST_DEFAULT_TUTORIAL_DESC,
-                new MarkPresentAllCommand(Index.fromOneBased(TEST_DEFAULT_TUTORIAL)));
+                new MarkAbsentAllCommand(Index.fromOneBased(TEST_DEFAULT_TUTORIAL)));
     }
 
     @Test
     public void parse_invalidTutorialIndex_throwsParseException() {
-        ClassDetails.setTutorialCount(ClassDetails.getTutorialCount());
-
         // index not a number
         assertParseFailure(parser, " " + PREFIX_TUTORIAL_INDEX + " test",
                 ClassDetails.getMessageInvalidTutorialIndex());
@@ -58,14 +56,14 @@ public class MarkPresentAllCommandParserTest {
     @Test
     public void parse_nonEmptyPreamble_throwsParseException() {
         assertParseFailure(parser, " test" + TEST_FIRST_TUTORIAL_DESC,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkPresentAllCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAbsentAllCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_additionalPrefix_throwsParseException() {
         assertParseFailure(parser, TEST_FIRST_TUTORIAL_DESC + STUDENT_NUMBER_DESC_AMY,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkPresentAllCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAbsentAllCommand.MESSAGE_USAGE));
         assertParseFailure(parser, TEST_FIRST_TUTORIAL_DESC + NAME_DESC_AMY,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkPresentAllCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAbsentAllCommand.MESSAGE_USAGE));
     }
 }

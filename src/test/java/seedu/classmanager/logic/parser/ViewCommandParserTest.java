@@ -1,8 +1,10 @@
 package seedu.classmanager.logic.parser;
 
 import static seedu.classmanager.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.classmanager.logic.commands.CommandTestUtil.INVALID_STUDENT_NUMBER;
+import static seedu.classmanager.logic.commands.CommandTestUtil.INVALID_STUDENT_NUMBER_DESC;
+import static seedu.classmanager.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.classmanager.logic.commands.CommandTestUtil.STUDENT_NUMBER_DESC_BOB;
+import static seedu.classmanager.logic.commands.CommandTestUtil.TEST_FIRST_TUTORIAL_DESC;
 import static seedu.classmanager.logic.commands.CommandTestUtil.VALID_STUDENT_NUMBER_BOB;
 import static seedu.classmanager.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.classmanager.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -37,8 +39,24 @@ public class ViewCommandParserTest {
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, INVALID_STUDENT_NUMBER,
+        assertParseFailure(parser, INVALID_STUDENT_NUMBER_DESC,
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
     }
 
+    @Test
+    public void parse_nonEmptyPreamble_throwsParseException() {
+        assertParseFailure(parser, " test" + STUDENT_NUMBER_DESC_BOB,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_additionalPrefix_throwsParseException() {
+        assertParseFailure(parser, NAME_DESC_AMY + STUDENT_NUMBER_DESC_BOB,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, STUDENT_NUMBER_DESC_BOB + NAME_DESC_AMY,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
+
+        assertParseFailure(parser, STUDENT_NUMBER_DESC_BOB + TEST_FIRST_TUTORIAL_DESC,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
+    }
 }

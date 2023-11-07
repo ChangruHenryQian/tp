@@ -20,6 +20,7 @@ import seedu.classmanager.logic.CommandHistory;
 import seedu.classmanager.logic.commands.exceptions.CommandException;
 import seedu.classmanager.model.ClassManager;
 import seedu.classmanager.model.Model;
+import seedu.classmanager.model.student.ClassDetails;
 import seedu.classmanager.model.student.Student;
 import seedu.classmanager.model.student.StudentNumber;
 import seedu.classmanager.testutil.EditStudentDescriptorBuilder;
@@ -41,14 +42,11 @@ public class CommandTestUtil {
     public static final String VALID_CLASS_NUMBER_AMY = "T11";
     public static final String VALID_CLASS_NUMBER_BOB = "T12";
     public static final String INVALID_STUDENT_NUMBER = "B2103818N";
-    public static final String VALID_COMMENT_AMY = "Good student";
     public static final String VALID_COMMENT_BOB = "Bad student";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_TAG_FRIENDS = "friends";
     public static final String VALID_TAG_SMART = "smart";
-
-
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
@@ -57,15 +55,14 @@ public class CommandTestUtil {
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
     public static final String STUDENT_NUMBER_DESC_AMY = " " + PREFIX_STUDENT_NUMBER + VALID_STUDENT_NUMBER_AMY;
     public static final String STUDENT_NUMBER_DESC_BOB = " " + PREFIX_STUDENT_NUMBER + VALID_STUDENT_NUMBER_BOB;
-    public static final String STUDENT_NUMBER_DESC_NONEXISTENT = " " + PREFIX_STUDENT_NUMBER + "A0000000A";
     public static final String CLASS_NUMBER_DESC_AMY = " " + PREFIX_CLASS_NUMBER + VALID_CLASS_NUMBER_AMY;
     public static final String CLASS_NUMBER_DESC_BOB = " " + PREFIX_CLASS_NUMBER + VALID_CLASS_NUMBER_BOB;
-    public static final String COMMENT_DESC_AMY = " " + PREFIX_CLASS_NUMBER + VALID_COMMENT_AMY;
-    public static final String COMMENT_DESC_BOB = " " + PREFIX_CLASS_NUMBER + VALID_COMMENT_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
-    public static final int TEST_TUTORIAL = 1;
-    public static final String TEST_TUTORIAL_DESC = " " + PREFIX_TUTORIAL_INDEX + TEST_TUTORIAL;
+    public static final int TEST_FIRST_TUTORIAL = 1;
+    public static final String TEST_FIRST_TUTORIAL_DESC = " " + PREFIX_TUTORIAL_INDEX + TEST_FIRST_TUTORIAL;
+    public static final int TEST_DEFAULT_TUTORIAL = ClassDetails.getTutorialCount();
+    public static final String TEST_DEFAULT_TUTORIAL_DESC = " " + PREFIX_TUTORIAL_INDEX + TEST_DEFAULT_TUTORIAL;
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol

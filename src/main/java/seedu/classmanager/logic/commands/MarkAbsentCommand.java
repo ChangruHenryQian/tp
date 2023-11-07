@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.classmanager.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_TUTORIAL_INDEX;
-import static seedu.classmanager.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import seedu.classmanager.commons.core.index.Index;
 import seedu.classmanager.logic.CommandHistory;
@@ -19,11 +18,11 @@ import seedu.classmanager.model.student.StudentNumber;
  */
 public class MarkAbsentCommand extends Command {
     public static final String COMMAND_WORD = "absent";
-    public static final String MESSAGE_MARK_SUCCESS = "Successfully mark the student as absent.";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks a student as absent.\n"
+    public static final String MESSAGE_MARK_SUCCESS = "Successfully marked the student's attendance as absent.";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks a student's attendance as absent.\n"
             + "Parameters: "
-            + PREFIX_STUDENT_NUMBER + "STUDENT NUMBER "
-            + PREFIX_TUTORIAL_INDEX + "TUTORIAL INDEX\n"
+            + PREFIX_STUDENT_NUMBER + "STUDENT_NUMBER "
+            + PREFIX_TUTORIAL_INDEX + "TUTORIAL_SESSION\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_STUDENT_NUMBER + "A0245234A "
             + PREFIX_TUTORIAL_INDEX + "1";
@@ -55,14 +54,8 @@ public class MarkAbsentCommand extends Command {
         Student studentToMark = model.getStudent(targetStudentNumber);
         Student markedStudent = studentToMark.copy();
 
-        try {
-            markedStudent.markAbsent(this.index);
-            model.setStudent(studentToMark, markedStudent);
-        } catch (CommandException e) {
-            throw new CommandException(e.getMessage());
-        }
-
-        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+        markedStudent.markAbsent(this.index);
+        model.setStudent(studentToMark, markedStudent);
         model.setSelectedStudent(markedStudent);
         model.commitClassManager();
 

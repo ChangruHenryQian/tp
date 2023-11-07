@@ -18,6 +18,7 @@ public class ClearCommand extends Command {
     public CommandResult execute(Model model, CommandHistory commandHistory) {
         requireNonNull(model);
         model.setClassManager(new ClassManager());
+        model.resetSelectedStudent();
         model.commitClassManager();
 
         return new CommandResult(MESSAGE_SUCCESS);

@@ -6,20 +6,20 @@ import static seedu.classmanager.logic.parser.ArgumentMultimap.areAdditionalPref
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_TUTORIAL_INDEX;
 
 import seedu.classmanager.commons.core.index.Index;
-import seedu.classmanager.logic.commands.MarkPresentAllCommand;
+import seedu.classmanager.logic.commands.MarkAbsentAllCommand;
 import seedu.classmanager.logic.parser.exceptions.ParseException;
 import seedu.classmanager.model.student.ClassDetails;
 
 /**
- * Parses input arguments and creates a new MarkPresentAllCommand object
+ * Parses input arguments and creates a new MarkAbsentAllCommand object
  */
-public class MarkPresentAllCommandParser implements Parser<MarkPresentAllCommand> {
+public class MarkAbsentAllCommandParser implements Parser<MarkAbsentAllCommand> {
     /**
-     * Parses the given {@code String} of arguments in the context of the MarkPresentAllCommand
-     * and returns a MarkPresentAllCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the MarkAbsentAllCommand
+     * and returns a MarkAbsentAllCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public MarkPresentAllCommand parse(String args) throws ParseException {
+    public MarkAbsentAllCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TUTORIAL_INDEX);
@@ -28,7 +28,7 @@ public class MarkPresentAllCommandParser implements Parser<MarkPresentAllCommand
                 || !argMultimap.getPreamble().isEmpty()
                 || areAdditionalPrefixesPresent(args, PREFIX_TUTORIAL_INDEX)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    MarkPresentAllCommand.MESSAGE_USAGE));
+                    MarkAbsentAllCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TUTORIAL_INDEX);
@@ -40,6 +40,6 @@ public class MarkPresentAllCommandParser implements Parser<MarkPresentAllCommand
             throw new ParseException(ClassDetails.getMessageInvalidTutorialIndex());
         }
 
-        return new MarkPresentAllCommand(index);
+        return new MarkAbsentAllCommand(index);
     }
 }

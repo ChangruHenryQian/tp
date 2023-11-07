@@ -33,7 +33,7 @@ public class MarkPresentCommandTest {
     @Test
     public void execute_validStudentNumber_success() throws CommandException {
         Student studentToMark = TypicalStudents.getTypicalStudents().get(INDEX_FIRST_STUDENT.getZeroBased());
-        Index i = Index.fromOneBased(ClassDetails.DEFAULT_COUNT);
+        Index i = Index.fromOneBased(ClassDetails.getTutorialCount());
         model.setSelectedStudent(studentToMark);
 
         MarkPresentCommand markPresentCommand = new MarkPresentCommand(i, studentToMark.getStudentNumber());
@@ -53,13 +53,13 @@ public class MarkPresentCommandTest {
     @Test
     public void execute_invalidTutorialIndex_throwsCommandException() {
         Student studentToMark = TypicalStudents.getTypicalStudents().get(INDEX_FIRST_STUDENT.getZeroBased());
-        Index i = Index.fromZeroBased(ClassDetails.DEFAULT_COUNT + 1);
+        Index i = Index.fromZeroBased(ClassDetails.getTutorialCount() + 1);
 
         MarkPresentCommand markPresentCommand = new MarkPresentCommand(i, studentToMark.getStudentNumber());
 
         assertCommandFailure(
                 markPresentCommand, model,
-                String.format(ClassDetails.MESSAGE_INVALID_TUTORIAL_INDEX, ClassDetails.DEFAULT_COUNT),
+                String.format(ClassDetails.MESSAGE_INVALID_TUTORIAL_INDEX, ClassDetails.getTutorialCount()),
                 commandHistory);
     }
 

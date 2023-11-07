@@ -6,9 +6,9 @@
     "studentNumber" : "A0234543A",
     "classDetails" : {
       "classNumber" : "T10",
-      "attendanceTracker" : [ false, false, false, false, false, false, false, false, false, false ],
-      "assignmentTracker" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
-      "classParticipationTracker" : [ false, false, false, false, false, false, false, false, false, false ]
+      "attendanceTracker" : [ false, false, false, false, false, false, false, false, false, false, false, false, false ],
+      "assignmentTracker" : [ 0, 0, 0, 0, 0, 0 ],
+      "classParticipationTracker" : [ false, false, false, false, false, false, false, false, false, false, false, false, false ]
     },
     "tags" : [ "classmates" ],
     "comment" : "Good Student"
@@ -19,9 +19,9 @@
     "studentNumber" : "A0224543A",
     "classDetails" : {
       "classNumber" : "T11",
-      "attendanceTracker" : [ false, false, false, false, false, false, false, false, false, false ],
-      "assignmentTracker" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
-      "classParticipationTracker" : [ false, false, false, false, false, false, false, false, false, false ]
+      "attendanceTracker" : [ false, false, false, false, false, false, false, false, false, false, false, false, false ],
+      "assignmentTracker" : [ 0, 0, 0, 0, 0, 0 ],
+      "classParticipationTracker" : [ false, false, false, false, false, false, false, false, false, false, false, false, false ]
     },
     "tags" : [ "colleagues" ],
     "comment" : "Good Student"

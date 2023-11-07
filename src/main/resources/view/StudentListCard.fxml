@@ -42,7 +42,7 @@
          <RowConstraints />
       </rowConstraints>
   </GridPane>
-   <BarChart fx:id="barChart" prefHeight="160.0" prefWidth="350.0">
+   <BarChart fx:id="barChart" prefHeight="160.0" prefWidth="400.0">
      <xAxis>
        <CategoryAxis side="BOTTOM">
             <opaqueInsets>

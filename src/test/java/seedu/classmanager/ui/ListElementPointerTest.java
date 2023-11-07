@@ -1,3 +1,6 @@
+//@@author Cikguseven-reused
+//Reused from AddressBook-Level 4 (https://github.com/se-edu/addressbook-level4)
+// with minor modifications
 package seedu.classmanager.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -90,7 +93,7 @@ public class ListElementPointerTest {
         assertTrue(firstPointer.equals(firstPointerCopy));
 
         // different types -> returns false
-        assertFalse(firstPointer.equals(1));
+        assertFalse(firstPointer.equals(0));
 
         // null -> returns false
         assertFalse(firstPointer.equals(null));
@@ -173,3 +176,4 @@ public class ListElementPointerTest {
         }
     }
 }
+//@@author

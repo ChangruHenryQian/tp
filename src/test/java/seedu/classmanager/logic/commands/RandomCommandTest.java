@@ -38,20 +38,16 @@ public class RandomCommandTest {
 
     @Test
     public void execute_invalidIndex_throwsCommandException() {
-        int invalid = TypicalStudents.getTypicalStudents().size() + 1;
-
-        RandomCommand invalidRandomCommand = new RandomCommand(invalid);
-
+        // input that is larger than students displayed
+        int largeInvalid = TypicalStudents.getTypicalStudents().size() + 1;
+        RandomCommand invalidRandomCommand = new RandomCommand(largeInvalid);
         assertCommandFailure(invalidRandomCommand, model,
-            RandomCommand.MESSAGE_INVALID_NUM_OF_STUDENT, commandHistory);
+            RandomCommand.MESSAGE_INVALID_NUM_OF_STUDENTS, commandHistory);
 
-        int negativeInput = -1;
-
-        RandomCommand negativeRandomCommand = new RandomCommand(negativeInput);
-
+        // input that is negative
+        RandomCommand negativeRandomCommand = new RandomCommand(-1);
         assertCommandFailure(negativeRandomCommand, model,
-            RandomCommand.MESSAGE_INVALID_NUM_OF_STUDENT, commandHistory);
-
+            RandomCommand.MESSAGE_INVALID_NUM_OF_STUDENTS, commandHistory);
     }
 
     @Test

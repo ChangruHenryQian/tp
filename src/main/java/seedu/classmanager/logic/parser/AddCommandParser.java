@@ -1,6 +1,7 @@
 package seedu.classmanager.logic.parser;
 
 import static seedu.classmanager.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.classmanager.logic.parser.ArgumentMultimap.areAdditionalPrefixesPresent;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_CLASS_NUMBER;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_NAME;
@@ -38,7 +39,9 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         if (!argMultimap.arePrefixesPresent(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                 PREFIX_STUDENT_NUMBER, PREFIX_CLASS_NUMBER)
-                || !argMultimap.getPreamble().isEmpty()) {
+                || !argMultimap.getPreamble().isEmpty()
+                || areAdditionalPrefixesPresent(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+                PREFIX_TAG, PREFIX_STUDENT_NUMBER, PREFIX_CLASS_NUMBER)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 

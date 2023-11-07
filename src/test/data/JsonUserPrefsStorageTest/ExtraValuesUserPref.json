@@ -10,7 +10,6 @@
     }
   },
   "classManagerFilePath": "data/classmanager.json",
-  "isConfigured" : true,
-  "tutorialCount" : 10,
-  "assignmentCount" : 10
+  "tutorialCount" : 13,
+  "assignmentCount" : 3
 }

@@ -8,7 +8,6 @@
     }
   },
   "classManagerFilePath": "data/classmanager.json",
-  "isConfigured" : false,
-  "tutorialCount" : 10,
-  "assignmentCount" : 10
+  "tutorialCount" : 26,
+  "assignmentCount" : 5
 }

@@ -2,6 +2,7 @@ package seedu.classmanager.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.classmanager.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.classmanager.logic.parser.ArgumentMultimap.areAdditionalPrefixesPresent;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_COUNT;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_TUTORIAL_COUNT;
 
@@ -12,8 +13,8 @@ import seedu.classmanager.logic.parser.exceptions.ParseException;
  * Parses input arguments and creates a new ConfigCommand object
  */
 public class ConfigCommandParser implements Parser<ConfigCommand> {
-    public static final String MESSAGE_INVALID_COUNT_VALUE = "Invalid count values! The count value of %1$s cannot "
-            + "be less than 0.";
+    public static final String MESSAGE_INVALID_COUNT_VALUE_TOO_SMALL = "Invalid count value!"
+            + "The count value of %1$s cannot be less than 0.";
 
     /**
      * Parses the given {@code String} of arguments in the context of the ConfigCommand
@@ -25,7 +26,8 @@ public class ConfigCommandParser implements Parser<ConfigCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TUTORIAL_COUNT, PREFIX_ASSIGNMENT_COUNT);
         if (!argMultimap.arePrefixesPresent(PREFIX_TUTORIAL_COUNT, PREFIX_ASSIGNMENT_COUNT)
-                || !argMultimap.getPreamble().isEmpty()) {
+                || !argMultimap.getPreamble().isEmpty()
+                || areAdditionalPrefixesPresent(args, PREFIX_TUTORIAL_COUNT, PREFIX_ASSIGNMENT_COUNT)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ConfigCommand.MESSAGE_USAGE));
         }
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TUTORIAL_COUNT, PREFIX_ASSIGNMENT_COUNT);
@@ -45,13 +47,13 @@ public class ConfigCommandParser implements Parser<ConfigCommand> {
 
     /**
      * Checks if the count value is valid.
-     * Count value is valid when it is greater than or equal to 0.
-     * @param count Count value of tutorials or assignments
-     * @throws ParseException if the count value is less than 0
+     * Count value is valid when it is 0 or larger.
+     * @param count Count value of tutorials or assignments.
+     * @throws ParseException if the count value is less than 0.
      */
     private void validCountParser(int count, String attribute) throws ParseException {
         if (count < 0) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COUNT_VALUE, attribute));
+            throw new ParseException(String.format(MESSAGE_INVALID_COUNT_VALUE_TOO_SMALL, attribute));
         }
     }
 }

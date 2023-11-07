@@ -13,8 +13,6 @@ public interface ReadOnlyUserPrefs {
 
     Path getClassManagerFilePath();
 
-    boolean getConfigured();
-
     int getAssignmentCount();
 
     int getTutorialCount();

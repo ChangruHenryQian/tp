@@ -56,7 +56,7 @@ public class LogicManager implements Logic {
 
         CommandResult commandResult;
         try {
-            command = classManagerParser.parseCommand(commandText, model.getConfigured());
+            command = classManagerParser.parseCommand(commandText);
             commandResult = command.execute(model, history);
         } finally {
             history.add(commandText);
@@ -71,20 +71,17 @@ public class LogicManager implements Logic {
             } catch (IOException ioe) {
                 throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
             }
-        } else if (command instanceof LoadCommand) {
+        } else if (command instanceof LoadCommand | command instanceof ConfigCommand) {
             try {
                 storage.saveClassManager(model.getClassManager(), model.getClassManagerFilePath());
                 storage.saveUserPrefs(model.getUserPrefs());
-                logger.info("Class Manager has loaded the save file.");
+                if (command instanceof LoadCommand) {
+                    logger.info("Class Manager has loaded the save file.");
+                } else {
+                    logger.info("Class Manager has been configured.");
+                }
             } catch (AccessDeniedException e) {
                 throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
-            } catch (IOException ioe) {
-                throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
-            }
-        } else if (command instanceof ConfigCommand) {
-            try {
-                storage.saveUserPrefs(model.getUserPrefs());
-                logger.info("Class Manager has been configured.");
             } catch (IOException ioe) {
                 throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
             }

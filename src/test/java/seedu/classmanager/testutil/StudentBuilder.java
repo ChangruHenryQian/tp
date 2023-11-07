@@ -3,6 +3,7 @@ package seedu.classmanager.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.classmanager.commons.core.index.Index;
 import seedu.classmanager.logic.commands.exceptions.CommandException;
 import seedu.classmanager.model.student.ClassDetails;
 import seedu.classmanager.model.student.Comment;
@@ -97,9 +98,9 @@ public class StudentBuilder {
      * Sets a {@code Assignment} in {@code AssignmentTracker} of the
      * {@code ClassDetails} that we are building.
      */
-    public StudentBuilder withAssignmentDetails(int assignmentNumber, int marks) {
+    public StudentBuilder withAssignmentDetails(Index assignmentIndex, int marks) {
         try {
-            this.classDetails.setGrade(assignmentNumber, marks);
+            this.classDetails.setGrade(assignmentIndex, marks);
         } catch (CommandException e) {
             e.printStackTrace();
         }
@@ -110,7 +111,7 @@ public class StudentBuilder {
      * Sets a {@code ClassParticipation} in {@code ClassParticipationTracker} of the
      * {@code ClassDetails} that we are building.
      */
-    public StudentBuilder withClassParticipationDetails(int tutNum, boolean isPresent) {
+    public StudentBuilder withClassParticipationDetails(Index tutNum, boolean isPresent) {
         try {
             this.classDetails.recordClassParticipation(tutNum, isPresent);
         } catch (CommandException e) {

@@ -1,6 +1,8 @@
 package seedu.classmanager.logic.parser;
 
 import static seedu.classmanager.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.classmanager.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.classmanager.logic.commands.CommandTestUtil.STUDENT_NUMBER_DESC_AMY;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_FILE;
 import static seedu.classmanager.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.classmanager.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -51,6 +53,23 @@ public class LoadCommandParserTest {
 
     @Test
     public void parse_nullArguments_failure() {
-        assertParseFailure(parser, null, String.format(MESSAGE_INVALID_COMMAND_FORMAT, LoadCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, null,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, LoadCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_nonEmptyPreamble_failure() {
+        assertParseFailure(parser, " test" + " " + PREFIX_FILE + "savefile",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, LoadCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_additionalPrefixPreamble_failure() {
+        assertParseFailure(parser, NAME_DESC_AMY + " " + PREFIX_FILE + "savefile",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, LoadCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " " + PREFIX_FILE + "savefile" + NAME_DESC_AMY,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, LoadCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " " + PREFIX_FILE + "savefile" + STUDENT_NUMBER_DESC_AMY,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, LoadCommand.MESSAGE_USAGE));
     }
 }

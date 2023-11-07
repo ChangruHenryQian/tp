@@ -12,14 +12,14 @@ import seedu.classmanager.model.Model;
 import seedu.classmanager.model.student.Student;
 
 /**
- * Marks all displayed students' attendance as present.
+ * Marks all displayed students' attendance as absent.
  */
-public class MarkPresentAllCommand extends Command {
-    public static final String COMMAND_WORD = "present-all";
+public class MarkAbsentAllCommand extends Command {
+    public static final String COMMAND_WORD = "absent-all";
     public static final String MESSAGE_MARK_SUCCESS = "Successfully marked the attendance of all displayed students "
-            + "as present.";
+            + "as absent.";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks the attendance of all displayed students as "
-            + "present.\n"
+            + "absent.\n"
             + "Parameters: "
             + PREFIX_TUTORIAL_INDEX + "TUTORIAL_SESSION\n"
             + "Example: " + COMMAND_WORD + " "
@@ -27,11 +27,11 @@ public class MarkPresentAllCommand extends Command {
     private final Index index;
 
     /**
-     * Constructs a MarkPresentAllCommand object.
+     * Constructs a MarkAbsentAllCommand object.
      *
      * @param index of the class.
      */
-    public MarkPresentAllCommand(Index index) {
+    public MarkAbsentAllCommand(Index index) {
         this.index = index;
     }
 
@@ -43,7 +43,7 @@ public class MarkPresentAllCommand extends Command {
 
         for (Student studentToMark : lastShownList) {
             Student markedStudent = studentToMark.copy();
-            markedStudent.markPresent(index);
+            markedStudent.markAbsent(index);
             model.setStudent(studentToMark, markedStudent);
             if (model.isSelectedStudent(studentToMark)) {
                 model.setSelectedStudent(markedStudent);
@@ -61,11 +61,11 @@ public class MarkPresentAllCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof MarkPresentAllCommand)) {
+        if (!(other instanceof MarkAbsentAllCommand)) {
             return false;
         }
 
-        MarkPresentAllCommand e = (MarkPresentAllCommand) other;
+        MarkAbsentAllCommand e = (MarkAbsentAllCommand) other;
         return index.equals(e.index);
     }
 }

@@ -6,9 +6,9 @@
     "studentNumber": "A0224917A",
     "classDetails" : {
       "classNumber" : "T11",
-      "attendanceTracker" : [ false, false, false ],
-      "assignmentTracker" : [ 0, 0 ],
-      "classParticipationTracker" : [ false, false, false ]
+      "attendanceTracker" : [ false, false, false, false, false, false, false, false, false, false, false, false, false ],
+      "assignmentTracker" : [ 0, 0, 0, 0, 0, 0 ],
+      "classParticipationTracker" : [ false, false, false, false, false, false, false, false, false, false, false, false, false ]
     },
     "tags": [ "friends" ],
     "comment" : "She is a very nice person"
@@ -19,9 +19,9 @@
     "studentNumber": "A0224917A",
     "classDetails" : {
       "classNumber" : "T11",
-      "attendanceTracker" : [ false, false, false ],
-      "assignmentTracker" : [ 0, 0 ],
-      "classParticipationTracker" : [ false, false, false ]
+      "attendanceTracker" : [ false, false, false, false, false, false, false, false, false, false, false, false, false ],
+      "assignmentTracker" : [ 0, 0, 0, 0, 0, 0 ],
+      "classParticipationTracker" : [ false, false, false, false, false, false, false, false, false, false, false, false, false ]
     },
     "comment" : "She is a very nice person"
   } ]

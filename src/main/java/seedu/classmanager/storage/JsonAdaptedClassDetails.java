@@ -61,6 +61,12 @@ public class JsonAdaptedClassDetails {
         if (attendanceTracker.size() != classParticipationTracker.size()) {
             throw new IllegalValueException(ClassDetails.MESSAGE_UNEQUAL_LENGTH);
         }
+        if (attendanceTracker.size() != ClassDetails.getTutorialCount()) {
+            throw new IllegalValueException(ClassDetails.MESSAGE_TUTORIAL_COUNT_MISMATCH);
+        }
+        if (assignmentTracker.size() != ClassDetails.getAssignmentCount()) {
+            throw new IllegalValueException(ClassDetails.MESSAGE_ASSIGNMENT_COUNT_MISMATCH);
+        }
 
         AssignmentTracker assignmentTracker = new AssignmentTracker(this.assignmentTracker);
         AttendanceTracker attendanceTracker = new AttendanceTracker(this.attendanceTracker);

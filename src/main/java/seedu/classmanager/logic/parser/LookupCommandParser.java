@@ -1,6 +1,7 @@
 package seedu.classmanager.logic.parser;
 
 import static seedu.classmanager.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.classmanager.logic.parser.ArgumentMultimap.areAdditionalPrefixesPresent;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_CLASS_NUMBER;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_NAME;
@@ -45,7 +46,8 @@ public class LookupCommandParser implements Parser<LookupCommand> {
             }
             prefixMap.put(prefix, keywords);
         }
-        if (!isPrefixPresent(prefixMap, prefixList)) {
+        if (!isPrefixPresent(prefixMap, prefixList)
+                || areAdditionalPrefixesPresent(args, prefixList)) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, LookupCommand.MESSAGE_USAGE));
         }

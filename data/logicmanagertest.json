@@ -1,0 +1,16 @@
+{
+  "students" : [ {
+    "name" : "John Doe",
+    "phone" : "98765432",
+    "email" : "johnd@example.com",
+    "studentNumber" : "A0245234A",
+    "classDetails" : {
+      "classNumber" : "T11",
+      "attendanceTracker" : [ false, false, false, false, false, false, false, false, false, false, false, false, false ],
+      "assignmentTracker" : [ 0, 0, 0, 0, 0, 0 ],
+      "classParticipationTracker" : [ false, false, false, false, false, false, false, false, false, false, false, false, false ]
+    },
+    "tags" : [ "owesMoney", "friends" ],
+    "comment" : ""
+  } ]
+}

@@ -83,7 +83,6 @@ public class JsonClassManagerStorageTest {
         jsonClassManagerStorage.saveClassManager(original); // file path not specified
         readBack = jsonClassManagerStorage.readClassManager().get(); // file path not specified
         assertEquals(original, new ClassManager(readBack));
-
     }
 
     @Test

@@ -117,7 +117,6 @@ class JsonAdaptedStudent {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     ClassDetails.class.getSimpleName()));
         }
-        final ClassDetails modelClassDetails = classDetails.toModelType();
 
         if (comment == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -126,6 +125,9 @@ class JsonAdaptedStudent {
         final Comment modelComment = new Comment(comment);
 
         final Set<Tag> modelTags = new HashSet<>(studentTags);
+
+        final ClassDetails modelClassDetails = classDetails.toModelType();
+
         return new Student(modelName, modelPhone, modelEmail, modelStudentNumber, modelClassDetails,
                 modelTags, modelComment);
     }
