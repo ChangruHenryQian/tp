@@ -13,8 +13,13 @@ import seedu.classmanager.logic.parser.exceptions.ParseException;
  * Parses input arguments and creates a new ConfigCommand object
  */
 public class ConfigCommandParser implements Parser<ConfigCommand> {
-    public static final String MESSAGE_INVALID_COUNT_VALUE_TOO_SMALL = "Invalid count value!"
-            + "The count value of %1$s cannot be less than 0.";
+    public static final String MESSAGE_INVALID_COUNT_VALUE_TOO_SMALL = "Invalid count values!"
+            + "The count value of %1$s cannot be less than 1.";
+    public static final String MESSAGE_INVALID_COUNT_VALUE_TOO_LARGE = "Invalid count values!"
+            + "The count value of %1$s cannot be more than 40.";
+    public static final String MESSAGE_INVALID_CONFIG_COMMAND_FORMAT = "Invalid count values! Please input an "
+            + "integer between 1 to 40 inclusive for both tutorial count and assignment count."
+            + "\n%1$s";
 
     /**
      * Parses the given {@code String} of arguments in the context of the ConfigCommand
@@ -38,7 +43,7 @@ public class ConfigCommandParser implements Parser<ConfigCommand> {
             tutorialCount = Integer.parseInt(argMultimap.getValue(PREFIX_TUTORIAL_COUNT).get());
             assignmentCount = Integer.parseInt(argMultimap.getValue(PREFIX_ASSIGNMENT_COUNT).get());
         } catch (NumberFormatException e) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ConfigCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_CONFIG_COMMAND_FORMAT, ConfigCommand.MESSAGE_USAGE));
         }
         validCountParser(tutorialCount, "tutorials");
         validCountParser(assignmentCount, "assignments");
@@ -52,8 +57,10 @@ public class ConfigCommandParser implements Parser<ConfigCommand> {
      * @throws ParseException if the count value is less than 0.
      */
     private void validCountParser(int count, String attribute) throws ParseException {
-        if (count < 0) {
+        if (count < 1) {
             throw new ParseException(String.format(MESSAGE_INVALID_COUNT_VALUE_TOO_SMALL, attribute));
+        } else if (count > 40) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COUNT_VALUE_TOO_LARGE, attribute));
         }
     }
 }

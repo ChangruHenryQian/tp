@@ -58,6 +58,10 @@ public class ClassManager implements ReadOnlyClassManager {
     public void resetData(ReadOnlyClassManager newData) {
         requireNonNull(newData);
         setStudents(newData.getStudentList());
+        resetSelectedStudent();
+        if (!newData.getSelectedStudent().isEmpty()) {
+            setSelectedStudent(newData.getSelectedStudent().get(0));
+        }
     }
 
     //// student-level operations

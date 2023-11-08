@@ -10,7 +10,7 @@ import static seedu.classmanager.commons.util.AppUtil.checkArgument;
 public class Comment {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Comments can contain any alphanumeric characters";
+            "Comments can contain any alphanumeric characters.";
 
     /*
      * The first character of the classmanager must not be a whitespace,

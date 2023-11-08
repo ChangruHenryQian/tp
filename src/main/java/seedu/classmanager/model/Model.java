@@ -150,12 +150,17 @@ public interface Model {
      * Saves the current Class Manager state for undo/redo.
      */
     void commitClassManager();
+    //@@author
 
     /**
      * Resets the history of the model after a load command.
      */
-    void reset(ReadOnlyClassManager classManager);
-    //@@author
+    void loadReset(ReadOnlyClassManager classManager);
+
+    /**
+     * Resets the history of the model after a config command.
+     */
+    void configReset();
 
     /**
      * Resets the selected student after a clear command.

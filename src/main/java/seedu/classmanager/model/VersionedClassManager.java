@@ -12,6 +12,7 @@ import java.util.List;
 public class VersionedClassManager extends ClassManager {
 
     private final List<ReadOnlyClassManager> classManagerStateList;
+    private final int stateListSize = 10;
     private int currentStatePointer;
 
     /**
@@ -21,7 +22,7 @@ public class VersionedClassManager extends ClassManager {
     public VersionedClassManager(ReadOnlyClassManager initialState) {
         super(initialState);
 
-        classManagerStateList = new ArrayList<>();
+        classManagerStateList = new ArrayList<>(stateListSize);
         classManagerStateList.add(new ClassManager(initialState));
         currentStatePointer = 0;
     }
@@ -32,8 +33,13 @@ public class VersionedClassManager extends ClassManager {
      */
     public void commit() {
         removeStatesAfterCurrentPointer();
+        if (classManagerStateList.size() == stateListSize) {
+            classManagerStateList.remove(0);
+        }
         classManagerStateList.add(new ClassManager(this));
-        currentStatePointer++;
+        if (currentStatePointer < stateListSize - 1) {
+            currentStatePointer++;
+        }
         resetData(classManagerStateList.get(currentStatePointer));
         indicateModified();
     }
@@ -43,13 +49,28 @@ public class VersionedClassManager extends ClassManager {
     }
 
     /**
-     * Removes all states other than the current state.
+     * Resets class manager after a load command.
      */
-    public void reset(ReadOnlyClassManager newData) {
+    public void loadReset(ReadOnlyClassManager newData) {
         classManagerStateList.clear();
         classManagerStateList.add(newData);
         currentStatePointer = 0;
         resetData(classManagerStateList.get(currentStatePointer));
+    }
+
+    /**
+     * Removes all states other than the current state after a config command.
+     */
+    public void configReset() {
+        // Removes all states before the current state, if any
+        if (currentStatePointer > 0) {
+            classManagerStateList.subList(0, currentStatePointer).clear();
+        }
+        // Removes all states after the current state, if any
+        if (classManagerStateList.size() > 1) {
+            classManagerStateList.subList(1, classManagerStateList.size()).clear();
+        }
+        currentStatePointer = 0;
     }
 
     /**

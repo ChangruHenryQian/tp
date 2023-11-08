@@ -76,7 +76,8 @@ public class ConfigCommandTest {
     @Test
     public void equals() {
         ConfigCommand configCommand = new ConfigCommand(3, 2);
-        ConfigCommand otherConfigCommand = new ConfigCommand(2, 3);
+        ConfigCommand diffValueConfigCommand = new ConfigCommand(3, 3);
+        ConfigCommand otherConfigCommand = new ConfigCommand(2, 2);
 
         // same object -> returns true
         assertTrue(configCommand.equals(configCommand));
@@ -91,7 +92,8 @@ public class ConfigCommandTest {
         // null -> returns false
         assertFalse(configCommand.equals(null));
 
-        // different student -> returns false
+        // different values -> returns false
+        assertFalse(configCommand.equals(diffValueConfigCommand));
         assertFalse(configCommand.equals(otherConfigCommand));
         ClassDetails.setTutorialCount(13);
         ClassDetails.setAssignmentCount(6);

@@ -321,5 +321,73 @@ public class VersionedClassManagerTest {
         // different value -> returns false;
         assertFalse(versionedClassManager.equals(newVersionedClassManager));
     }
+    //@@author
+
+    @Test
+    public void configReset_stateOneOfOne_success() {
+        VersionedClassManager versionedClassManager = prepareClassManagerList(emptyClassManager);
+
+        versionedClassManager.configReset();
+        assertEquals(versionedClassManager, new VersionedClassManager(emptyClassManager));
+    }
+
+    @Test
+    public void configReset_stateTwoOfTwo_success() {
+        VersionedClassManager versionedClassManager = prepareClassManagerList(emptyClassManager, classManagerWithAmy);
+
+        versionedClassManager.configReset();
+        assertEquals(versionedClassManager, new VersionedClassManager(classManagerWithAmy));
+    }
+
+    @Test
+    public void configReset_stateThreeOfThree_success() {
+        VersionedClassManager versionedClassManager = prepareClassManagerList(emptyClassManager, classManagerWithAmy,
+                classManagerWithBob);
+
+        versionedClassManager.configReset();
+        assertEquals(versionedClassManager, new VersionedClassManager(classManagerWithBob));
+    }
+
+    @Test
+    public void configReset_stateFourOfFour_success() {
+        VersionedClassManager versionedClassManager = prepareClassManagerList(emptyClassManager, classManagerWithAmy,
+                classManagerWithBob, classManagerWithCarl);
+
+        versionedClassManager.configReset();
+        assertEquals(versionedClassManager, new VersionedClassManager(classManagerWithCarl));
+    }
+
+    @Test
+    public void configReset_stateOneOfFour_success() {
+        VersionedClassManager versionedClassManager = prepareClassManagerList(emptyClassManager, classManagerWithAmy,
+                classManagerWithBob, classManagerWithCarl);
+
+        versionedClassManager.undo();
+        versionedClassManager.undo();
+        versionedClassManager.undo();
+        versionedClassManager.configReset();
+        assertEquals(versionedClassManager, new VersionedClassManager(emptyClassManager));
+    }
+
+    @Test
+    public void configReset_stateTwoOfFour_success() {
+        VersionedClassManager versionedClassManager = prepareClassManagerList(emptyClassManager, classManagerWithAmy,
+                classManagerWithBob, classManagerWithCarl);
+
+        versionedClassManager.undo();
+        versionedClassManager.undo();
+        versionedClassManager.configReset();
+        assertEquals(versionedClassManager, new VersionedClassManager(classManagerWithAmy));
+    }
+
+    @Test
+    public void configReset_stateThreeOfFour_success() {
+        VersionedClassManager versionedClassManager = prepareClassManagerList(emptyClassManager, classManagerWithAmy,
+                classManagerWithBob, classManagerWithCarl);
+
+        versionedClassManager.undo();
+        versionedClassManager.configReset();
+        assertEquals(versionedClassManager, new VersionedClassManager(classManagerWithBob));
+    }
 }
-//@@author
+

@@ -31,6 +31,7 @@ public class MarkPresentAllCommandTest {
         Index i = Index.fromOneBased(ClassDetails.getTutorialCount());
         Student selectedStudent = TypicalStudents.getTypicalStudents().get(0);
         model.setSelectedStudent(selectedStudent);
+
         MarkPresentAllCommand markPresentAllCommand = new MarkPresentAllCommand(i);
 
         String expectedMessage = MarkPresentAllCommand.MESSAGE_MARK_SUCCESS;

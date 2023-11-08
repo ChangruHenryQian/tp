@@ -60,7 +60,9 @@ public class RecordClassParticipationCommand extends Command {
         Student markedStudent = studentToMark.copy();
         markedStudent.markClassParticipation(this.tutorialIndex, this.hasParticipated);
         model.setStudent(studentToMark, markedStudent);
-        model.setSelectedStudent(markedStudent);
+        if (model.isSelectedStudent(studentToMark)) {
+            model.setSelectedStudent(markedStudent);
+        }
         model.commitClassManager();
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, studentNumber)

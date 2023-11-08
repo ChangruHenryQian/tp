@@ -74,7 +74,7 @@ public class LoadCommandTest {
             throw new CommandException(String.format(MESSAGE_FILE_CANNOT_LOAD, fileName));
         }
         expectedModel.setClassManagerFilePath(filePath);
-        expectedModel.reset(tempData);
+        expectedModel.loadReset(tempData);
     }
 
     @Test

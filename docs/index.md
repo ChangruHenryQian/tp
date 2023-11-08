@@ -10,7 +10,7 @@
 
 <img alt="Ui" src="images/Ui.png" width="650" >
 
-**_Class Manager 2023_ is a desktop application for managing your students' details.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
+**_Class Manager 2023_ is a desktop application for Teaching Assistants (TAs) in National University of Singapore (NUS) to manage their students' details.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
 
 * If you are interested in using `Class Manager 2023`, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
 * If you are interested about developing `Class Manager 2023`, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.

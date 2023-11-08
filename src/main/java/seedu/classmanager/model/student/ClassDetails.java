@@ -19,17 +19,19 @@ import seedu.classmanager.storage.JsonAdaptedClassDetails;
  */
 public class ClassDetails {
 
-    public static final String MESSAGE_CONSTRAINTS = "Class number should be in the form 'T[Integer]',"
-            + " such as 'T11'";
-    public static final String MESSAGE_INVALID_GRADE = "Grade should be an integer between 0 and 100";
+    public static final String MESSAGE_CONSTRAINTS = "Class Number must begin with 1 to 3 consecutive "
+            + "alphabetical characters, followed by 1 to 5 consecutive digits. "
+            + "Optionally, it can end with 1 alphabetical character.\n"
+            + "Class Number must not be blank. ";
+
+    public static final String MESSAGE_INVALID_GRADE = "Grade should be between 0 and 100";
     public static final String MESSAGE_INVALID_ASSIGNMENT_NUMBER = "Assignment index should be an integer "
+            + "between 1 and %s";
+    public static final String MESSAGE_INVALID_TUTORIAL_INDEX = "Tutorial index should be an integer "
             + "between 1 and %s";
 
     public static final String MESSAGE_INVALID_PARTICIPATION = "Participation should be "
-            + "either 'true' or 'false'";
-    public static final String MESSAGE_INVALID_TUTORIAL_INDEX = "Tutorial index should be an "
-            + "integer(without decimal places) "
-            + "between 1 and %s";
+            + "either 'true' or 'false'.";
     public static final String MESSAGE_UNEQUAL_LENGTH = "The number of tutorial sessions and "
             + "attendance records should be equal.";
     public static final String MESSAGE_RECONFIGURE = " Please reconfigure Class Manager before "
@@ -40,7 +42,7 @@ public class ClassDetails {
             + " match the number of assignments in the save file." + MESSAGE_RECONFIGURE;
 
     // The class number should start with "T".
-    public static final String VALIDATION_REGEX = "T.*";
+    public static final String VALIDATION_REGEX = "^[a-zA-Z]{1,3}[0-9]{1,5}[a-zA-Z]{0,1}$";
 
     private static int tutorialCount = 13;
     private static int assignmentCount = 6;
@@ -59,6 +61,7 @@ public class ClassDetails {
     public ClassDetails(String classNumber) {
         requireNonNull(classNumber);
         checkArgument(isValidClassDetails(classNumber), MESSAGE_CONSTRAINTS);
+        classNumber = classNumber.toUpperCase().trim();
         this.classNumber = classNumber;
         attendanceTracker = new AttendanceTracker(tutorialCount);
         classParticipationTracker = new ClassParticipationTracker(tutorialCount);

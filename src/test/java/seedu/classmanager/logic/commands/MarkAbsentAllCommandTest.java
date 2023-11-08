@@ -31,6 +31,7 @@ public class MarkAbsentAllCommandTest {
         Index i = Index.fromOneBased(ClassDetails.getTutorialCount());
         Student selectedStudent = TypicalStudents.getTypicalStudents().get(0);
         model.setSelectedStudent(selectedStudent);
+
         MarkAbsentAllCommand markAbsentAllCommand = new MarkAbsentAllCommand(i);
 
         String expectedMessage = MarkAbsentAllCommand.MESSAGE_MARK_SUCCESS;

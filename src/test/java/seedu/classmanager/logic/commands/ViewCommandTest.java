@@ -42,6 +42,7 @@ public class ViewCommandTest {
 
         ModelManager expectedModel = new ModelManager(model.getClassManager(), new UserPrefs());
         expectedModel.setSelectedStudent(studentToView);
+        expectedModel.commitClassManager();
 
         assertCommandSuccess(viewCommand, model, expectedMessage, expectedModel, commandHistory);
     }

@@ -62,16 +62,7 @@ public class LogicManager implements Logic {
             history.add(commandText);
         }
 
-        if (classManagerModified) {
-            logger.info("Class Manager modified, saving to file.");
-            try {
-                storage.saveClassManager(model.getClassManager(), model.getClassManagerFilePath());
-            } catch (AccessDeniedException e) {
-                throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
-            } catch (IOException ioe) {
-                throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
-            }
-        } else if (command instanceof LoadCommand | command instanceof ConfigCommand) {
+        if (command instanceof LoadCommand | command instanceof ConfigCommand) {
             try {
                 storage.saveClassManager(model.getClassManager(), model.getClassManagerFilePath());
                 storage.saveUserPrefs(model.getUserPrefs());
@@ -80,6 +71,15 @@ public class LogicManager implements Logic {
                 } else {
                     logger.info("Class Manager has been configured.");
                 }
+            } catch (AccessDeniedException e) {
+                throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
+            } catch (IOException ioe) {
+                throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
+            }
+        } else if (classManagerModified) {
+            logger.info("Class Manager modified, saving to file.");
+            try {
+                storage.saveClassManager(model.getClassManager(), model.getClassManagerFilePath());
             } catch (AccessDeniedException e) {
                 throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
             } catch (IOException ioe) {

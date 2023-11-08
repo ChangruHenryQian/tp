@@ -33,7 +33,7 @@
   * [Commands]({{ baseUrl }}/UserGuide.html#commands)
   * [FAQ]({{ baseUrl }}/UserGuide.html#faq)
   * [Known issues]({{ baseUrl }}/UserGuide.html#known-issues)
-  * [Command Summary]({{ baseUrl }}/UserGuide.html#command-summary-in-alphabetical-order)
+  * [Command Summary]({{ baseUrl }}/UserGuide.html#command-summary)
   * [Glossary]({{ baseUrl }}/UserGuide.html#glossary)
 * [Developer Guide]({{ baseUrl }}/DeveloperGuide.html) :expanded:
   * [Acknowledgements]({{ baseUrl }}/DeveloperGuide.html#acknowledgements)

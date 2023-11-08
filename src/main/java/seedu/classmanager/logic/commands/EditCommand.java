@@ -41,7 +41,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_STUDENT_NUMBER + "STUDENT_NUMBER] "
+            + "[" + PREFIX_STUDENT_NUMBER + "NEW_STUDENT_NUMBER] "
             + "[" + PREFIX_CLASS_NUMBER + "CLASS_NUMBER]\n"
             + "Example: " + COMMAND_WORD + " A0245234A "
             + PREFIX_PHONE + "91234567 "
@@ -82,6 +82,9 @@ public class EditCommand extends Command {
         }
 
         model.setStudent(studentToEdit, editedStudent);
+        if (model.isSelectedStudent(studentToEdit)) {
+            model.setSelectedStudent(editedStudent);
+        }
         model.commitClassManager();
 
         return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, Messages.format(editedStudent)));

@@ -42,6 +42,7 @@ public class ViewCommand extends Command {
 
         Student studentToView = model.getStudent(studentNumber);
         model.setSelectedStudent(studentToView);
+        model.commitClassManager();
 
         return new CommandResult(String.format(MESSAGE_COMMAND_SUCCESS, studentToView.getName()));
     }

@@ -26,7 +26,7 @@ public class LoadCommand extends Command {
     public static final String COMMAND_WORD = "load";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Load student information from an existing JSON file in the data folder. "
-            + "The file becomes the new default save file. "
+            + "The file becomes the new default save file.\n"
             + "Parameters: " + PREFIX_FILE + "FILE_NAME\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_FILE + "export-v1";
     public static final String MESSAGE_LOAD_SUCCESS = "The file %1$s.json has successfully loaded!\n"
@@ -34,7 +34,10 @@ public class LoadCommand extends Command {
     public static final String MESSAGE_FILE_NOT_FOUND = "The file %1$s.json cannot be found.\n"
             + "Please make sure the file is in the /data folder.\n";
     public static final String MESSAGE_FILE_CANNOT_LOAD = "The file %1$s.json cannot be loaded.\n"
-            + "Please make sure the file is formatted correctly.\n";
+            + "Please make sure the file is formatted correctly.\n"
+            + "The number of tutorials and assignments of each student in the file must match"
+            + " the current configuration of Class Manager.\n"
+            + "You can configure Class Manager before loading the file.";
 
     private final String fileName;
     private final Path filePath;
@@ -73,7 +76,7 @@ public class LoadCommand extends Command {
             throw new CommandException(String.format(MESSAGE_FILE_CANNOT_LOAD, fileName));
         }
         model.setClassManagerFilePath(filePath);
-        model.reset(newData);
+        model.loadReset(newData);
 
         return new CommandResult(String.format(MESSAGE_LOAD_SUCCESS, fileName), false, false, true, false);
     }

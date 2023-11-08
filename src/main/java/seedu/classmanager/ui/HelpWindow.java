@@ -16,35 +16,37 @@ import seedu.classmanager.commons.core.LogsCenter;
 public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://ay2324s1-cs2103t-t11-1.github.io/tp/UserGuide.html";
-    public static final String COMMAND_TABLE = "Useful Commands:\n"
-            + "Configure Class Manager - config #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT\n"
+    public static final String COMMAND_TABLE = "Essential commands:\n"
+            + "Configure Class Manager - config\n"
             + "Open help window - help\n\n"
-            + "Core Commands without Parameters:\n"
-            + "Clear student list - clear\n"
+            + "Miscellaneous commands:\n"
             + "Exit Class Manager - exit\n"
             + "View command history - history\n"
+            + "Load a save file - load\n"
+            + "Randomly select students - random\n"
+            + "Redo a command - redo\n"
+            + "Undo a command - undo\n"
+            + "Toggle UI theme - theme\n\n"
+            + "Student list commands:\n"
+            + "Add a student - add\n"
+            + "Comment on a student - comment\n"
+            + "Delete all students - clear\n"
+            + "Delete one student - delete\n"
+            + "Edit a student's details - edit\n"
             + "List all students - list\n"
-            + "Toggle theme - theme\n\n"
-            + "Core Commands with Parameters:\n"
-            + "Add - add s/STUDENT_NUMBER n/NAME p/PHONE_NUMBER e/EMAIL c/CLASS_NUMBER [t/TAG]…\n"
-            + "Comment - comment s/STUDENT_NUMBER cm/COMMENT\n"
-            + "Delete - delete s/STUDENT_NUMBER\n"
-            + "Edit - edit STUDENT_NUMBER [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/NEW_STUDENT_NUMBER] "
-            + "[c/CLASS_NUMBER]\n"
-            + "Lookup - lookup [c/CLASS_NUMBER] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/STUDENT_NUMBER] [t/TAG]\n"
-            + "Load - load f/FILE_NAME\n"
-            + "Present - present s/STUDENT_NUMBER tut/TUTORIAL_INDEX\n"
-            + "Absent - absent s/STUDENT_NUMBER tut/TUTORIAL_INDEX\n"
-            + "Present All - present-all tut/TUTORIAL_INDEX\n"
-            + "Absent All - absent-all tut/TUTORIAL_INDEX\n"
-            + "Random - random NUMBER_OF_STUDENTS\n"
-            + "Record Class participation - class-part s/STUDENT_NUMBER tut/TUTORIAL_INDEX "
-            + "part/PARTICIPATION_LEVEL\n"
-            + "Set Grade - grade s/STUDENT_NUMBER a/ASSIGNMENT_INDEX g/GRADE\n"
-            + "Tag - tag s/STUDENT_NUMBER [/add] [/delete] t/[TAG]…\n"
-            + "View - view s/STUDENT_NUMBER\n";
+            + "Lookup students - lookup\n"
+            + "Tag a student - tag\n\n"
+            + "Class details commands:\n"
+            + "Mark a student as absent - absent\n"
+            + "Mark a student as present - present\n"
+            + "Mark all displayed students as absent - absent-all\n"
+            + "Mark all displayed students as present - present-all\n"
+            + "Record class participation for a student - class-part\n"
+            + "Set assignment grade for a student - grade\n"
+            + "View a student's class details - view\n";
 
-    public static final String HELP_MESSAGE = COMMAND_TABLE + "\nRefer to the user guide: " + USERGUIDE_URL;
+    public static final String HELP_MESSAGE =
+            COMMAND_TABLE + "\nRefer to the user guide for more details: " + USERGUIDE_URL;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";

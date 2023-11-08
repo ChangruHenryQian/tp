@@ -50,6 +50,10 @@ public class TypicalStudents {
             .withEmail("stefan@example.com").withStudentNumber("A0818923A").withClassDetails("T11").build();
     public static final Student IDA = new StudentBuilder().withName("Ida Mueller").withPhone("8482131")
             .withEmail("hans@example.com").withStudentNumber("A09141343A").withClassDetails("T11").build();
+    public static final Student JAMES = new StudentBuilder().withName("James White").withPhone("8433131")
+            .withEmail("james@example.com").withStudentNumber("A0257890A").withClassDetails("T99").build();
+    public static final Student KACEY = new StudentBuilder().withName("Kacey Armstrong").withPhone("81102001")
+            .withEmail("kacey@example.com").withStudentNumber("A2334512D").withClassDetails("T81").build();
 
     // Manually added - Student's details found in {@code CommandTestUtil}
     public static final Student AMY = new StudentBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
@@ -65,7 +69,7 @@ public class TypicalStudents {
     private TypicalStudents() {} // prevents instantiation
 
     /**
-     * Returns an {@code ClassManager} with all the typical students.
+     * Returns an {@code ClassManager} with some of the typical students.
      */
     public static ClassManager getTypicalClassManager() {
         ClassManager ab = new ClassManager();
@@ -75,7 +79,23 @@ public class TypicalStudents {
         return ab;
     }
 
+    /**
+     * Returns an {@code ClassManager} with even more of the typical students.
+     */
+    public static ClassManager getTypicalClassManagerMore() {
+        ClassManager ab = new ClassManager();
+        for (Student student : getMoreTypicalStudents()) {
+            ab.addStudent(student);
+        }
+        return ab;
+    }
+
     public static List<Student> getTypicalStudents() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    }
+
+    public static List<Student> getMoreTypicalStudents() {
+        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE, HOON, IDA, JAMES,
+                KACEY));
     }
 }

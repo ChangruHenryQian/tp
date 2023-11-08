@@ -360,7 +360,7 @@ public class LogicManagerTest {
         }
         ModelManager expectedModel = new ModelManager();
         expectedModel.setClassManagerFilePath(filePath);
-        expectedModel.reset(newData);
+        expectedModel.loadReset(newData);
         assertCommandFailure(loadCommand, CommandException.class, expectedMessage, expectedModel);
         assertHistoryCorrect(loadCommand);
     }

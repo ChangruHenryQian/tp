@@ -217,16 +217,24 @@ public class ModelManager implements Model {
     public void commitClassManager() {
         versionedClassManager.commit();
     }
+    //@@author
 
     /**
      * Resets the history of the model after a load command.
      */
     @Override
-    public void reset(ReadOnlyClassManager classManager) {
-        this.versionedClassManager.reset(classManager);
+    public void loadReset(ReadOnlyClassManager classManager) {
+        this.versionedClassManager.loadReset(classManager);
         versionedClassManager.resetSelectedStudent();
     }
-    //@@author
+
+    /**
+     * Resets the history of the model after a config command.
+     */
+    @Override
+    public void configReset() {
+        this.versionedClassManager.configReset();
+    }
 
     /**
      * Resets the selected student after a clear command.
