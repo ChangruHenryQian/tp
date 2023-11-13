@@ -111,7 +111,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void toggleColorTheme() {
+        public void toggleColourTheme() {
             throw new AssertionError("This method should not be called.");
         }
 

@@ -31,7 +31,7 @@ public class RandomCommandTest {
 
         RandomCommand randomCommand = new RandomCommand(1);
 
-        String expectedMessage = RandomCommand.MESSAGE_RANDOM_SUCCESS
+        String expectedMessage = RandomCommand.MESSAGE_RANDOM_SUCCESS_SINGLE_STUDENT
                 + studentToSelect.getName() + " " + studentToSelect.getStudentNumber() + "\n";
 
         assertCommandSuccess(randomCommand, model, expectedMessage, model, commandHistory);

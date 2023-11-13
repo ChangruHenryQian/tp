@@ -99,8 +99,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void toggleColorTheme() {
-        userPrefs.toggleColorTheme();
+    public void toggleColourTheme() {
+        userPrefs.toggleColourTheme();
     }
 
     //=========== ClassManager ================================================================================
