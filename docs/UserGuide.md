@@ -7,7 +7,7 @@
 
 ## Welcome to Class Manager 2023!
 
-To all CS2103/T Teaching Assistants (TAs), 
+To all CS2103/T Teaching Assistants, 
 
 We understand your struggles in managing your students' information. We know it is difficult to keep track of your students' contact information, attendance, class participation, and assignment grades. This is even more challenging when you teach multiple classes while juggling your schoolwork and other commitments.
 
@@ -202,9 +202,9 @@ Data visualisation of student's class information is automatically generated in 
 
 **Class Manager 2023's** data is saved as a JSON file at `[JAR file location]/data/classmanager.json`. Advanced users are welcome to update data directly by editing that data file. You can refer to a valid sample of the JSON file in the image below. 
 
-The size of the `attendanceTracker` and `classParticipationTracker` arrays must match the configured tutorial count. Similarly, the size of the `assignmentTracker` array must match the configured assignment count. **Class Manager 2023** is configured to have 13 tutorials and 6 assignments by default. Before loading the edited data file, you can configure **Class Manager 2023** using the `config` command. 
-
 <img alt="sample_contents" src="images/sample-contents.png" width="750"> <br><br>
+
+The size of the `attendanceTracker` and `classParticipationTracker` arrays must match the configured tutorial count. Similarly, the size of the `assignmentTracker` array must match the configured assignment count. **Class Manager 2023** is configured to have 13 tutorials and 6 assignments by default. Before loading the edited data file, you can configure **Class Manager 2023** using the `config` command.
 
 <box type="warning" seamless>
 
@@ -225,6 +225,7 @@ If your changes to the data file make its format invalid (missing value pairs or
 
 **Warning:**
 Configuring **Class Manager 2023** resets all students' class information (grades, attendance and class participation details), as well as the past states of **Class Manager 2023**. This **cannot** be undone using the `undo` command. It is recommended to configure **Class Manager 2023** before adding students.
+
 </box>
 
 Before you begin using **Class Manager 2023**, it is recommended that you configure the number of tutorials and assignments that your module has. This can be done using the `config` command, which allows **Class Manager 2023** to automatically generate the correct number of class information fields for each student. <br><br>
@@ -463,7 +464,7 @@ Examples:
 
 ### Comment on a student : `comment`
 
-Adds or replaces a comment of an existing student in **Class Manager 2023**.
+Adds or replaces a comment of an existing student in **Class Manager 2023**. The comment of a student appears at the bottom of their contact information card.
 
 Format: `comment s/STUDENT_NUMBER cm/COMMENT`
 
@@ -557,7 +558,9 @@ Shows a list of all students in **Class Manager 2023**.
 
 Format: `list`
 
-Displayed result is `list` is successful: A list of all students in **Class Manager 2023**.
+The following image shows a successful execution of the `list` command.
+
+<img alt="list-student-success" src="images/list-success.png" width="700" >
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -589,10 +592,10 @@ Examples:
 
 * `lookup n/alex david` returns `Alex Yeoh`, `David Li`<br>
 
-<img alt="result for 'lookup n/alex david'" src="images/lookupNameResult.png" width="700"> </br></br>
+<img alt="result for 'lookup n/alex david'" src="images/lookupNameResult.png" width="700"> </br>
 * `lookup c/T11` returns all students in class number T11<br>
 
-<img alt="result for 'lookup c/T11'" src="images/lookupClassResult.png" width="700"> </br></br>
+<img alt="result for 'lookup c/T11'" src="images/lookupClassResult.png" width="700"> </br>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -612,7 +615,7 @@ Format: `tag s/STUDENT_NUMBER [/add] [/delete] t/[TAG]…​`
 
 </box>
 
-<box type="tip" seamlesss>
+<box type="tip" seamless>
 
 **Tip:** You can remove all the student’s tags by typing `t/` without specifying any tags after it.
 
@@ -624,9 +627,9 @@ Examples:
 * `tag s/A1234567N /delete t/shy` removes the `shy` tag from the specified student.
 * `tag s/A1234567N t/` clears all tags from the specified student.
 
-The following image shows a successful execution of the `tag` command that replaces all the students tags.
+The following image shows a successful execution of the `tag` command that replaces all the student's tags.
 
-<img src="images/tag-success.png" alt="result for `tag s/A0231017A t/smart" width="700" />
+<img src="images/tag-success.png" alt="result for 'tag s/A0247243A t/smart'" width="700" />
 
 <box type="info" seamless>
 
@@ -746,7 +749,9 @@ Format: `class-part s/STUDENT_NUMBER tut/TUTORIAL_SESSION part/PARTICIPATION`
     * The proposed levels include: `None`, `Minimal`, `Sufficient`, `Active` and `Very Active`.
 
 Examples:
-* `class-part s/A0249112A tut/1 part/true`
+* `class-part s/A0245234A tut/1 part/true`
+
+<img alt="class-part-success" src="images/class-part-success.png" width="700" /><br>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -763,7 +768,7 @@ Format: `grade s/STUDENT_NUMBER a/ASSIGNMENT_INDEX g/GRADE`
 * The `GRADE` must be a valid integer between 0 and 100.
 
 Examples:
-* `grade s/A0249112A a/1 g/100`
+* `grade s/A0245234A a/1 g/100`
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -781,7 +786,7 @@ Example:
 
 * `view s/A0241243A`
 
-<img alt="result for 'view s/A0241243A'" src="images/ViewCommand.png" width="700" >
+<img alt="result for 'view s/A0241243A'" src="images/ViewCommand.png" width="700" />
 
 Possible error and their corresponding message:
 * If [`STUDENT_NUMBER`](#student-number) does not belong to any student in **Class Manager 2023**.
@@ -866,13 +871,13 @@ Possible error and their corresponding message:
 
 # Glossary
 
-* **cd**: Change directory command in terminal/command line. cd takes folder name you want to navigate to as an argument. The full command is cd `your-directory`.
-* **Student Number**: Unique matriculation number of an NUS student. In **Class Manager 2023**, it must begin with the capital letter 'A', followed by 1 or more consecutive digits, and end with a single alphabetical character. Student Numbers must not be blank as well.
-* **Email**: Any valid electronic mail address, such as NUS email address (eXXXXXXX@u.nus.edu).
+* **cd**: Change directory command in command terminal. cd takes folder name you want to navigate to as an argument. The full command is cd `your-directory`.
 * **CLI**: Command Line Interface.
-* **GUI**: Graphical User Interface.
-* **JSON**: JavaScript Object Notation, a lightweight data-interchange format.
-* **JAR**: Java Archive, a package file format used to aggregate many Java class files and associated metadata and resources (text, images, etc.) into one file to distribute application software or libraries on the Java platform.
 * **Class information**: The grades, attendance and class participation details of a student in **Class Manager 2023**.
+* **Email**: An electronic mail address, such as NUS email addresses (eXXXXXXX@u.nus.edu).
+* **GUI**: Graphical User Interface.
+* **JAR**: Java Archive, a package file format used to aggregate many Java class files and associated metadata and resources (text, images, etc.) into one file to distribute application software or libraries on the Java platform.
+* **JSON**: JavaScript Object Notation, a lightweight data-interchange format.
+* **Student Number**: Unique matriculation number of an NUS student. In **Class Manager 2023**, it must begin with the capital letter 'A', followed by 1 or more consecutive digits, and end with a single alphabetical character. Student Numbers must not be blank as well.
 
 [Back to Table of Contents](#table-of-contents)

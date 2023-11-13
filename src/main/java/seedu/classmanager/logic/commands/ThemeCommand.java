@@ -20,7 +20,7 @@ public class ThemeCommand extends Command {
      */
     @Override
     public CommandResult execute(Model model, CommandHistory commandHistory) {
-        model.toggleColorTheme();
+        model.toggleColourTheme();
         return new CommandResult(SHOWING_THEME_MESSAGE, false, false, false, true);
     }
 }

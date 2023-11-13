@@ -35,7 +35,7 @@ public class ClassManager implements ReadOnlyClassManager {
     public ClassManager() {}
 
     /**
-     * Creates an ClassManager using the Students in the {@code toBeCopied}
+     * Creates a ClassManager using the Students in the {@code toBeCopied}
      */
     public ClassManager(ReadOnlyClassManager toBeCopied) {
         this();

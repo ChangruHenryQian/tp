@@ -33,7 +33,7 @@ public interface Model {
     /**
      * Toggles the color theme.
      */
-    void toggleColorTheme();
+    void toggleColourTheme();
 
     /**
      * Returns the user prefs.

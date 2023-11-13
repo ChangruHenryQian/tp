@@ -34,7 +34,7 @@ public class UserPrefsTest {
         if (theme.equalsIgnoreCase("light")) {
             expectedTheme = "dark";
         }
-        userPrefs.toggleColorTheme();
+        userPrefs.toggleColourTheme();
         assertTrue(userPrefs.getTheme().equals(expectedTheme));
     }
 

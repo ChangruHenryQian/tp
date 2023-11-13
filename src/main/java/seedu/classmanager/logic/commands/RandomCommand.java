@@ -17,7 +17,8 @@ import seedu.classmanager.model.student.Student;
  */
 public class RandomCommand extends Command {
     public static final String COMMAND_WORD = "random";
-    public static final String MESSAGE_RANDOM_SUCCESS = "The following students are selected:\n";
+    public static final String MESSAGE_RANDOM_SUCCESS_SINGLE_STUDENT = "The following student is selected:\n";
+    public static final String MESSAGE_RANDOM_SUCCESS_MULTIPLE_STUDENT = "The following students are selected:\n";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Selects a specific number of students randomly.\n"
             + "Parameters: NUMBER_OF_STUDENTS\n"
             + "Example: " + COMMAND_WORD + " 1";
@@ -54,7 +55,9 @@ public class RandomCommand extends Command {
 
         Integer[] randomInt = generateRandomInt(numOfStudents, lastShownList.size());
 
-        StringBuilder result = new StringBuilder(MESSAGE_RANDOM_SUCCESS);
+        StringBuilder result = numOfStudents == 1
+                ? new StringBuilder(MESSAGE_RANDOM_SUCCESS_SINGLE_STUDENT)
+                : new StringBuilder(MESSAGE_RANDOM_SUCCESS_MULTIPLE_STUDENT);
         for (Integer i : randomInt) {
             Student s = lastShownList.get(i);
             result.append(s.getName()).append(" ").append(s.getStudentNumber()).append("\n");
@@ -79,8 +82,7 @@ public class RandomCommand extends Command {
             int i = random.nextInt(upper);
             distinctInt.add(i);
         }
-        Integer[] randomInt = distinctInt.toArray(new Integer[0]);
-        return randomInt;
+        return distinctInt.toArray(new Integer[0]);
     }
 
     @Override

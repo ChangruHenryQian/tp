@@ -51,7 +51,7 @@ public class MarkPresentAllCommand extends Command {
     }
 
     /**
-     * Helper function to mark all displayed students' attendance as present.
+     * Helps execute to mark all displayed students' attendance as present.
      * @param model {@code Model} which the command should operate on.
      * @throws CommandException If an error occurs during command execution.
      */

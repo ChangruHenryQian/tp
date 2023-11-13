@@ -13,7 +13,7 @@
 
 ## **Acknowledgements**
 
-- The features `undo`, `redo`, `history` and arrow key command navigation (including the code) was reused with some changes from [AddressBook-Level4](https://github.com/se-edu/addressbook-level4).
+- The features `undo`, `redo`, `history` and arrow key command navigation (including the code) were reused with some changes from [AddressBook-Level4](https://github.com/se-edu/addressbook-level4).
 - Our book icon favicon was taken from [Smashicons at Flaticon](https://www.flaticon.com/free-icon/book_2232688).
 
 --------------------------------------------------------------------------------------------------------------------
@@ -30,24 +30,24 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <puml src="diagrams/ArchitectureDiagram.puml" width="280" />
 
-The ***Architecture Diagram*** given above explains the high-level design of the App.
+The ***Architecture Diagram*** given above explains the high-level design of the app.
 
-Given below is a quick overview of main components and how they interact with each other.
+Below is a quick overview of the main components and how they interact with each other.
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/AY2324S1-CS2103T-T11-1/tp/tree/master/src/main/java/seedu/classmanager/Main.java) and [`MainApp`](https://github.com/AY2324S1-CS2103T-T11-1/tp/tree/master/src/main/java/seedu/classmanager/MainApp.java)) is in charge of the app launch and shut down.
-* At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
-* At shut down, it shuts down the other components and invokes cleanup methods where necessary.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2324S1-CS2103T-T11-1/tp/tree/master/src/main/java/seedu/classmanager/Main.java) and [`MainApp`](https://github.com/AY2324S1-CS2103T-T11-1/tp/tree/master/src/main/java/seedu/classmanager/MainApp.java)) is in charge of the app launch and shutdown.
+* At app launch, it initialises the other components in the correct sequence and connects them up with each other.
+* At shutdown, it shuts down the other components and invokes cleanup methods where necessary.
 
 The bulk of the app's work is done by the following four components:
 
-* [**`UI`**](#ui-component): The UI of the App.
+* [**`UI`**](#ui-component): The UI of the app.
 * [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds the data of the App in memory.
-* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+* [**`Model`**](#model-component): Holds the data of the app in memory.
+* [**`Storage`**](#storage-component): Reads data from and writes data to the hard disk.
 
-[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+[**`Commons`**](#common-classes) represent a collection of classes used by multiple other components.
 
 **How the architecture components interact with each other**
 
@@ -57,10 +57,10 @@ The *Sequence Diagram* below shows how the components interact with each other f
 
 Each of the four main components (also shown in the diagram above),
 
-* defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* defines its *API* in an `interface` with the same name as the component.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
 
-For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
+For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class, which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside components' being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
 <puml src="diagrams/ComponentManagers.puml" width="300" />
 
@@ -72,16 +72,16 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `StudentListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `StudentListPanel`, `StatusBarFooter`, etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class, which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2324S1-CS2103T-T11-1/tp/tree/master/src/main/java/seedu/classmanager/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2324S1-CS2103T-T11-1/tp/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts is defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2324S1-CS2103T-T11-1/tp/tree/master/src/main/java/seedu/classmanager/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2324S1-CS2103T-T11-1/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
-* keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Student` object residing in the `Model`.
+* keeps a reference to the `Logic` component because the `UI` relies on the `Logic` to execute commands.
+* depends on some classes in the `Model` component, as it displays the `Student` object residing in the `Model`.
 
 ### Logic component
 
@@ -91,29 +91,20 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete s/A0249112A")` API call as an example.
-
-<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete s/A0249112A` Command" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-</box>
-
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `ClassManagerParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a student).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+1. When `Logic` is called upon to execute a command, it is passed to a `ClassManagerParser` object, which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`), which is executed by the `LogicManager`.
+3. The command can communicate with the `Model` when it is executed (e.g. to delete a student).
+4. The result of the command execution is encapsulated as a `CommandResult` object, which is returned from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
 <puml src="diagrams/ParserClasses.puml" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `ClassManagerParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `ClassManagerParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `ClassManagerParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name, e.g. `AddCommandParser`), which uses the other classes shown above to parse the user command and creates an `XYZCommand` object (e.g., `AddCommand`) which the `ClassManagerParser` returns as a `Command` object.
+* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, etc.) inherit from the `Parser` interface so that they can be treated similarly where possible, e.g during testing.
 
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-T11-1/tp/tree/master/src/main/java/seedu/classmanager/model/Model.java)
@@ -123,9 +114,9 @@ How the parsing works:
 
 The `Model` component,
 
-* stores Class Manager data i.e., all `Student` objects (which are contained in a `UniqueStudentList` object).
+* stores Class Manager data, i.e. all `Student` objects (which are contained in a `UniqueStudentList` object).
 * stores the currently 'selected' `Student` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Student>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` object.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 ### Storage component
@@ -135,7 +126,7 @@ The `Model` component,
 <puml src="diagrams/StorageClassDiagram.puml" width="650" />
 
 The `Storage` component,
-* can save both Class Manager data and user preference data in JSON format, and read them back into corresponding objects.
+* can save both Class Manager data and user preference data in JSON format and read them back into corresponding objects.
 * inherits from both `ClassManagerStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
@@ -159,7 +150,7 @@ This feature allows users to tag their student with labels to allow easier recog
 
 Tagging a student with `Tag` is facilitated by `TagCommand`, `AddTagCommand`, `DeleteTagCommand` and `TagCommandParser`.
 * `TagCommand` will replace all existing tags of a student with input tags.
-* `AddTagCommand` will add input tags to existing tags of the student.
+* `AddTagCommand` will add input tags to the existing tags of the student.
 * `DeleteTagCommand` will delete input tags from the existing tags of the student.
 * `TagCommandParser` will parse the user input and create the correct command object to execute.
 
@@ -169,11 +160,11 @@ Tagging a student with `Tag` is facilitated by `TagCommand`, `AddTagCommand`, `D
 
 </box>
 
-Here is a step by step example of how the tag command might be executed.
+Here is a step-by-step example of how the tag command might be executed.
 
 Step 1. User inputs the `tag` command.
 
-Step 2. `Logic` will receive the input and pass it to a `ClassManagerParser` object which in turn creates a `TagCommandParser` object to parse the command.
+Step 2. `Logic` will receive the input and pass it to a `ClassManagerParser` object, which in turn creates a `TagCommandParser` object to parse the command.
 
 Step 3. Next `TagCommandParser` will check for any action identifiers,
 `/add` or `/delete`, which will create a `AddTagCommand` object or `DeleteTagCommand` object respectively,
@@ -209,19 +200,19 @@ The following activity diagram summarises what happens when a user executes a `t
 
 **Aspect: TagCommand**
 
-* **Alternative 1 (current choice):** Use different types of TagCommand to handle add and delete tags.
-  * Pros: Able to handle add and delete of tags. Users do not have to retype tags that they want to keep.
+* **Alternative 1 (current choice):** Use different types of TagCommand to handle adding and deletion of tags.
+  * Pros: Able to handle adding and deletion of tags. Users do not have to retype tags that they want to keep.
   * Cons: Users have to input more details.
   
 * **Alternative 2:** Replace all existing tags with input tags.
   * Pros: Easy to implement.
-  * Cons: Users have to always replace the tag even if they want to keep it.
+  * Cons: Users must replace tags that they want to keep.
 
 ### Undo/redo feature
 
 #### Implementation
 
-The undo/redo feature works similarly to the one implemented in AddressBook-Level 4, but with support for more commands and a limit to the number of Class Manager states stored. The undo/redo mechanism is facilitated by `VersionedClassManager`. It extends `ClassManager` with an undo/redo history, stored internally as an `classManagerStateList` and `currentStatePointer`. `classManagerStateList` only stores up to 10 most recent states of Class Manager to avoid performance issues when a large number of commands are executed. Additionally, it implements the following operations:
+The undo/redo feature works similarly to the one implemented in AddressBook-Level 4, but with support for more commands and a limit to the number of Class Manager states stored. The undo/redo mechanism is facilitated by `VersionedClassManager`. It extends `ClassManager` with an undo/redo history, stored internally as a `classManagerStateList` and `currentStatePointer`. `classManagerStateList` only stores up to 10 most recent states of Class Manager to avoid performance issues when a large number of commands are executed. Additionally, it implements the following operations:
 
 * `VersionedClassManager#commit()` — Saves the current Class Manager state in its history.
 * `VersionedClassManager#undo()` — Restores the previous Class Manager state from its history.
@@ -231,7 +222,7 @@ These operations are exposed in the `Model` interface as `Model#commitClassManag
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedClassManager` will be initialized with the initial Class Manager state, and the `currentStatePointer` pointing to that single Class Manager state.
+Step 1. The user launches the application for the first time. The `VersionedClassManager` will be initialized with the initial Class Manager state and the `currentStatePointer` pointing to that single Class Manager state.
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
@@ -245,11 +236,11 @@ Step 3. The user executes `add n/David …​` to add a new student. The `add` c
 
 <box type="info" seamless>
 
-**Note:** If a command fails its execution, it will not call `Model#commitClassManager()`, so Class Manager state will not be saved into the `classManagerStateList`.
+**Note:** If a command fails its execution, it will not call `Model#commitClassManager()`, so the Class Manager state will not be saved into the `classManagerStateList`.
 
 </box>
 
-Step 4. The user now decides that adding the student was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoClassManager()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous Class Manager state, and restores Class Manager to that state.
+Step 4. The user now decides that adding the student was a mistake and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoClassManager()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous Class Manager state and restores Class Manager to that state.
 
 <puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
 
@@ -267,7 +258,7 @@ The following sequence diagram shows how the undo operation works:
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X), but due to a limitation of PlantUML, the lifeline reaches the end of the diagram.
 
 </box>
 
@@ -283,11 +274,11 @@ Step 5. The user then decides to execute the command `list`. Commands that do no
 
 <puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
 
-Step 6. The user executes `clear`, which calls `Model#commitClassManager()`. Since the `currentStatePointer` is not pointing at the end of the `classManagerStateList`, all Class Manager states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitClassManager()`. Since the `currentStatePointer` is not pointing at the end of the `classManagerStateList`, all Class Manager states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behaviour that most modern desktop applications follow.
 
 <puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
 
-In order to implement `undo` and `redo` in Class Manager, `load` and `config` commands are not supported by `undo` and `redo`. This is because undoing `load` and `config` can cause Class Manager to be in an inconsistent state. To prevent this, `load` and `config` commands calls `Model#loadReset()` and `Model#configReset()` respectively. These methods essentially clear `classManagerStateList` and reset the `currentStatePointer` to the current Class Manager state, allowing 9 more states of Class Manager to be stored after `load` and `config` commands.
+In order to implement `undo` and `redo` in Class Manager, `load` and `config` commands are not supported by `undo` and `redo`. This is because undoing `load` and `config` can cause Class Manager to be in an inconsistent state. To prevent this, `load` and `config` commands call `Model#loadReset()` and `Model#configReset()`, respectively. These methods essentially clear `classManagerStateList` and reset the `currentStatePointer` to the current Class Manager state, allowing 9 more states of Class Manager to be stored after `load` and `config` commands.
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
@@ -313,7 +304,7 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both `HistoryManager` and `VersionedClassManager`.
 
 * **Alternative 2:** Use `HistoryManager` for undo/redo.
-  * Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.
+  * Pros: We do not need to maintain a separate list and can just reuse what is already in the codebase.
   * Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 
 **Aspect: Commands that support undo & redo**
@@ -322,13 +313,13 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Ensures that Class Manager will not run into issues such as inconsistent states when undoing `load` for missing saved files.
   * Cons: Unable to restore student's class information after `config` command resets student class information.
 * **Alternative 2:** Supporting undo/redo for all commands.
-  * Pros: Ensures that app is consistent with undo/redo and users will not be unsure if a certain command can be undone.
+  * Pros: Ensures that app is consistent with undo/redo, and users will not be unsure if a certain command can be undone.
   * Cons: Can be confusing for the user to use undo/redo with `load` and `config`.
 
 **Aspect: Number of Class Manager states to store**
 
 * **Alternative 1 (current choice):** Store up to 10 Class Manager states.
-  * Pros: Ensures that app will not run into performance issues when a large number of commands are executed.
+  * Pros: Ensures that Class Manager will not run into performance issues when a large number of commands are executed.
   * Cons: Unable to undo/redo more than 10 commands.
 * **Alternative 2:** Store all Class Manager states.
   * Pros: Able to undo/redo more than 10 commands and restore any state of Class Manager in the current session.
@@ -338,15 +329,19 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 #### About this feature
 
-The load feature allows users to load a saved JSON file into the app. Load allows data from the new JSON file to be displayed in Class Manager, while setting the new default save file to be the new JSON file. The status bar footer also updates to show the current file path.
+The load feature allows users to load a saved JSON file into the app. Load allows data from the new JSON file to be displayed in Class Manager while setting the new default save file to be the new JSON file. The status bar footer also updates to show the current file path.
 
-This feature is an improvement to the previous method of directly editing the `classmanager.json` file located in `[JAR file location]/data`. Users are now able to have multiple JSON files in `[JAR file location]/data` and choose which file is to be loaded into Class Manager. This allows TAs with multiple courses to have a JSON file for each course, and load the JSON file for the course they are currently teaching.
+This feature is an improvement to the previous method of directly editing the `classmanager.json` file located in `[JAR file location]/data`. Users are now able to have multiple JSON files in `[JAR file location]/data` and choose which file is to be loaded into Class Manager. This allows TAs with multiple courses to have a JSON file for each course and load the JSON file for the course they are currently teaching.
 
 #### How it is implemented
 
 <puml src="diagrams/LoadSequenceDiagram.puml" alt="LoadSequenceDiagram" />
 
-The `load` command is facilitated by `LoadCommand` and `LoadCommandParser`. `LoadCommand` attempts to read the JSON file and checks if the tutorial and assignment count for each student matches the current configuration of Class Manager. If the file is valid, it then calls `setClassManager` and `setClassManagerFilePath` of `Model` to update the new save file path and Class Manager data to be displayed. `LoadCommand` then resets `VersionedClassManager` to clear the undo/redo history of Class Manager.
+The `load` command is facilitated by `LoadCommand` and `LoadCommandParser`. `LoadCommand` attempts to read the JSON file and checks if the tutorial and assignment count for each student matches the current configuration of Class Manager. If the file is valid (each Student's information follows the format in the image below), it then calls `setClassManager` and `setClassManagerFilePath` of `Model` to update the new save file path and Class Manager data to be displayed. `LoadCommand` then resets `VersionedClassManager` to clear the undo/redo history of Class Manager.
+
+#### Valid JSON format
+
+<img alt="sample_contents" src="images/sample-contents.png" width="750"> <br><br>
 
 #### Parsing user input
 
@@ -365,17 +360,17 @@ The `load` command is facilitated by `LoadCommand` and `LoadCommandParser`. `Loa
   * Cons: Users may want to load other types of files.
 * **Alternative 2:** Allow users to load any type of file.
   * Pros: Users can use files of other formats that may be generated from other applications.
-  * Cons: A lot of effort to ensure that the data of each file type is valid.
+  * Cons: A lot of effort is needed to ensure that the data of each file type is valid.
 
 ### Config feature
 
-The `config` command allows TAs to set the number of tutorials and the number of assignments in a module. This allows Class Manager to be able to display the correct number of tutorials and assignments for the TA to enter the grades for each student. This also provides more flexibility to TAs as their class may differ from the default configuration of 13 tutorials and 6 assignments.
+The `config` command allows TAs to set the number of tutorials and the number of assignments in a module. This allows the Class Manager to be able to display the correct number of tutorials and assignments for the TA to enter the grades for each student. This also provides more flexibility to TAs as their class may differ from the default configuration of 13 tutorials and 6 assignments.
 
 #### How it is implemented
 
 <puml src="diagrams/ConfigSequenceDiagram.puml" alt="ConfigSequenceDiagram" />
 
-The `config` command is facilitated by `ConfigCommand` and `ConfigCommandParser`. `ConfigCommand` updates the tutorial and assignment count of Class Manager by calling `setTutorialCount` and `setAssignmentCount` of `Model` to update the `preferences.json` file, while simultaneously updating the static tutorial and assignment count of `ClassDetails` to accurately recreate the `ClassDetails` objects for students. All students in the current file will have their class information updated to correctly reflect the new configuration. `ConfigCommand` then resets the student shown in the view panel, as well as `VersionedClassManager` to clear the undo/redo history of Class Manager.
+The `config` command is facilitated by `ConfigCommand` and `ConfigCommandParser`. `ConfigCommand` updates the tutorial and assignment count of Class Manager by calling `setTutorialCount` and `setAssignmentCount` of `Model` to update the `preferences.json` file. Simultaneously, it updates the static tutorial and assignment count of `ClassDetails` to recreate the `ClassDetails` objects for students accurately. All students in the current file will have their class information updated to reflect the new configuration. `ConfigCommand` then resets the student shown in the view panel, as well as `VersionedClassManager`, to clear the undo/redo history of Class Manager.
 
 #### Parsing user input
 
@@ -387,9 +382,9 @@ The `config` command is facilitated by `ConfigCommand` and `ConfigCommandParser`
 
 #### Design considerations:
 
-Initially in v1.2, `config` was implemented as a command that users could only execute once before they started using Class Manager. This allows `ClassDetails` to create fixed length arrays for `AssignmentTracker`, `AttendanceTracker` and `ClassParticipationTracker`. 
+In v1.2, `config` was initially implemented as a command that users could only execute once before they started using Class Manager. This allows `ClassDetails` to create fixed-length arrays for `AssignmentTracker`, `AttendanceTracker` and `ClassParticipationTracker`. 
 
-However, this implementation was changed in v1.3 to allow users to execute `config` multiple times. This allows users to reconfigure Class Manager if they have entered the wrong information previously. We decided to reset the class information of a student back to the default values of 0 for attendance, class participation and assignment grades, as it ensures a consistent implementation of `config` regardless of whether the new tutorial count and assignment count was smaller or larger than the previous configuration.
+However, this implementation was changed in v1.3 to allow users to execute `config` multiple times. This allows users to reconfigure Class Manager if they have entered the wrong information previously. We decided to reset the class information of a student back to the default values of 0 for attendance, class participation and assignment grades, as it ensures a consistent implementation of `config` regardless of whether the new tutorial count and assignment count were smaller or larger than the previous configuration.
 
 In addition, the tutorial and assignment count was limited to an integer between 1 and 40 inclusive in v1.4. This prevents division by zero bugs encountered in data visualisation, as well as Class Manager being unresponsive when the user enters a large number of tutorials and assignments.
 
@@ -405,7 +400,7 @@ In addition, the tutorial and assignment count was limited to an integer between
 
 ### Lookup feature
 
-The `lookup` command allows TAs to search and filter for students in the Class Manager. This allows TAs to quickly find the student they are looking for, and do subsequent operations such as editing class information for student(s). This also provides more flexibility to TAs as they may want to search for students based on different criteria.
+The `lookup` command allows TAs to search and filter for students in the Class Manager. This allows TAs to find the student they are looking for quickly, and perform subsequent operations such as editing class information for student(s). This also provides more flexibility to TAs as they may want to search for students based on different criteria.
 
 #### How it is implemented
 
@@ -442,11 +437,11 @@ The `lookup` command is facilitated by `LookupCommand` and `LookupCommandParser`
 
 * **Alternative 2:** The `LookupCommandParser` will apply validation to the user input.
     * Pros: Less confusion for the user, and behaviour is consistent with other commands.
-    * Cons: The implementation will be more complicated.
+    * Cons: The implementation will be more complex.
 
-**Aspect: Criteria Combination for complicated lookup**
+**Aspect: Criteria Combination for complex lookup**
 
-* **Alternative 1 (current choice):** Within a field the operation is _OR_, and between fields the operation is _AND_.
+* **Alternative 1 (current choice):** Within a field, the operation is _OR_, and between fields the operation, is _AND_.
 
     For example, `lookup n/alex david c/T11 T12` will have the criteria:
     ```
@@ -458,29 +453,35 @@ The `lookup` command is facilitated by `LookupCommand` and `LookupCommandParser`
 
 * **Alternative 2:** The combination can be specified by the user.
 
-    For example (Proposed), `lookup n/alex \AND david \OR c/T11 \OR T12` will have the criteria:
+    For example, `lookup n/alex \AND david \OR c/T11 \OR T12` will have the criteria:
     ```
     (name contains alex AND david) OR (class number is T11 OR T12)
     ```
 
     * Pros: The user can specify any combination of criteria.
-    * Cons: The command will be more complicated to implement. As it involves changing the `LookupCommandParser` and the `StudentContainsKeywordsPredicate` class. In addition, the syntax can be confusing for the user.
-
-
+    * Cons: The command will be more complicated to implement, as the order of the keywords and the logic operators will be used to determine the `StudentContainsKeywordsPredicate`. In addition, the syntax can be confusing for the user. <br>
+      One such example is the command `lookup n/alex \AND david \OR li` which can have two different interpretations:
+      ```
+      (name contains alex AND david) OR (name contains li)
+      ```
+      ```
+      (name contains alex) AND (name contains david OR li)
+      ```
+      
 ### Theme feature
 
 The `theme` command allows TAs to toggle/switch between _light_ and _dark_ themes.
 
 #### Implementation
-The `theme` feature is facilitated by the `ThemeCommand`, and inside the `Model` component, the `UserPrefs` class stores the current color theme settings. 
+The `theme` feature is facilitated by the `ThemeCommand`, and inside the `Model` component, the `UserPrefs` class stores the current colour theme settings. 
 
-Here is a step by step example of how the theme command might be executed.
+Here is a step-by-step example of how the theme command might be executed.
 
 1. The user inputs the `theme` command.
 2. The `Logic` component will receive the input and create a new `ThemeCommand` object.
-3. When `ThemeCommand` is executed, it will call `Model#toggleTheme()` to update the color theme settings in the `UserPrefs` class.
-4. The `MainWindow` class in the `UI` component will then fetch the new color theme settings from the `UserPrefs` class.
-5. The `MainWindow` class will then update the GUI color theme accordingly.
+3. When `ThemeCommand` is executed, it will call `Model#toggleTheme()` to update the colour theme settings in the `UserPrefs` class.
+4. The `MainWindow` class in the `UI` component will then fetch the new colour theme settings from the `UserPrefs` class.
+5. The `MainWindow` class will then update the GUI colour theme accordingly.
 
 Below is a sequence diagram that shows how the `theme` command is executed.
 
@@ -488,9 +489,9 @@ Below is a sequence diagram that shows how the `theme` command is executed.
 
 #### Design considerations:
 
-**Aspect: Fetching the new color theme setting**
+**Aspect: Fetching the new colour theme setting**
 
-* **Alternative 1 (current choice):** The `MainWindow` class fetches the new color theme through the `Logic` component.
+* **Alternative 1 (current choice):** The `MainWindow` class fetches the new colour theme through the `Logic` component.
   * Pros: Easy to implement.
   * Cons: Additional operations are required to fetch the new setting from the `UserPrefs` class.
 
@@ -504,7 +505,7 @@ Below is a sequence diagram that shows how the `theme` command is executed.
 #### Implementation
 
 The proposed class details mechanism for each student will be facilitated by `ClassDetails`. It allows for the tracking
-of an `Student`'s class details, such as their tutorial group, tutorial attendance, class participation, and assignment
+of a `Student`'s class details, such as their tutorial group, tutorial attendance, class participation, and assignment
 grades. It will be stored as 3 separate classes to model each of the 3 different types of class details (We will
 call them "class information"), and a tracker
 class to act as the manager for each of the class information, with the trackers composing the `ClassDetails` class.
@@ -513,11 +514,11 @@ class to act as the manager for each of the class information, with the trackers
 
 The 3 different types of class information are:
 
-* `Attendance` - Stores the details for a student's attendance in a specific tutorial. Attendance will be stored as
+* `Attendance` - Stores the details of a student's attendance in a specific tutorial. Attendance will be stored as
 a boolean value.
-* `ClassParticipation` - Stores the details for a student's participation in a specific tutorial. Class participation
+* `ClassParticipation` - Stores the details of a student's participation in a specific tutorial. Class participation
 will be stored as a boolean value.
-* `Assignment` - Stores the details for a student's assignment grades for a specific tutorial. Assignment grades will be
+* `Assignment` - Stores the details of a student's assignment grades for a specific tutorial. Assignment grades will be
 stored as an integer value, with the total marks standardized to 100 marks.
 
 These components will be stored in their respective tracker classes, using Java Arrays to store the objects. The position
@@ -533,11 +534,11 @@ The tracker classes will be stored in the `ClassDetails` class, which will be co
 
 These tracker classes will inherit from a `tracker` *interface*. They will also support the following operations:
 * `getPercentage()` - Returns the average grade of the student for the specific tracker class. For example, the average
-tutorial attendance percentage, or the average assignment score.
+tutorial attendance percentage or the average assignment score.
 * `getJson()` - Returns a Json Friendly representation of the tracker.
 
-Each of these tracker classes will be able to be initialized with a specific size, which will be the number of tutorials
-or assignment grade.
+Each of these tracker classes will be initialized with a specific size, which will be the number of tutorials
+or assignments.
 
 #### Design considerations:
 
@@ -545,34 +546,34 @@ or assignment grade.
 
 * **Alternative 1 (current choice):** Use a class for each type of class information.
   * Pros: Easy to implement, follows OOP principle. If we want to edit the implementation of each of the classes or
-  change the data structure / details of each instance, it can be easily done.
+  change the data structure/details of each instance, it can be done easily.
   * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Store class values as a primitive type (String or Integer).
   * Pros: Will use less memory.
   * Cons: We must ensure that the implementation of each class is correct. Implementation will be more
-  complicated as different class detail types will require different implementations for the same operation.
+  complex as different class detail types will require different implementations for the same operation.
 
 **Aspect: Tracker classes**
 
 * **Alternative 1 (current choice):** Use a tracker class for each type of class information.
-  * Pros: Easy to implement. Shared functions can be abstracted out and polymorphism can be applied.
+  * Pros: Easy to implement. Shared functions can be abstracted out, and polymorphism can be applied.
   * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Store class values as an Object Array.
   * Pros: Will use less memory.
   * Cons: Will need to implement different functions for each type of class details. Implementation will be more
-  complicated. SLAP principle might not be able to be adhered to.
+  complex. SLAP principle might not be able to be adhered to.
 
 ### Data visualisation feature
 
 #### About this feature
-The data visualisation feature allows users to visualize the `Class Information` fields of each student. The display will be located in the student list card, next to the other details of the students.
+The data visualisation feature allows users to visualize the `Class Information` fields of each student. The display will be located inside the student list card, next to the other details of the students.
 There will be 3 bar graphs associated with each student, one for each of the `Class Information` fields, representing the overall percentage of each field across a semester.
 
 #### How it is implemented
 The data visualisation feature is facilitated by each Class Information `Tracker`. Each tracker will have a method that will calculate the average percentage of the field.
-These methods are called by the `StudentCard` class in the UI package, within a method used to initialize the FXML barchart.
+These methods are called by the `StudentCard` class in the UI package within a method used to initialize the FXML bar chart.
 
 
 ### Present feature
@@ -595,11 +596,11 @@ This feature builds upon the current design of Student and ClassDetails.
 
 #### Design considerations:
 
-The feature should be implemented upon the current design of Student and ClassDetails. Alternative designs may exist, such as treating the attendance and participation as association classes.
+The feature should be implemented based on the current design of Student and ClassDetails. Alternative designs may exist, such as treating the attendance and participation as association classes.
 
 <box type="info" seamless>
 
-**Note:** Other similar features, such as `absent`, `class-part`, and `grade`, are implemented in a similar way.
+**Note:** Other similar features, such as `absent`, `class-part`, and `grade`, are implemented similarly.
 
 </box>
 
@@ -608,6 +609,7 @@ The feature should be implemented upon the current design of Student and ClassDe
 #### About this feature
 
 The view feature allows users to view the class information of their students.
+
 <box type="info" seamless>
 
 **Note:** The `view` command is the only way to change the student being viewed in the `GUI`.
@@ -618,14 +620,11 @@ The view feature allows users to view the class information of their students.
 
 The `view` command is facilitated by the `ViewCommandParser` and the `ViewCommand`. It uses `Model#setSelectedStudent()` to select the student that is to be viewed in the `GUI`.
 
-Here is a step by step example of how a `view` command is executed:
+Here is a step-by-step example of how a `view` command is executed:
 
-Step 1. Users inputs a `view` command.
-
-Step 2. `Logic` will receive the input and pass it to a `ClassManagerParser` object which in turn creates a `ViewCommandParser` object to parse the command.
-
-Step 3. `ViewCommandParser` will check if the input is valid. If input is valid, it will create a `ViewCommand` object to execute the command. Else `ParseException` is thrown.
-
+Step 1. User inputs a `view` command.
+Step 2. `Logic` will receive the input and pass it to a `ClassManagerParser` object, which in turn creates a `ViewCommandParser` object to parse the command.
+Step 3. `ViewCommandParser` will check if the input is valid. If the input is valid, it will create a `ViewCommand` object to execute the command. Else `ParseException` is thrown.
 Step 4. `ViewCommand` will use `Model#setSelectedStudent()` to set the requested student to be viewed in the `GUI`.
 
 The following sequence diagram will show what happens when a user executes a `view` command:
@@ -642,7 +641,7 @@ The following activity diagram will show what happens when a user executes a `vi
 
 * **Alternative 1 (current choice):** Using a command to view the class information of a student.
   * Pros: Reduces clutter in the `GUI`.
-  * Cons: Always have to type a command if the users wants to view a different student.
+  * Cons: User has to enter a command whenever they want to view the class information of a different student.
 
 * **Alternative 2:** Listing all the class information of every student.
   * Pros: Easy to implement.
@@ -667,7 +666,7 @@ The following activity diagram will show what happens when a user executes a `vi
 **Target user profile**:
 
 * NUS CS2103/T Teaching Assistants
-* has a need to manage student information across different classes
+* needs to manage student information across different classes
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
@@ -697,12 +696,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | TA       | lookup all students in a particular tutorial group           | obtain their contact information                                        |
 | `* *`    | TA       | search particular students across different tutorial groups  | contact them easily                                                     |
 | `*`      | TA       | know the students I searched recently                        | minimize repeated searches                                              |
-| `* *`    | TA       | filter students by tags/labels                               | categorize and organize students                                        |
+| `* *`    | TA       | filter students by tags/labels                               | categorise and organise students                                        |
 | `* *`    | TA       | filter students by their year of study                       | gain a better understanding of the whole tutorial                       |
 | `*`      | TA       | have a composite filter for tutorial group attendance        | look up the attendance of a particular tutorial group on a certain week |
 | `*`      | TA       | randomly select a specific number of students                | use as a feature during teaching                                        |
 | `* *`    | TA       | sort students by coding experience                           | group students with similar experience levels                           |
-| `* *`    | TA       | sort students based on their individual score marks          | understand the performance of the whole class                           |
+| `* *`    | TA       | sort students based on their score marks                     | understand the performance of the whole class                           |
 | `* *`    | TA       | sort students by alphabetical order                          | compare to the attendance sheet                                         |
 | `* *`    | TA       | sort students by their overall grades                        | identify students falling behind in my class                            |
 | `* `     | TA       | customise my GUI                                             | use a theme that suits my desktop theme                                 |
@@ -712,11 +711,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | TA       | customise commands                                           | save time and fit my habit                                              |
 | `* * *`  | TA       | export and import app’s data                                 | work on different devices                                               |
 | `* * *`  | TA       | save queries and searches to the application                 | not lose progress                                                       |
-| `* * *`  | new user | see usage instructions                                       | refer to instructions when I forget how to use the App                  |
+| `* * *`  | new user | see usage instructions                                       | refer to instructions when I forget how to use the app                  |
 
 ### Use cases
 
-(For all use cases below, the **System** is `Class Manager` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `Class Manager`, and the **Actor** is the `user`, unless specified otherwise)
 
 ---
 
@@ -814,7 +813,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to look up students with a given criteria.
-2.  Class Manager check each student in the list with the given criteria.
+2.  Class Manager checks each student in the list with the given criteria.
 3.  Class Manager shows a list of students that match the criteria.
 
     Use case ends.
@@ -839,8 +838,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to randomly select a specific number of students.
-2.  Class Manager randomly selects the students from the list.
+1.  User requests to select a specific number of students randomly.
+2.  Class Manager randomly selects the students from all students displayed.
 3.  Class Manager shows a list of students that are randomly selected.
 
     Use case ends.
@@ -851,13 +850,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. Class Manager shows an error message.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1b. The number of students to be selected is less than 1.
 
     * 1b1. Class Manager shows an error message.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 ---
 
@@ -877,13 +876,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. Class Manager shows an error message.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1b. The modifying request is invalid.
 
     * 1b1. Class Manager shows an error message.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 ---
 
@@ -951,7 +950,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. The student requested does not exist in the Class Manager.
+* 1a. The requested student does not exist in the Class Manager.
 
     * 1a1. Class Manager displays an error message.
 
@@ -969,20 +968,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  The Application needs to have proper documentation and user guide so that users can understand how to use the application.
-5.  The Application should allow users to create and customize their profiles, including preferences for shortcuts, views, and layouts, to enhance the user experience.
-6.  The Application should be able to handle multiple windows at the same time.
-7.  The Application should comply with the specific policies and regulations of the university regarding data storage, security, and access control.
+5.  The Application should allow users to customize the color scheme to enhance the user experience.
 
 ### Glossary
 
+* **CLI**: Command Line Interface.
+* **Class information**: The grades, attendance and class participation details of a student in Class Manager.
+* **Email**: An electronic mail address, such as NUS email addresses (eXXXXXXX@u.nus.edu).
+* **GUI**: Graphical User Interface.
+* **JAR**: Java Archive, a package file format typically used to aggregate many Java class files and associated metadata and resources (text, images, etc.) into one file to distribute application software or libraries on the Java platform.
+* **JSON**: JavaScript Object Notation, a lightweight data-interchange format.
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Student Number**: Unique matriculation number of a NUS student. In Class Manager, it must begin with the capital letter 'A', followed by 1 or more consecutive digits, and end with a single alphabetical character. Student Number must not be blank as well.
-* **Email**: Any valid electronic mail address, such as NUS email address (eXXXXXXX@u.nus.edu).
-* **CLI**: Command Line Interface.
-* **GUI**: Graphical User Interface.
-* **JSON**: JavaScript Object Notation, a lightweight data-interchange format.
-* **JAR**: Java Archive, a package file format typically used to aggregate many Java class files and associated metadata and resources (text, images, etc.) into one file to distribute application software or libraries on the Java platform.
-* **Class information**: The grades, attendance and class participation details of a student in Class Manager.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1001,9 +998,9 @@ Testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy it into an empty folder.
 
-   2. Double-click the jar file<br>
+   2. Double-click the jar file.<br>
       Expected: Shows the GUI with a set of sample contacts. The window size may not be optimal.
 
 2. Save window preferences
@@ -1011,7 +1008,7 @@ Testers are expected to do more *exploratory* testing.
    1. Resize the window to an optimal size. Move the window to a different location. Close the window.
 
    2. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+       Expected: The most recent window size and window location are retained.
       <br><br>
 
 ### Configure Class Manager
@@ -1025,22 +1022,22 @@ Testers are expected to do more *exploratory* testing.
     - Enter: `config #t/3 #a/3`<br>
         Expected: The list of students shown in the GUI is the same as the one in `classmanager.json`.
     - Enter: `add n/John Doe p/999 e/john@gmail.com s/A0981234X c/T11`<br>
-        Expected: The student John Doe is added to the botton of the Student List. Details of John Doe are shown in the result display box.
+        Expected: The student John Doe is added to the bottom of the Student List. Details of John Doe are shown in the result display box.
     - Enter: `view s/A0981234X`<br>
-        Expected: The student John Doe is shown in the view panel. The student's class information is shown in the view panel with the tutorial and assignment count both updated to 3.
+        Expected: The student John Doe is shown in the view panel. The student's class information is shown in the view panel, with the tutorial and assignment count both updated to 3.
     - Enter: `present-all tut/1`<br>
         Expected: All the students have their attendance marked for tutorial 1. The bar graph for all student's attendance is updated to show the attendance for tutorial 1. The attendance of John Doe for tutorial 1 is now present in the view panel.
     - Enter: `config #t/4 #a/4`<br>
         Expected: The list of students shown in the GUI is the same as the one in `classmanager.json`, but their attendance bar graph is reset to 0.
     - Enter: `view s/A0981234X`<br>
-        Expected: The student John Doe is shown in the view panel. The student's class information is shown in the view panel with the tutorial and assignment count both updated to 4. The student's attendance for tutorial 1 is now absent.
+        Expected: The student John Doe is shown in the view panel. The student's class information is shown in the view panel, with the tutorial and assignment count both updated to 4. The student's attendance for tutorial 1 is now absent.
     <br><br>
 
-2. Configure Class Manager with tutorial count less than 1
+2. Configure Class Manager with a tutorial count that is less than 1
     - Enter: `config #t/0 #a/3`<br>
       Expected: Error message `Invalid count values! The count value of tutorials cannot be less than 1.`
       <br><br>
-3. Configure Class Manager with valid tutorial count but missing assignment count
+3. Configure Class Manager with a valid tutorial count but is missing an assignment count
     - Enter: `config #t/10`<br>
       Expected: Error message: `Invalid command format!
                                 config: Configures Class Manager with the module information.
@@ -1055,7 +1052,7 @@ Testers are expected to do more *exploratory* testing.
 1. Display help.
 
    1. Test case: `help`<br>
-      Expected: The help window with list of commands is shown.
+      Expected: The help window with the full list of commands is shown.
       <br><br>
    
 ### Add a student
@@ -1063,18 +1060,18 @@ Testers are expected to do more *exploratory* testing.
 1. Add a new student to Class Manager.
 
    1. Test case: `add n/NAME s/STUDENT_NUMBER e/EMAIL`<br>
-      Expected: The student with NAME, STUDENT_NUMBER and EMAIL is added to the list. Details of the added student shown in the result display box.
+      Expected: The student with NAME, STUDENT_NUMBER and EMAIL is added to the list. Details of the added student are shown in the result display box.
       <br><br>
    
 2. Add an already existing student to Class Manager.
 
    1. Test case: Student Number that is already present in the list <br>
-      Expected: No student is added. Error details shown in the result display box.
+      Expected: No student is added. Error details are shown in the result display box.
       <br><br>
    
-3. Add a student without some required fields <br>
-   1. Test Case: `add n/NAME s/STUDENT_NUMBER e/EMAIL`, `add n/NAME s/PHONE e/EMAIL`<br>
-      Expected: No student is added. Error details shown in the result display box.
+3. Add a student without some required fields.<br>
+   1. Test case: `add n/NAME s/STUDENT_NUMBER e/EMAIL`, `add n/NAME s/PHONE e/EMAIL`<br>
+      Expected: No student is added. Error details are shown in the result display box.
       <br><br>
    
 ### Add a comment to a student
@@ -1087,8 +1084,8 @@ Testers are expected to do more *exploratory* testing.
    
 2. Add a comment to a student where the student is not in Class Manager (Invalid Student Number). 
 
-   1. Test case: Comment command with Student Number that is not present in the list <br>
-      Expected: No student is edited. Error details shown in the result display box.
+   1. Test case: Comment command with Student Number that is not present in the list.<br>
+      Expected: No student is edited. Error details are shown in the result display box.
       <br><br>
    
 3. Add a comment to a student where the new comment is empty.
@@ -1102,33 +1099,26 @@ Testers are expected to do more *exploratory* testing.
 1. Delete a student from Class Manager.
 
    1. Test case: `delete s/STUDENT_NUMBER`<br>
-      Expected: STUDENT_NUMBER is a valid Student Number that exists in the Class Manager. The student with STUDENT_NUMBER is deleted from the list. Details of the deleted student shown in the result display box.
+      Expected: STUDENT_NUMBER is a valid Student Number that exists in the Class Manager. The student with STUDENT_NUMBER is deleted from the list. Details of the deleted student are shown in the result display box.
       <br><br>
-2. Delete a student that is not in Class Manager.
+2. Delete a student with an invalid student number.
 
    1. Test case: `delete s/vnqvq1924`<br>
-      Expected: No student is deleted. Student Number error details shown in the result display box.
-      <br><br>
-3. Delete a student with an invalid student number.
-
-   1. Other incorrect delete commands to try: `delete`, `delete s/x`, `...` (where x is an invalid student number)<br>
-      Expected: No student is deleted. Command format error details shown in the result display box.
-   2. Test case: `delete`<br>
-      Expected: No student is deleted. Command format error details shown in the result display box.
+      Expected: No student is deleted. Student Number error and its details are shown in the result display box.
       <br><br>
    
 ### Edit a student
 
-1. Edit a student's details in the current students list.
+1. Edit a student's details in Class Manager.
 
    1. Test case: `edit STUDENT_NUMBER n/NAME`<br>
       Expected: The student with STUDENT_NUMBER is edited to have the new NAME.
    2. Test case: `edit STUDENT_NUMBER s/NEW_STUDENT_NUMBER`<br>
       Expected: The student with STUDENT_NUMBER is edited to have the NEW_STUDENT_NUMBER.
       <br><br>
-2. Edit a student's details where the student is not in the list (Invalid Student Number).
+2. Edit a student's details who do not exist in Class Manager.
 
-   1. Test case: Edit command with Student Number that is not present in the list <br>
+   1. Test case: Edit command with Student number that does not belong to any student in Class Manager.<br>
       Expected: No student is edited. Error details shown in the result display box.
       <br><br>
 
@@ -1147,9 +1137,9 @@ Testers are expected to do more *exploratory* testing.
    1. Test case: `lookup n/NAME`<br>
       Expected: The list of students with NAME will be displayed in the student list.
    2. Test case: `lookup c/CLASS_NUMBER`<br>
-      Expected: The list of students in CLASS_NUMBER will be displayed in the student list.
+      Expected: The list of students who are in CLASS_NUMBER will be displayed in the student list.
    3. Test case: `lookup t/TAG c/CLASS_NUMBER`<br>
-      Expected: The list of students with TAG and in CLASS_NUMBER will be displayed in the student list.
+      Expected: The list of students who have tags that match TAG and are in CLASS_NUMBER will be displayed in the student list.
       <br><br>
 2. Lookup students in Class Manager using invalid criteria.
 
@@ -1201,39 +1191,59 @@ Testers are expected to do more *exploratory* testing.
       <br><br>
 5. Attempt to tag a student not in Class Manager.
 
-   1. Test case: `tag` command with a student number that is not in the Class Manager.
+   1. Test case: `tag` command with a student number that is not in the Class Manager.<br>
       Expected: Error message is shown in the display result.
       <br><br>
 
 ### Mark a student as present
 
-1. Mark a student as present in Class Manager
+<box type="info" seamless>
 
-   1. Test case: `present s/STUDENT_NUMBER tut/1`
-      Expected:The student with STUDENT_NUMBER is marked as present for the first tutorial.
+**Note:** A similar way can be adopted to test `absent`.
+
+</box>
+
+1. Mark a student as present in Class Manager.
+
+   1. Test case: `present s/STUDENT_NUMBER tut/1`<br>
+      Expected: The student with STUDENT_NUMBER is marked as present for the first tutorial.
       <br><br>
 
 ### Mark all displayed students as present
 
-1. Mark all displayed students as present in Class Manager
+<box type="info" seamless>
 
-   1. Test case: `present tut/1`
-      Expected:All displayed students are marked as present for the first tutorial.
+**Note:** A similar way can be adopted to test `absent-all`.
+
+</box>
+
+1. Mark all displayed students as present in Class Manager.
+
+   1. Test case: `present-all tut/1`<br>
+      Expected: All displayed students are marked as present for the first tutorial.
+      <br><br>
+
+### Randomly select students
+
+1. Randomly select a specified number of students from the list of displayed students.
+
+   1. Test case: `random 2`<br>
+      Expected: Two students from the list of displayed students are selected randomly. Ensure at least two students are displayed.
       <br><br>
 
 ### View a student
 
-1. View a student in Class Manager
+1. View a student who exists in Class Manager.
 
    1. Test case: `view s/STUDENT_NUMBER`<br>
       Expected: The class information of the student with STUDENT_NUMBER will be displayed in the class information panel on the right.
       <br><br>
-2. View a student not in Class Manager
+2. View a student who does not exist not in Class Manager.
 
-   1. Test case: `view` command with a student number not in Class Manager<br>
+   1. Test case: `view` command with a student number that does not exist in Class Manager<br>
       Expected: Error message shown in the display result.
       <br><br>
-3. Invalid Student number
+3. Invalid Student number.
 
    1. Test case: `view s/x` (where x is an invalid student number)<br>
       Expected: Error message shown in the display result.
@@ -1243,24 +1253,24 @@ Testers are expected to do more *exploratory* testing.
 ###### Setup
 - Move the JAR file to a fresh directory.
 - Run and close the app before starting this test. (This is to ensure a fresh `classmanager.json` and `preferences.json`)<br>
-- Copy the sample data file `classmanager.json`. And paste 2 copies of it in the same directory as the `classmanager.json`. Rename the copies to `t1.json` and `t2.json`.
-- Do not delete the data file `classmanager.json` as it will be used as the starting default file.
+- Copy the sample data file `classmanager.json`. Paste 2 copies of the file in the same directory as `classmanager.json`. Rename the copies to `t1.json` and `t2.json`.
+- Please do not delete the data file `classmanager.json`, as it will be used as the starting default file.
 
 ###### Test cases
-1. Load a valid data file
+1. Load a valid data file.
    - Enter: `load f/t1`<br>
-        Expected: The data in `t1.json` is loaded into the app. The status bar on the bottom left changed to the new file path.
+        Expected: The data in `t1.json` is loaded into the app. The status bar on the bottom left is updated to show the new file path.
         The list of students shown in the GUI is the same as the one in `classmanager.json`.
    <br><br>
-2. Load a corrupted data file
+2. Load a corrupted data file.
    - Open and edit `t2.json` with a text editor. Add some random text to the file or delete some text from the file.
    - Enter: `load f/t2`<br>
         Expected: The data in `t2.json` is not loaded into the app. The status bar on the bottom left is unchanged.
-        File error details shown in the result display box.
+        File error details are shown in the result display box.
     <br><br>
-3. Load a missing data file
+3. Load a missing data file.
    - Enter: `load f/t3`<br>
-       Expected: The status bar on the bottom left is unchanged. File error details shown in the result display box.
+       Expected: The status bar on the bottom left is unchanged. File error details are shown in the result display box.
      <br><br>
    
 ### Undo/redo commands
@@ -1283,7 +1293,7 @@ Testers are expected to do more *exploratory* testing.
 ### History
 
 ###### Setup
-- Close the app and run it again before starting this test. Do not type any commands (This is to reset command history)<br>
+- Close the app and rerun it before starting this test. Do not type any commands (This is to reset command history).<br>
 
 ###### Test cases
 1. View command history
@@ -1297,50 +1307,49 @@ Testers are expected to do more *exploratory* testing.
       Expected: The command history is shown in the result display box. The command history shows `help` as the most recent command at the top of the list, followed by `list` below it.
     <br><br>
       
-### Launch with erroneous data files
+### Launching with erroneous data files
 ###### Setup
 - Move the JAR file to a fresh directory.
 - Run and close the app before starting this test. (This is to ensure a fresh `classmanager.json` and `preferences.json`)<br>
-- Copy the sample data file `classmanager.json`. And paste 2 copies of it in the same directory as the `classmanager.json`. Rename the copies to `corrupt.json` and `wrong.json`.
+- Copy the sample data file `classmanager.json`. Paste 2 copies of the file in the same directory as `classmanager.json`. Rename the copies to `corrupt.json` and `wrong.json`.
 
 ###### Test cases
-1. Deal with missing data files
+1. Handling missing data files.
     - Edit the `preferences.json` to have the entry:
     ```
     "classManagerFilePath" : "data\\missing.json"
     ```
    (Ensure that there is **no** file named `missing.json`)
-   - Launch the app<br>
-      Expected: The app will be populated with sample students. The app will create a new data file when it is next closed.
+   - Launch Class Manager<br>
+      Expected: Class Manager will be populated with sample students. Class Manager will create a new data file when it is next closed.
       <br><br>
-2. Deal with corrupted data files
-    - Edit the data file `corrupt.json`, by randomly add or delete lines of data. <br>
+2. Handling corrupted data files.
+    - Edit the data file `corrupt.json`, by adding or deleting lines of data and resulting in a file that does not match the [valid JSON format](#valid-json-format). <br>
     - Edit the `preferences.json` to have the entry:
     ```
     "classManagerFilePath" : "data\\corrupt.json"
     ```
-    - Launch the app<br>
-      Expected: The app will launch with an empty student list. The app will create a new data file when it is next closed.
+    - Launch Class Manager<br>
+      Expected: Class Manager will launch with an empty student list. The app will create a new data file when it is next closed.
       <br><br>
-3. Deal with valid data file but with the wrong configuration
-    - Edit the data file `wrong.json`. (Do not change anything) <br>
+3. Handling valid data files but with the wrong configuration.
     - Edit the `preferences.json` to have the entries:
     ```
     "classManagerFilePath" : "data\\wrong.json",
     "tutorialCount" : 1,
     "assignmentCount" : 1,
     ```
-   (Ensure that the `tutorialCount` and `assignmentCount` are **changed**)
+   (Ensure that the `tutorialCount` and `assignmentCount` are **modified**)
     - Launch the app<br>
       Expected: The app will launch with an empty student list. The app will create a new data file when it is next closed.
       <br><br>
 
-### Toggle color theme
+### Toggle colour theme
 
-1. Toggle color theme
+1. Toggle colour theme
 
    1. Test case: `theme`<br>
-      Expected: The color theme of the app will be switched. If the current theme is dark, it will be switched to light and vice versa.
+      Expected: The colour theme of the app will be switched. If the current theme is dark, it will be switched to light and vice versa.
       <br><br>
 
 ### Exit the app
@@ -1348,16 +1357,17 @@ Testers are expected to do more *exploratory* testing.
 1. Exit the app.
 
    1. Test case: `exit`<br>
-      Expected: The app closes and all data is saved.
+      Expected: The app closes, and all data is saved.
       <br><br>
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Planned Enhancements**
 
-1. The current keywords are case-sensitive. We plan to make keywords not case-sensitive in the future iteration. For example, currently `add` is case-sensitive. We will accept keywords such as `Add` in the future.
+1. The current keywords are case-sensitive. We plan to make keywords not case-sensitive in the future iteration. For example, `add` is currently case-sensitive. We will accept keywords such as `Add` in the future.
 2. Class Numbers are currently limited to tutorials that begin with T. We plan to allow Class Numbers to be any sensible alphanumeric string, such as `R15` and `SG06`.
-3. Clicking on a student in the student list currently highlights the student's card. We plan to disable this interaction as it affects the visibility of the student's contact details and visualised graphs.
-4. Class Participation is currently limited to being true or false for each tutorial session. We plan to allow Class Participation to be an enum level instead, such as `NONE`, `MINIMAL`, `SUFFICIENT`, `ACTIVE`, `VERY_ACTIVE` etc. to allow for better representation of student's efforts in class.
-5. Users currently can only search for basic student information. We plan to allow users to search based on class information in the future. For example, users can search for students with a certain grade or attendance percentage.
+3. Clicking on a student in the student list currently highlights the student's card. We plan to remove this interaction as it affects the visibility of the student's contact details and visualised graphs.
+4. Class Participation is currently limited to being true or false for each tutorial session. We plan to allow Class Participation to be an enum level instead, such as `NONE`, `MINIMAL`, `SUFFICIENT`, `ACTIVE`, `VERY_ACTIVE` etc., to allow for better representation of student's efforts in class.
+5. Users currently can only search for basic student information. We plan to allow users to search based on class information in the future. For example, users can search for students with average grades or attendance percentage less than a certain value.
 6. The lookup command currently does not check for invalid fields. We plan to add field validation to the lookup command in the future.
+7. The comment command doesn't support handling long strings (exact length depends on the size of the user's screen) as it might get cut off. We plan to allow users to add comments of any length that will not get cut off in the future.

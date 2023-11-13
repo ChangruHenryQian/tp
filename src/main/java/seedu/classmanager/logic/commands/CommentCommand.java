@@ -67,7 +67,7 @@ public class CommentCommand extends Command {
         model.setStudent(student, editedStudent);
         model.commitClassManager();
 
-        return new CommandResult(String.format(MESSAGE_COMMENT_SUCCESS, Messages.format(student)));
+        return new CommandResult(MESSAGE_COMMENT_SUCCESS);
     }
 
     @Override

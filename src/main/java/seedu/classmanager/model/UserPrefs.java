@@ -112,7 +112,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         return tutorialCount;
     }
 
-    public void toggleColorTheme() {
+    public void toggleColourTheme() {
         theme = theme.equals("dark") ? "light" : "dark";
     }
 

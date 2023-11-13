@@ -23,7 +23,7 @@ public class ModelManager implements Model {
 
     private final VersionedClassManager versionedClassManager;
     private final UserPrefs userPrefs;
-    private FilteredList<Student> filteredStudents;
+    private final FilteredList<Student> filteredStudents;
 
     /**
      * Initializes a ModelManager with the given Class Manager and userPrefs.
@@ -99,8 +99,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void toggleColorTheme() {
-        userPrefs.toggleColorTheme();
+    public void toggleColourTheme() {
+        userPrefs.toggleColourTheme();
     }
 
     //=========== ClassManager ================================================================================

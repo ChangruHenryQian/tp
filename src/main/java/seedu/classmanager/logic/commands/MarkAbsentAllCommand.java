@@ -51,7 +51,7 @@ public class MarkAbsentAllCommand extends Command {
     }
 
     /**
-     * Helper function to mark all displayed students' attendance as absent.
+     * Helps execute to mark all displayed students' attendance as absent.
      * @param model {@code Model} which the command should operate on.
      * @throws CommandException If an error occurs during command execution.
      */

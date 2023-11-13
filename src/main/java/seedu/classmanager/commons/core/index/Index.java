@@ -12,7 +12,7 @@ import seedu.classmanager.commons.util.ToStringBuilder;
  */
 public class Index {
 
-    private int zeroBasedIndex;
+    private final int zeroBasedIndex;
 
     /**
      * Index can only be created by calling {@link Index#fromZeroBased(int)} or

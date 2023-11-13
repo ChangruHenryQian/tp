@@ -13,7 +13,7 @@ public class Comment {
             "Comments can contain any alphanumeric characters.";
 
     /*
-     * The first character of the classmanager must not be a whitespace,
+     * The first character of the comment must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = ".*";

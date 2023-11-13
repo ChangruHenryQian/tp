@@ -16,7 +16,7 @@ import java.util.NoSuchElementException;
  * {@code next()} and {@code previous()}, the next and previous elements are returned respectively.
  */
 public class ListElementPointer {
-    private List<String> list;
+    private final List<String> list;
     private int index;
 
     /**
